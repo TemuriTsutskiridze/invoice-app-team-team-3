@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import data from '../data.json';
 
 function formatDate(dateString: string | number | Date) {
@@ -10,11 +11,23 @@ function formatDate(dateString: string | number | Date) {
   });
 }
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
 function InvoiceBoxes() {
   return (
     <>
-      {data.map((invoice) => (
-        <div key={invoice.id} className='flex justify-between px-6 bg-[#FFF] mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4'>
+      {data.map((invoice, index) => (
+        <motion.div
+          key={invoice.id}
+          className='flex justify-between px-6 bg-[#FFF] mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 hover:border border-transparent hover:border-gray-500 cursor-pointer shadow-sm'
+          initial="hidden"
+          animate="visible"
+          variants={itemVariants}
+          transition={{ duration: 0.5, delay: index * 0.3 }}
+        >
           <div className='flex flex-col justify-between'>
             <span className='text-[0.9375rem] font-bold'>
               <span className='text-[#7E88C3]'>#</span>{invoice.id}
@@ -36,7 +49,7 @@ function InvoiceBoxes() {
               </span>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
     </>
   );
