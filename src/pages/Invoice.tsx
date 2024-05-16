@@ -1,13 +1,12 @@
-import React from 'react'
-import Header from '../components/Header'
-
+import { Edit, Header } from "../components";
 
 function Invoice() {
   return (
     <div>
       <Header />
+      <Edit />
     </div>
-  )
+  );
 }
 
-export default Invoice
+export default Invoice;

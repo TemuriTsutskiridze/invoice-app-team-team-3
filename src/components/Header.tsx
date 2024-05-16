@@ -1,6 +1,6 @@
-import Logo from "../../public/assets/purpleImg.svg"
-import Avatar from "../../public/assets/image-avatar.jpg"
-import Moon from "../../public/assets/icon-moon.svg"
+import Logo from "/assets/purpleImg.svg"
+import Avatar from "/assets/image-avatar.jpg"
+import Moon from "/assets/icon-moon.svg"
 
 export default function Header() {
   return (

@@ -1,30 +1,52 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=League+Spartan:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=League+Spartan:wght@100..900&display=swap");
 
 #root {
   height: 100%;
   font-family: "League Spartan", sans-serif;
 }
 
+:root {
+  --gray: #7e88c3;
+  --lightGray: #dfe3fa;
+}
+
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background-color: #F8F8FB;
+  background-color: #f8f8fb;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   position: relative;
   min-height: 100vh;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
-.spartan-font {
-  font-family: "League Spartan", sans-serif;
+.inputText {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.25px;
+}
+.labelStyle {
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: -0.1px;
+  color: var(--gray);
+  display: block;
+}
+
+.inputStyle {
+  margin-top: 9px;
+  width: -webkit-fill-available;
+  outline: none;
+  height: 48px;
+  padding: 18px 10px 15px 20px;
+  border: 1px solid var(--lightGray);
+  border-radius: 6px;
 }
