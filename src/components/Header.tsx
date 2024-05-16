@@ -4,7 +4,7 @@ import Moon from "../../public/assets/icon-moon.svg"
 
 export default function Header() {
   return (
-    <div className=" w-[100%]">
+    <div className=" w-screen">
       <div className=" flex flex-row justify-between w-[100%] bg-[#373B53]">
       <img src={Logo} alt="" className="w-[4.5rem]  "/>
       <div className=" flex items-center justify-between pr-[1.5rem] gap-[2rem]">

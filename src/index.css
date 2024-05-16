@@ -2,3 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=League+Spartan:wght@100..900&display=swap');
+
+#root {
+  height: 100%;
+  font-family: "League Spartan", sans-serif;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+  background-color: #F8F8FB;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.spartan-font {
+  font-family: "League Spartan", sans-serif;
+}
