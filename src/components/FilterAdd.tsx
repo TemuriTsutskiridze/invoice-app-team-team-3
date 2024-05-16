@@ -4,7 +4,7 @@ import Plus from "../../public/assets/icon-plus.svg"
 
 function FilterAdd() {
   return (
-    <div className=' flex justify-between items-center px-[1.5rem] mt-[2.25rem]'>
+    <div className=' flex justify-between items-center px-[1.5rem] mt-9 mb-8'>
       <div className='inline-flex justify-start items-start flex-col'>
         <h1 className=' text-[1.5rem] font-bold -mb-[4px]'>Invoices</h1>
         <p className=' text-[#888EB0]'>7 invoices</p>

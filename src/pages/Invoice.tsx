@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import FilterAdd from '../components/FilterAdd'
+import InvoiceBoxes from '../components/InvoiceBoxes'
 
 
 function Invoice() {
@@ -8,6 +9,7 @@ function Invoice() {
     <div>
       <Header />
       <FilterAdd />
+      <InvoiceBoxes />
     </div>
   )
 }
