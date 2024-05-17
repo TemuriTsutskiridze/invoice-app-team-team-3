@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import data from '../data.json';
+import { MyContext } from '../pages/Invoice';
 
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
@@ -17,9 +18,25 @@ const itemVariants = {
 };
 
 function InvoiceBoxes() {
+  const { filterClick, setFilterClick } = useContext(MyContext);
+
+  const filterInvoice = () => {
+    switch (filterClick) {
+      case "pending":
+        return data.filter(item => item.status === "pending");
+      case "paid":
+        return data.filter(item => item.status === "paid");
+      case "draft":
+        return data.filter(item => item.status === "draft");
+      case "all":
+      default:
+        return data;
+    }
+  };
+
   return (
     <>
-      {data.map((invoice, index) => (
+      {filterInvoice().map((invoice, index) => (
         <motion.div
           key={invoice.id}
           className='flex justify-between px-6 bg-[#FFF] mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 hover:border border-transparent hover:border-gray-500 cursor-pointer shadow-sm'

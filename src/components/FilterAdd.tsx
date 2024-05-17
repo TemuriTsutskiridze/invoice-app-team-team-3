@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import IconDown from "../../public/assets/icon-arrow-down.svg";
 import Plus from "../../public/assets/icon-plus.svg";
 import data from '../data.json';
+import { MyContext } from '../pages/Invoice';
 import '../styles/filter.css';
 
 function FilterAdd() {
-  const [filter, setFilter] = useState(false);
-  const [arrowUp, setArrowUp] = useState(false);
+  const [filter, setFilter] = useState<boolean>(false);
+  const [arrowUp, setArrowUp] = useState<boolean>(false);
 
+  const { filterClick, setFilterClick } = useContext(MyContext);
   const filterBox = () => {
     setFilter(!filter);
     setArrowUp(!arrowUp);
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setFilterClick(value as any);
+      setFilter(!filter) 
+    }
   };
 
   return (
@@ -30,15 +40,15 @@ function FilterAdd() {
             className={`filter-box ${filter ? 'filter-box-visible' : 'filter-box-hidden'}`}
           >
             <div className='flex gap-[0.81rem]'>
-              <input type="checkbox" className="accent-[#7C5DFA] cursor-pointer"/>
+              <input type="checkbox" value="draft" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'draft'} />
               <span className='text-black text-[0.9375rem] font-bold'>Draft</span>
             </div>
             <div className='flex gap-[0.81rem]'>
-              <input type="checkbox" className="accent-[#7C5DFA] cursor-pointer"/>
+              <input type="checkbox" value="pending" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'pending'} />
               <span className='text-black text-[0.9375rem] font-bold'>Pending</span>
             </div>
             <div className='flex gap-[0.81rem]'>
-              <input type="checkbox" className="accent-[#7C5DFA] cursor-pointer"/>
+              <input type="checkbox" value="paid" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'paid'} />
               <span className='text-black text-[0.9375rem] font-bold'>Paid</span>
             </div>
           </div>
