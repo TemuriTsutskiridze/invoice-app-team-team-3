@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import Header from '../components/Header';
 import FilterAdd from '../components/FilterAdd';
 import InvoiceBoxes from '../components/InvoiceBoxes';
+import EmptyInvoices from '../components/EmptyInvoices';
+import data from "../data.json"
 
 type FilterType = "all" | "pending" | "paid" | "draft";
 interface ContextType {
@@ -11,7 +13,7 @@ interface ContextType {
 
 export const MyContext = React.createContext<ContextType>({
   filterClick: 'all',
-  setFilterClick: () => {}
+  setFilterClick: () => {} 
 });
 
 function Invoice() {
@@ -21,7 +23,7 @@ function Invoice() {
     <MyContext.Provider value={{ filterClick, setFilterClick }}>
       <Header />
       <FilterAdd />
-      <InvoiceBoxes />
+      {data.length === 0 ? <EmptyInvoices /> : <InvoiceBoxes />}
     </MyContext.Provider>
   );
 }

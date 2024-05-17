@@ -19,11 +19,10 @@ const itemVariants = {
 
 function InvoiceBoxes() {
   const { filterClick, setFilterClick } = useContext(MyContext);
-
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return data.filter(item => item.status === "pending");
+        return data.filter(item => item.status === "pending"); 
       case "paid":
         return data.filter(item => item.status === "paid");
       case "draft":
