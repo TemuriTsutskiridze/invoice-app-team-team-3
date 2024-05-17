@@ -14,6 +14,7 @@ export const MyContext = React.createContext<ContextType>({
   setFilterClick: () => {}
 });
 
+
 function Invoice() {
   const [filterClick, setFilterClick] = useState<FilterType>('all');
 
