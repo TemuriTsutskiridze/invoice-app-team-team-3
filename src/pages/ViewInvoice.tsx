@@ -210,7 +210,7 @@ const ViewInvoice: React.FC = () => {
             {invoice.clientEmail}
           </p>
           <div
-            className="w-full mt-[38px] rounded-t-lg"
+            className="w-full mt-[38px] rounded-lg"
             style={
               darkMode
                 ? { backgroundColor: "#252945" }
@@ -261,15 +261,20 @@ const ViewInvoice: React.FC = () => {
                       darkMode ? { color: "#888eb0" } : { color: "#7e88c3" }
                     }
                   >
-                    {invoice.items[1]?.quantity} x £{" "}
-                    {invoice.items[1]?.price.toFixed(2)}
+                    {invoice.items[1]
+                      ? `${invoice.items[1]?.quantity} x £
+                    ${invoice.items[1]?.price.toFixed(2)} `
+                      : null}
                   </p>
                 </div>
                 <p
                   className="text-[15px] font-bold mt-2"
                   style={darkMode ? { color: "#888eb0" } : { color: "#7e88c3" }}
                 >
-                  £ {invoice.items[1]?.total.toFixed(2)}
+                  {invoice.items[1]
+                    ? `£ ${invoice.items[1]?.quantity} x £
+                    ${invoice.items[1]?.total.toFixed(2)} `
+                    : null}
                 </p>
               </div>
             </div>
