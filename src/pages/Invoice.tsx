@@ -1,13 +1,29 @@
-import React from 'react'
-import Header from '../components/Header'
+import React, { useContext, useState } from 'react';
+import Header from '../components/Header';
+import FilterAdd from '../components/FilterAdd';
+import InvoiceBoxes from '../components/InvoiceBoxes';
 
-
-function Invoice() {
-  return (
-    <div>
-      <Header />
-    </div>
-  )
+type FilterType = "all" | "pending" | "paid" | "draft";
+interface ContextType {
+  filterClick: FilterType;
+  setFilterClick: React.Dispatch<React.SetStateAction<FilterType>>;
 }
 
-export default Invoice
+export const MyContext = React.createContext<ContextType>({
+  filterClick: 'all',
+  setFilterClick: () => {}
+});
+
+function Invoice() {
+  const [filterClick, setFilterClick] = useState<FilterType>('all');
+
+  return (
+    <MyContext.Provider value={{ filterClick, setFilterClick }}>
+      <Header />
+      <FilterAdd />
+      <InvoiceBoxes />
+    </MyContext.Provider>
+  );
+}
+
+export default Invoice;
