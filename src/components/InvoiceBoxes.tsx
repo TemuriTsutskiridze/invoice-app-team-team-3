@@ -28,7 +28,8 @@ function InvoiceBoxes() {
         return data.filter(item => item.status === "paid");
       case "draft":
         return data.filter(item => item.status === "draft");
-      case "all":
+      case "all": 
+      return data
       default:
         return data;
     }

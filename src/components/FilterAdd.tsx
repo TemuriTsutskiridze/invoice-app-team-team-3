@@ -51,6 +51,10 @@ function FilterAdd() {
               <input type="checkbox" value="paid" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'paid'} />
               <span className='text-black text-[0.9375rem] font-bold'>Paid</span>
             </div>
+            <div className='flex gap-[0.81rem]'>
+              <input type="checkbox" value="all" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'all'} />
+              <span className='text-black text-[0.9375rem] font-bold'>All</span>
+            </div>
           </div>
         </div>
         <div className='flex justify-center items-center w-[5.625rem] h-[2.75rem] bg-[#7C5DFA] rounded-[1.5rem] gap-[0.5rem] cursor-pointer'>
