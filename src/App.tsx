@@ -1,10 +1,12 @@
+import { Modal } from "./pages";
 
-import Invoice from "./pages/Invoice";
 
 function App() {
-  return <>
-  <Invoice />
-  </>;
+  return (
+    <>
+      <Modal />
+    </>
+  );
 }
 
 export default App;

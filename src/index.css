@@ -5,8 +5,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=League+Spartan:wght@100..900&display=swap");
 
 #root {
-  height: 100%;
+  min-height: 100vh;
   font-family: "League Spartan", sans-serif;
+  position: relative;
 }
 
 :root {
@@ -24,8 +25,11 @@ body {
   background-color: #f8f8fb;
   display: flex;
   flex-direction: column;
-  position: relative;
   min-height: 100vh;
+}
+
+.halfSize {
+  width: calc(50% - 8px);
 }
 
 .inputText {
@@ -42,11 +46,11 @@ body {
 }
 
 .inputStyle {
-  margin-top: 9px;
   width: -webkit-fill-available;
   outline: none;
   height: 48px;
-  padding: 18px 10px 15px 20px;
+  padding: 18px 0px 15px 20px;
   border: 1px solid var(--lightGray);
   border-radius: 6px;
+  display: block;
 }
