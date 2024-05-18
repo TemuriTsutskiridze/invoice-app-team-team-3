@@ -10,7 +10,6 @@ function EmptyInvoices() {
       <span className=' text-center max-w-[12.875rem] text-[0.8125rem] text-[#888EB0] text-medium leading-[0.9375rem]'>Create an invoice by clicking the 
         <span className=' text-bold text-[0.8125rem] leading-[0.9375rem]'> New</span> button and get started</span>
       </div>
-      
     </div>
   )
 }
