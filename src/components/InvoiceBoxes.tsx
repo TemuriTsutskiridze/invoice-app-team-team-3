@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import data from '../data.json';
 import { MyContext } from '../pages/Invoice';
@@ -34,6 +34,21 @@ function InvoiceBoxes() {
     }
   };
 
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth >= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="flex justify-center mb-[6.56rem]">
       <div className="w-full max-w-[60rem]">
@@ -51,16 +66,26 @@ function InvoiceBoxes() {
               <span className='text-[0.9375rem] font-bold md:mr-[1.75rem]'>
                 <span className='text-[#7E88C3]'>#</span>{invoice.id}
               </span>
-              <span className='-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem]'>
+              <span className='-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem] md:items-center'>
                 Due {formatDate(invoice.paymentDue)}
               </span>
-              {<span className='font-bold'>£ {invoice.total.toFixed(2)}</span>}
+              {!isMobile
+               ?
+              <span className='font-bold mt-4'>£ {invoice.total.toFixed(2)}</span>
+               : 
+              <span className='font-[0.8125rem] text-[#858BB2] text-[0.8125rem] tracking-[-0.00625rem]'>
+              {invoice.clientName}
+            </span>}
             </div>
 
-            <div className='flex justify-between items-end flex-col gap-[1.68rem] md:flex-row items-center'>
-             { <span className='font-[0.8125rem] text-[#858BB2] text-[0.8125rem] leading-[0.9375rem] tracking-[-0.00625rem]'>
+            <div className='flex justify-between items-end flex-col gap-[1.68rem] md:flex-row md:items-center md:justify-center md:flex-row'>
+             {!isMobile 
+                ?
+              <span className='font-[0.8125rem] text-[#858BB2] text-[0.8125rem] tracking-[-0.00625rem]'>
                 {invoice.clientName}
-              </span>}
+              </span>
+               : 
+              <span className='font-bold'>£ {invoice.total.toFixed(2)}</span>}
               <div className={`${invoice.status === "paid" ? 'bg-[#33D69F]' : invoice.status === "pending" ? 'bg-[#FF8F00]' : 'bg-[#373B53]'} bg-opacity-10 flex justify-center items-center gap-2 min-w-[6.5rem] max-w-[7.5rem] rounded-[0.375rem] pt-[0.88rem] pb-[0.69rem]`}>
                 <div className={`${invoice.status === "paid" ? "bg-[#33D69F]" : invoice.status === "pending" ? 'bg-[#FF8F00]' : 'bg-[black]'} w-[0.5rem] h-[0.5rem] rounded-lg`}></div>
                 <span className={`${invoice.status === "paid" ? "text-[#33D69F]" : invoice.status === "pending" ? "text-[#FF8F00]" : "text-[#373B53]"} font-bold`}>
