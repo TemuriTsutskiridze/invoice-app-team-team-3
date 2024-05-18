@@ -1,18 +1,18 @@
-interface Address {
+export interface Address {
   street: string;
   city: string;
   postCode: string;
   country: string;
 }
 
-interface Item {
+export interface Item {
   name: string;
   quantity: number;
   price: number;
   total: number;
 }
 
-interface Invoice {
+export interface InvoiceData {
   id: string;
   createdAt: string;
   paymentDue: string;
@@ -20,9 +20,16 @@ interface Invoice {
   paymentTerms: number;
   clientName: string;
   clientEmail: string;
-  status: InvoiceStatus;
+  status: string;
   senderAddress: Address;
   clientAddress: Address;
   items: Item[];
   total: number;
+}
+
+export interface AppContextType {
+  appData: InvoiceData[];
+  setAppData: React.Dispatch<React.SetStateAction<InvoiceData[]>>;
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
