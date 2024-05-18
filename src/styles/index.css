@@ -8,6 +8,7 @@
   min-height: 100vh;
   font-family: "League Spartan", sans-serif;
   position: relative;
+  z-index: 0;
 }
 
 :root {
@@ -26,31 +27,4 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-.halfSize {
-  width: calc(50% - 8px);
-}
-
-.inputText {
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.25px;
-}
-.labelStyle {
-  font-weight: 500;
-  font-size: 13px;
-  letter-spacing: -0.1px;
-  color: var(--gray);
-  display: block;
-}
-
-.inputStyle {
-  width: -webkit-fill-available;
-  outline: none;
-  height: 48px;
-  padding: 18px 0px 15px 20px;
-  border: 1px solid var(--lightGray);
-  border-radius: 6px;
-  display: block;
 }

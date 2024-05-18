@@ -20,7 +20,6 @@ function Invoice() {
 
   return (
     <MyContext.Provider value={{ filterClick, setFilterClick }}>
-      <Header />
       <FilterAdd />
       <InvoiceBoxes />
     </MyContext.Provider>

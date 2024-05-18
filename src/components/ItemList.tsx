@@ -13,8 +13,8 @@ const ItemList = () => {
             <label className="labelStyle">Item Name</label>
             <input type="text" className="inputStyle inputText mt-[15px]" />
           </div>
-          <div className="flex  gap-[65px]">
-            <div className="flex gap-4">
+          <div className="grid grid-cols-2 gap-[65px] ">
+            <div className="grid grid-cols-inputsGrid gap-4 flex-grow-[2] ">
               <InputField type={"number"}>Qty.</InputField>
               <InputField type={"number"}>Price</InputField>
               <div>
@@ -24,13 +24,15 @@ const ItemList = () => {
                 </p>
               </div>
             </div>
-            <div className="pt-[70px] ml-auto">
-              <img src={DeleteIcon} />
+            <div className="pt-[70px] justify-self-end">
+              <img src={DeleteIcon} className=" max-w-max" />
             </div>
           </div>
         </div>
         <div className="bg-[#eaeced] h-[48px] rounded-3xl flex items-center justify-center">
-          <p className="text-[#7e88c3] font-bold text-[15px] ">+ Add New Item</p>
+          <p className="text-[#7e88c3] font-bold text-[15px] ">
+            + Add New Item
+          </p>
         </div>
       </div>
     </div>
