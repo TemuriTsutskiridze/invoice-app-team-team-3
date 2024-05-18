@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import data from '../data.json';
 import { MyContext } from '../pages/Invoice';
-
+import ArrowRight from "../../public/assets/icon-arrow-right.svg"
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-GB', {
@@ -92,6 +92,7 @@ function InvoiceBoxes() {
                   {invoice.status.split("")[0].toUpperCase() + invoice.status.slice(1)}
                 </span>
               </div>
+              {isMobile && <img src={ArrowRight} alt="" />}
             </div>
           </motion.div>
         ))}
