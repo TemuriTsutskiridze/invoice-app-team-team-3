@@ -13,12 +13,12 @@ function formatDate(dateString: string | number | Date) {
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 50 },
   visible: { opacity: 1, y: 0 }
 };
 
 function InvoiceBoxes() {
-  const { filterClick, setFilterClick } = useContext(MyContext);
+  const { filterClick, setFilterClick, isMobile } = useContext(MyContext);
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
@@ -34,36 +34,21 @@ function InvoiceBoxes() {
     }
   };
 
-  const [isMobile, setIsMobile] = useState<boolean>(false)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth >= 768);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <div className="flex justify-center mb-[6.56rem]">
       <div className="w-full max-w-[60rem]">
         {filterInvoice().map((invoice, index) => (
           <motion.div
             key={invoice.id}
-            className='flex justify-between px-6 bg-[#FFF] mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 hover:border border-transparent hover:border-gray-500 cursor-pointer shadow-sm
+            className='flex justify-between px-6 bg-[#FFF] mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 hover:border border-transparent hover:border-[#7C5DFA] cursor-pointer shadow-sm
               md:mx-[3rem] md:items-center'
             initial="hidden"
             animate="visible"
             variants={itemVariants}
             transition={{ duration: 0.5, delay: index * 0.3 }}
           >
-            <div className='flex flex-col justify-between md:flex-row'>
-              <span className='text-[0.9375rem] font-bold md:mr-[1.75rem]'>
+            <div className='flex flex-col justify-between md:flex-row md:justify-center'>
+              <span className='text-[0.9375rem] font-bold md:mr-[2.75rem]'>
                 <span className='text-[#7E88C3]'>#</span>{invoice.id}
               </span>
               <span className='-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem] md:items-center'>
@@ -71,7 +56,7 @@ function InvoiceBoxes() {
               </span>
               {!isMobile
                ?
-              <span className='font-bold mt-4'>£ {invoice.total.toFixed(2)}</span>
+              <span className='font-bold mt-4 md:mr-[3.56rem]'>£ {invoice.total.toFixed(2)}</span>
                : 
               <span className='font-[0.8125rem] text-[#858BB2] text-[0.8125rem] tracking-[-0.00625rem]'>
               {invoice.clientName}

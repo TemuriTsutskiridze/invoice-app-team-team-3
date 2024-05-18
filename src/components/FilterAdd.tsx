@@ -8,8 +8,7 @@ import '../styles/filter.css';
 function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-
-  const { filterClick, setFilterClick } = useContext(MyContext);
+  const { filterClick, setFilterClick, modalPage, setModalPage } = useContext(MyContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -25,7 +24,7 @@ function FilterAdd() {
   };
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center  xl:mt-[3.88rem]'>
       <div className='flex justify-between items-center px-[1.5rem] mt-9 mb-8 w-full max-w-[60rem] md:px-[3rem]'>
         <div className='inline-flex justify-start items-start flex-col'>
           <h1 className='text-[1.5rem] font-bold -mb-[4px] md:text-[2.25rem]'>Invoices</h1>
@@ -58,7 +57,7 @@ function FilterAdd() {
               </div>
 
           </div>
-          <div 
+          <div onClick={() => setModalPage(!modalPage)}
             className='flex justify-center items-center w-[5.625rem] h-[2.75rem] bg-[#7C5DFA] rounded-[1.5rem] gap-[0.5rem] cursor-pointer
             md:w-[9.375rem]'>
             <img src={Plus} alt="" className='bg-white w-8 h-8 rounded-[50%] flex justify-center items-center p-[10px]'/>
