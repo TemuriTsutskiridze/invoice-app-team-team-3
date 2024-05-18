@@ -4,6 +4,7 @@ import Plus from "../../public/assets/icon-plus.svg";
 import data from '../data.json';
 import { MyContext } from '../pages/Invoice';
 import '../styles/filter.css';
+export 
 
 function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
@@ -22,13 +23,27 @@ function FilterAdd() {
       setFilter(!filter);
     }
   };
+  const filterInvoice = () => {
+    switch (filterClick) {
+      case "pending":
+        return data.filter(item => item.status === "pending"); 
+      case "paid":
+        return data.filter(item => item.status === "paid");
+      case "draft":
+        return data.filter(item => item.status === "draft");
+      case "all": 
+        return data;
+      default:
+        return data;
+    }
+  };
 
   return (
     <div className='flex justify-center  xl:mt-[3.88rem]'>
       <div className='flex justify-between items-center px-[1.5rem] mt-9 mb-8 w-full max-w-[60rem] md:px-[3rem]'>
         <div className='inline-flex justify-start items-start flex-col'>
           <h1 className='text-[1.5rem] font-bold -mb-[4px] md:text-[2.25rem]'>Invoices</h1>
-          <p className='text-[#888EB0]'>{data.length} invoices</p>
+          <p className='text-[#888EB0]'>{filterInvoice().length} invoices</p>
         </div>
         <div className='flex justify-between items-center gap-[1.16rem]'>
           <div className='relative'>

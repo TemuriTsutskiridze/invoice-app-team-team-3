@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import data from '../data.json';
 import { MyContext } from '../pages/Invoice';
 import ArrowRight from "../../public/assets/icon-arrow-right.svg"
+import { Link } from 'react-router-dom';
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-GB', {
@@ -38,6 +39,7 @@ function InvoiceBoxes() {
     <div className="flex justify-center mb-[6.56rem]">
       <div className="w-full max-w-[60rem]">
         {filterInvoice().map((invoice, index) => (
+           <Link to={`/view-invoice/${invoice.id}`} key={index}>
           <motion.div
             key={invoice.id}
             className='flex justify-between px-6 bg-[#FFF] mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 hover:border border-transparent hover:border-[#7C5DFA] cursor-pointer shadow-sm
@@ -80,6 +82,7 @@ function InvoiceBoxes() {
               {isMobile && <img src={ArrowRight} alt="" />}
             </div>
           </motion.div>
+           </Link>
         ))}
       </div>
     </div>

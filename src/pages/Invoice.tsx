@@ -28,6 +28,7 @@ export const MyContext = React.createContext<ContextType>({
   setModalPage: () => {}
 });
 
+
 function Invoice() {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(false)
@@ -50,7 +51,6 @@ function Invoice() {
 
   return (
     <MyContext.Provider value={{ filterClick, setFilterClick, isMobile, setIsMobile, isDesktop, setIsDesktop,modalPage,setModalPage  }}>
-      <Header />
       <FilterAdd />
       {data.length === 0 ? <EmptyInvoices /> : <InvoiceBoxes />}
     </MyContext.Provider>
