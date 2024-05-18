@@ -60,9 +60,9 @@ function InvoiceBoxes() {
               {invoice.clientName}
             </span>
             <div className={`${invoice.status === "paid" ? 'bg-[#33D69F]' : invoice.status === "pending" ? 'bg-[#FF8F00]' : 'bg-[#373B53]'} bg-opacity-10 flex justify-center items-center gap-2 min-w-[6.5rem] max-w-[7.5rem] rounded-[0.375rem] pt-[0.88rem] pb-[0.69rem]`}>
-              <div className={`${invoice.status === "paid" ? "bg-[green]" : invoice.status === "pending" ? 'bg-[#FF8F00]' : 'bg-[black]'} w-[0.5rem] h-[0.5rem] rounded-lg`}></div>
+              <div className={`${invoice.status === "paid" ? "bg-[#33D69F]" : invoice.status === "pending" ? 'bg-[#FF8F00]' : 'bg-[black]'} w-[0.5rem] h-[0.5rem] rounded-lg`}></div>
               <span className={`${invoice.status === "paid" ? "text-[#33D69F]" : invoice.status === "pending" ? "text-[#FF8F00]" : "text-[#373B53]"} font-bold`}>
-                {invoice.status}
+                {invoice.status.split("")[0].toUpperCase() + invoice.status.slice(1)}
               </span>
             </div>
           </div>
