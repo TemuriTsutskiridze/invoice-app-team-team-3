@@ -1,4 +1,4 @@
 export { default as Header } from "./Header";
-export { default as InputField } from "./InputField";
-export { default as ItemList } from "./ItemList";
-export {default as ModalFooter} from "./ModalFooter"
+export { default as InputField } from "./modalComponents/InputField";
+export { default as ItemList } from "./modalComponents/ItemList";
+export { default as ModalFooter } from "./modalComponents/ModalFooter";

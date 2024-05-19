@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "../App"; // Ensure correct path
+import { AppContext } from "../App";
 
 const GoBackButton: React.FC = () => {
   const { darkMode } = useContext(AppContext);
