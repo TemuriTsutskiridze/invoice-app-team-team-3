@@ -12,15 +12,14 @@ export const AppContext = createContext<AppContextType>({
   setAppData: () => {},
   darkMode: false,
   setDarkMode: () => {},
+  isMoonVisible: true,
+  setIsMoonVisible: () => {}
 });
 
 const App = () => {
   const [appData, setAppData] = useState(data);
   const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    document.body.style.backgroundColor = darkMode ? "#141625" : "#F8F8FB";
-  }, [darkMode]);
+  const [isMoonVisible, setIsMoonVisible] = useState(true);
 
   return (
     <AppContext.Provider
@@ -29,9 +28,12 @@ const App = () => {
         setAppData,
         darkMode,
         setDarkMode,
+        isMoonVisible,
+        setIsMoonVisible
       }}
     >
       <Header />
+      <span className={`animatedBg ${darkMode ? "second" : "first"}`}></span>
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />
         <Route path="/invoices" element={<Invoice />} />

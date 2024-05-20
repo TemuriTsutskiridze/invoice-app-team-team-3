@@ -36,7 +36,7 @@ function InvoiceBoxes() {
   };
 
   return (
-    <div className="flex justify-center mb-[6.56rem]">
+    <div className="flex justify-center pb-[6rem]">
       <div className="w-full max-w-[60rem]">
         {filterInvoice().map((invoice, index) => (
            <Link to={`/view-invoice/${invoice.id}`} key={index}>

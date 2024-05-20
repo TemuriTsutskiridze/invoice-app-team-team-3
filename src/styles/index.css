@@ -4,27 +4,48 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=League+Spartan:wght@100..900&display=swap');
 
-#root {
+
+html, body {
   height: 100%;
-  font-family: "League Spartan", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; 
 }
-
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-
-body {
+body{
   background-color: #F8F8FB;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  min-height: 100vh;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
-.spartan-font {
-  font-family: "League Spartan", sans-serif;
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.animatedBg {
+  position: absolute;
+  width: 100%;
+  height: 100%; 
+  background: #141625;
+  z-index: -2;
+  clip-path: circle(0.0% at 2% 82%);
+  transition: clip-path 1s ease-out;
+}
+
+.animatedBg.first {
+  clip-path: circle(0.0% at 50% 50%);
+}
+
+.animatedBg.second {
+  clip-path: circle(150.5% at 50% 50%);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }

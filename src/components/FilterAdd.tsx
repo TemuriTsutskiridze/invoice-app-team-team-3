@@ -9,7 +9,7 @@ export
 function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-  const { filterClick, setFilterClick, modalPage, setModalPage } = useContext(MyContext);
+  const { filterClick, setFilterClick } = useContext(MyContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -72,7 +72,7 @@ function FilterAdd() {
               </div>
 
           </div>
-          <div onClick={() => setModalPage(!modalPage)}
+          <div
             className='flex justify-center items-center w-[5.625rem] h-[2.75rem] bg-[#7C5DFA] rounded-[1.5rem] gap-[0.5rem] cursor-pointer
             md:w-[9.375rem]'>
             <img src={Plus} alt="" className='bg-white w-8 h-8 rounded-[50%] flex justify-center items-center p-[10px]'/>

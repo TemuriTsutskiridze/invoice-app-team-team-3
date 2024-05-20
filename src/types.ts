@@ -32,4 +32,6 @@ export interface AppContextType {
   setAppData: React.Dispatch<React.SetStateAction<InvoiceData[]>>;
   darkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  isMoonVisible:boolean;
+  setIsMoonVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
