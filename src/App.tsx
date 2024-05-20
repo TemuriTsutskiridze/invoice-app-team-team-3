@@ -1,11 +1,10 @@
-import "./App.css";
 import Invoice from "./pages/Invoice";
 import ViewInvoice from "./pages/ViewInvoice";
 import { Navigate, Route, Routes } from "react-router";
 import { createContext, useEffect, useState } from "react";
 import data from "./data.json";
-import { AppContextType } from "./types";
 import Header from "./components/Header";
+import { Modal } from "./pages";
 
 export const AppContext = createContext<AppContextType>({
   appData: [],
@@ -32,6 +31,7 @@ const App = () => {
       }}
     >
       <Header />
+      <Modal />
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />
         <Route path="/invoices" element={<Invoice />} />
