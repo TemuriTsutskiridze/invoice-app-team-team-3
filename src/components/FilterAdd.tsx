@@ -4,11 +4,13 @@ import Plus from "../../public/assets/icon-plus.svg";
 import data from "../data.json";
 import { MyContext } from "../pages/Invoice";
 import "../styles/filter.css";
+import { AppContext } from "../App";
+
 export function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-  const { filterClick, setFilterClick, modalPage, setModalPage } =
-    useContext(MyContext);
+  const { filterClick, setFilterClick } = useContext(MyContext);
+  const { setModal } = useContext(AppContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -22,6 +24,7 @@ export function FilterAdd() {
       setFilter(!filter);
     }
   };
+
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
@@ -121,7 +124,7 @@ export function FilterAdd() {
             </div>
           </div>
           <div
-            onClick={() => setModalPage(true)}
+            onClick={() => setModal(true)}
             className="flex justify-center items-center w-[5.625rem] h-[2.75rem] bg-[#7C5DFA] rounded-[1.5rem] gap-[0.5rem] cursor-pointer
             md:w-[9.375rem]"
           >

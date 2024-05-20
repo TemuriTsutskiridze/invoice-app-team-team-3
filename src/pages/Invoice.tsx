@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Header from '../components/Header';
+import React, {  useEffect, useState } from 'react';
 import FilterAdd from '../components/FilterAdd';
 import InvoiceBoxes from '../components/InvoiceBoxes';
 import EmptyInvoices from '../components/EmptyInvoices';
@@ -13,8 +12,6 @@ interface ContextType {
   setIsMobile:  React.Dispatch<React.SetStateAction<boolean>>;
   isDesktop: boolean;
   setIsDesktop: React.Dispatch<React.SetStateAction<boolean>>;
-  modalPage: boolean;
-  setModalPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const MyContext = React.createContext<ContextType>({
@@ -24,8 +21,6 @@ export const MyContext = React.createContext<ContextType>({
   setIsMobile: () => {},
   isDesktop: false,
   setIsDesktop: () => {},
-  modalPage: false,
-  setModalPage: () => {}
 });
 
 
@@ -33,7 +28,6 @@ function Invoice() {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(false)
   const [filterClick, setFilterClick] = useState<FilterType>('all');
-  const [modalPage, setModalPage] = useState<boolean>(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,7 +44,7 @@ function Invoice() {
   }, []);
 
   return (
-    <MyContext.Provider value={{ filterClick, setFilterClick, isMobile, setIsMobile, isDesktop, setIsDesktop,modalPage,setModalPage  }}>
+    <MyContext.Provider value={{ filterClick, setFilterClick, isMobile, setIsMobile, isDesktop, setIsDesktop  }}>
       <FilterAdd />
       {data.length === 0 ? <EmptyInvoices /> : <InvoiceBoxes />}
     </MyContext.Provider>

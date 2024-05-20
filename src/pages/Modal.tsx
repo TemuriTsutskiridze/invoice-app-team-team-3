@@ -12,12 +12,9 @@ import { AppContext } from "../App";
 import "../styles/ModalStyle.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { MyContext } from "./Invoice";
 
 const Modal = () => {
-  const { darkMode } = useContext(AppContext);
-  const { modalPage, setModalPage } = useContext(MyContext);
-
+  const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),
   });
@@ -25,18 +22,19 @@ const Modal = () => {
   const Submit = async (data: any) => {
     console.log(data);
   };
-  console.log(modalPage);
 
   return (
     <div
       className={` absolute w-full z-10 ${
         darkMode ? "bg-darkBgColor" : "bg-white "
-      }   ${modalPage ? "" : "hidden"}`}
+      } ${modal ? "block" : "hidden"}`}
     >
       <div className={` px-6 pt-8 pb-[180px] top-[72px]  `}>
         <div
-          onClick={() => setModalPage(false)}
-          className="flex gap-6 items-center"
+          onClick={() => {
+            setModal(false);
+          }}
+          className="flex gap-6 items-center cursor-pointer"
         >
           <img src={ArrowLeft} alt="Arrow Left" />
           <p className={`inputText ${darkMode && "text-white"}`}>Go back</p>
