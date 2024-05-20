@@ -11,11 +11,14 @@ export const AppContext = createContext<AppContextType>({
   setAppData: () => {},
   darkMode: false,
   setDarkMode: () => {},
+  modal: false,
+  setModal: () => {},
 });
 
 const App = () => {
   const [appData, setAppData] = useState(data);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = darkMode ? "#141625" : "#F8F8FB";
@@ -28,6 +31,8 @@ const App = () => {
         setAppData,
         darkMode,
         setDarkMode,
+        modal,
+        setModal,
       }}
     >
       <Header />
