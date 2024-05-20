@@ -32,4 +32,5 @@ export interface AppContextType {
   setAppData: React.Dispatch<React.SetStateAction<InvoiceData[]>>;
   darkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  updateInvoiceStatus: (id: string, status: string) => void;
 }

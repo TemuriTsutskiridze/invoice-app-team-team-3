@@ -12,6 +12,7 @@ export const AppContext = createContext<AppContextType>({
   setAppData: () => {},
   darkMode: false,
   setDarkMode: () => {},
+  updateInvoiceStatus: () => {},
 });
 
 const App = () => {
@@ -22,6 +23,14 @@ const App = () => {
     document.body.style.backgroundColor = darkMode ? "#141625" : "#F8F8FB";
   }, [darkMode]);
 
+  const updateInvoiceStatus = (id: string, status: string) => {
+    setAppData((prevData) =>
+      prevData.map((invoice) =>
+        invoice.id === id ? { ...invoice, status } : invoice
+      )
+    );
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -29,6 +38,7 @@ const App = () => {
         setAppData,
         darkMode,
         setDarkMode,
+        updateInvoiceStatus,
       }}
     >
       <Header />

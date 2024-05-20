@@ -3,9 +3,15 @@ import { AppContext } from "../App";
 import { useParams } from "react-router-dom";
 
 const ViewInvoiceButtons: React.FC = () => {
-  const { appData, darkMode } = useContext(AppContext);
+  const { appData, darkMode, updateInvoiceStatus } = useContext(AppContext);
   const { id } = useParams<{ id: string }>();
   const invoice = appData.find((inv) => inv.id === id);
+
+  const handleMarkAsPaid = () => {
+    if (invoice) {
+      updateInvoiceStatus(invoice.id, "paid");
+    }
+  };
   return (
     <>
       <button
@@ -23,6 +29,7 @@ const ViewInvoiceButtons: React.FC = () => {
       </button>
       <button
         className="w-[131px] py-3 rounded-[24px] text-[#ffffff] bg-[#7c5dfa] lg:hover:bg-[#9277ff] lg:transition lg:duration-200"
+        onClick={handleMarkAsPaid}
         style={
           invoice && invoice.status === "pending"
             ? { display: "block" }
