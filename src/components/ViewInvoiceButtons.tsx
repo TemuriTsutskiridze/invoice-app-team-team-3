@@ -9,7 +9,7 @@ const ViewInvoiceButtons: React.FC = () => {
   return (
     <>
       <button
-        className="w-[73px] py-3 rounded-[24px]"
+        className="w-[73px] py-3 rounded-[24px] lg:hover:bg-[#dfe3fa] lg:transition lg:duration-200"
         style={
           darkMode
             ? { backgroundColor: "#252945", color: "#dfe3fa" }
@@ -18,11 +18,11 @@ const ViewInvoiceButtons: React.FC = () => {
       >
         Edit
       </button>
-      <button className="w-[90px] py-3 rounded-[24px] text-[#ffffff] bg-[#ec5757]">
+      <button className="w-[90px] py-3 rounded-[24px] text-[#ffffff] bg-[#ec5757] lg:hover:bg-[#ff9797] lg:transition lg:duration-200">
         Delete
       </button>
       <button
-        className="w-[131px] py-3 rounded-[24px] text-[#ffffff] bg-[#7c5dfa]"
+        className="w-[131px] py-3 rounded-[24px] text-[#ffffff] bg-[#7c5dfa] lg:hover:bg-[#9277ff] lg:transition lg:duration-200"
         style={
           invoice && invoice.status === "pending"
             ? { display: "block" }
