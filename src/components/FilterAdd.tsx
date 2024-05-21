@@ -3,13 +3,15 @@ import IconDown from "../../public/assets/icon-arrow-down.svg";
 import Plus from "../../public/assets/icon-plus.svg";
 import data from '../data.json';
 import { MyContext } from '../pages/Invoice';
+import { AppContext } from '../App';
 import '../styles/filter.css';
 export 
 
 function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-  const { filterClick, setFilterClick } = useContext(MyContext);
+  const { filterClick, setFilterClick,  } = useContext(MyContext);
+  const { darkMode } = useContext(AppContext)
 
   const filterBox = () => {
     setFilter(!filter);
@@ -42,13 +44,15 @@ function FilterAdd() {
     <div className='flex justify-center  xl:mt-[3.88rem]'>
       <div className='flex justify-between items-center px-[1.5rem] mt-9 mb-8 w-full max-w-[60rem] md:px-[3rem]'>
         <div className='inline-flex justify-start items-start flex-col'>
-          <h1 className='text-[1.5rem] font-bold -mb-[4px] md:text-[2.25rem]'>Invoices</h1>
-          <p className='text-[#888EB0]'>{filterInvoice().length} invoices</p>
+          <h1 className={`text-[1.5rem] font-bold -mb-[4px] md:text-[2.25rem]
+           transition ease-out duration-1000  ${!darkMode ? "text-[#0C0E16]" : "text-[white]"}`}>Invoices</h1>
+          <p
+           className={`text-[#888EB0] transition ease-out duration-1000  ${!darkMode ? "text-[#888EB0]" : "text-[#DFE3FA]"}`}>{filterInvoice().length} invoices</p>
         </div>
         <div className='flex justify-between items-center gap-[1.16rem]'>
           <div className='relative'>
             <div className='flex justify-between items-center gap-[0.75rem] md:mr-[2.75rem] cursor-pointer' onClick={filterBox}>
-              <span className='font-bold text-[0.9375rem]'>Filter <span className=' hidden md:inline-block'>by status</span></span>
+              <span className={`font-bold text-[0.9375rem]  transition ease-out duration-1000  ${!darkMode ? "text-[#0C0E16]" : "text-[white]"}`}>Filter <span className={` hidden md:inline-block`}>by status</span></span>
               <img src={IconDown} alt="" className={`w-[10.456px] h-[7.228px] transition-transform duration-300 ${arrowUp ? 'rotate-180' : ''}`} />
             </div>
 

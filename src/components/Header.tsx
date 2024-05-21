@@ -26,7 +26,7 @@ export default function Header() {
         
         <div
           className="flex items-center justify-between pr-[1.5rem] gap-[2rem]
-          xl:flex-col xl:pr-0 xl:w-[100%]">
+          xl:flex-col xl:pr-0 xl:w-[100%] cursor-pointer">
           {isMoonVisible ? (
             <img 
               src={Moon}

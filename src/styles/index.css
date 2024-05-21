@@ -4,7 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=League+Spartan:wght@100..900&display=swap');
 
-
 html, body {
   height: 100%;
   margin: 0;
@@ -33,19 +32,34 @@ body{
   height: 100%; 
   background: #141625;
   z-index: -2;
-  clip-path: circle(0.0% at 2% 82%);
+  clip-path: circle(0.0% at 0% 88%);
   transition: clip-path 1s ease-out;
 }
 
 .animatedBg.first {
-  clip-path: circle(0.0% at 50% 50%);
+  clip-path: circle(0.0% at 0% 78%);
 }
 
 .animatedBg.second {
-  clip-path: circle(150.5% at 50% 50%);
+  clip-path: circle(150.5% at 0% 78%);
+}
+.moon, .sun {
+  transition: transform 1s ease-in-out;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.moon {
+  transform: rotate(0deg) scale(1);
 }
+
+.sun {
+  transform: rotate(360deg) scale(1);
+}
+
+.moon.hidden {
+  transform: rotate(360deg) scale(0);
+}
+
+.sun.hidden {
+  transform: rotate(0deg) scale(0);
+}
+
