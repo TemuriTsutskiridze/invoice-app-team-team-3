@@ -16,7 +16,15 @@ export const AppContext = createContext<AppContextType>({
 });
 
 const App = () => {
-  const [appData, setAppData] = useState(data);
+  const [appData, setAppData] = useState<InvoiceData[]>(() => {
+    const storedData = localStorage.getItem("appData");
+    return storedData ? JSON.parse(storedData) : data;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("appData", JSON.stringify(appData));
+  }, [appData]);
+
   const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
