@@ -43,6 +43,42 @@ body{
 .animatedBg.second {
   clip-path: circle(150.5% at 0% 78%);
 }
+@media (max-width:1280px) {
+  .animatedBg{
+    clip-path: circle(0.5% at 90% 0%);
+  }
+  .animatedBg.first {
+    clip-path: circle(0.0% at 90% 0%);
+  }
+  
+  .animatedBg.second {
+    clip-path: circle(150.5% at 82% 4%);
+  }
+}
+@media (max-width:768px) {
+  .animatedBg{
+    clip-path: circle(0.5% at 83% 0%);
+  }
+  .animatedBg.first {
+    clip-path: circle(0.0% at 83% 0%);
+  }
+  
+  .animatedBg.second {
+    clip-path: circle(150.5% at 83% 4%);
+  }
+}
+@media (max-width:464px) {
+  .animatedBg{
+    clip-path: circle(0.5% at 70% 0%);
+  }
+  .animatedBg.first {
+    clip-path: circle(0.0% at 70% 0%);
+  }
+  
+  .animatedBg.second {
+    clip-path: circle(150.5% at 70% 4%);
+  }
+}
 .moon, .sun {
   transition: transform 1s ease-in-out;
 }

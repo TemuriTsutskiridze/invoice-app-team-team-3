@@ -56,22 +56,23 @@ function FilterAdd() {
               <img src={IconDown} alt="" className={`w-[10.456px] h-[7.228px] transition-transform duration-300 ${arrowUp ? 'rotate-180' : ''}`} />
             </div>
 
-              <div className={`filter-box ${filter ? 'filter-box-visible' : 'filter-box-hidden'} absolute top-full mt-5 -mr-[6rem] md:-mr-[1rem] bg-white p-4 shadow-lg rounded-lg z-10`}>
+              <div className={`filter-box ${filter ? 'filter-box-visible' : 'filter-box-hidden'} absolute top-full mt-5 -mr-[6rem] md:-mr-[1rem] transition ease-out duration-1000  ${!darkMode ? "bg-[white]" : "bg-[#252945]"}
+                p-4 rounded-lg z-10 ${!darkMode ? "text-[black]" : "text-[white]"}`}>
                 <div className='flex gap-[0.81rem]'>
                   <input type="checkbox" value="draft" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'draft'} />
-                  <span className='text-black text-[0.9375rem] font-bold'>Draft</span>
+                  <span className=' text-[0.9375rem] font-bold'>Draft</span>
                 </div>
                 <div className='flex gap-[0.81rem]'>
                   <input type="checkbox" value="pending" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'pending'} />
-                  <span className='text-black text-[0.9375rem] font-bold'>Pending</span>
+                  <span className=' text-[0.9375rem] font-bold'>Pending</span>
                 </div>
                 <div className='flex gap-[0.81rem]'>
                   <input type="checkbox" value="paid" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'paid'} />
-                  <span className='text-black text-[0.9375rem] font-bold'>Paid</span>
+                  <span className=' text-[0.9375rem] font-bold'>Paid</span>
                 </div>
                 <div className='flex gap-[0.81rem]'>
                   <input type="checkbox" value="all" className="accent-[#7C5DFA] cursor-pointer" onChange={handleCheckboxChange} checked={filterClick === 'all'} />
-                  <span className='text-black text-[0.9375rem] font-bold'>All</span>
+                  <span className='text-[0.9375rem] font-bold'>All</span>
                 </div>
               </div>
 
