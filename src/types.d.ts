@@ -123,3 +123,29 @@ interface InputFieldProps {
   value?: string | number;
   name: any;
 }
+
+
+interface FormValues {
+  senderAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  clientName: string;
+  clientEmail: string;
+  clientAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  paymentDue: string;
+  paymentTerms: string;
+  description: string;
+  items: {
+    name: string;
+    quantity: number;
+    price: number;
+  }[];
+}

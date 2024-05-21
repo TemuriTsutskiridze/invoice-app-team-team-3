@@ -28,12 +28,7 @@ const Schema = yup.object().shape({
       .string()
       .min(5, "Must be at least 5 characters")
       .max(20, "Must be at most 20 characters")
-      .required("Street address is required")
-      .test(
-        "sender street check",
-        "Incorrect address format",
-        (value) => !value.includes("")
-      ),
+      .required("Street address is required"),
     city: yup
       .string()
       .min(3, "Must be at least 3 characters")
@@ -69,8 +64,8 @@ const Schema = yup.object().shape({
           .required("Price is required"),
       })
     )
-    .min(1, "must be At Least one Item"),
-  clientEmail: yup.string().required("Client email is required"),
+    .min(1, "- AN Item must be added"),
+  clientEmail: yup.string().email().required("Client email is required"),
   clientName: yup.string().required("Client name is required"),
   description: yup.string().required("Description is required"),
   paymentTerms: yup.string().required("Payment terms are required"),

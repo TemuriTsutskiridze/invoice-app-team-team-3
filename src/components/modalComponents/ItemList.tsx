@@ -3,6 +3,7 @@ import InputField from "./InputField";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
+import { object } from "yup";
 
 interface Item {
   name: string;
@@ -16,10 +17,11 @@ const ItemList = () => {
   const { darkMode } = useContext(AppContext);
   const {
     formState: { errors },
+    setValue,
+    trigger,
   } = useFormContext();
   //declare states
   const [items, setItems] = useState<Item[]>([]);
-  console.log(items.length);
 
   //item add and delete function
   const handleAddItems = () => {
@@ -33,7 +35,13 @@ const ItemList = () => {
     const newItems = [...items];
     newItems.splice(index, 1);
     setItems(newItems);
+
+    setValue("items", newItems);
+    trigger("items");
   };
+
+  console.log(items);
+  console.log(errors);
   return (
     <div className="mt-[69px]">
       <h3 className="font-bold text-[18px] tracking-[-0.38px] text-[#777f98]">
@@ -103,12 +111,17 @@ const ItemList = () => {
         >
           <p className="text-[#7e88c3] font-bold text-[15px]">+ Add New Item</p>
         </div>
-        {errors.items && (
-          <p className="text-[#ec5757] text-[10px] font-semibold">
-            - All fields must be added
-          </p>
-        )}
       </div>
+      {Object.keys(errors).length > 1 && (
+        <p className="text-[#ec5757] text-[10px] font-semibold mt-[30px] ">
+          - All fields must be Added
+        </p>
+      )}
+      {errors.items && typeof errors.items.message === "string" && (
+        <p className="text-[#ec5757] mt-5px text-[10px] font-semibold">
+          {errors.items.message}
+        </p>
+      )}
     </div>
   );
 };

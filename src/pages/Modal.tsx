@@ -13,15 +13,33 @@ import "../styles/ModalStyle.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+export const defaultValues = {
+  senderAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  clientName: "",
+  clientEmail: "",
+  clientAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  paymentDue: "",
+  paymentTerms: "",
+  description: "",
+  items: [],
+};
+
 const Modal = () => {
   const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),
+    defaultValues,
   });
-
-  const Submit = async (data: any) => {
-    console.log(data);
-  };
 
   return (
     <div
@@ -46,17 +64,17 @@ const Modal = () => {
         >
           New Invoice
         </h1>
-        <form className="mt-[22px]" onSubmit={methods.handleSubmit(Submit)}>
-          <FormProvider {...methods}>
+        <FormProvider {...methods}>
+          <form className="mt-[22px]">
             <div>
               <SenderAdress />
               <ClientAdress />
               <InvoiceDates />
               <ItemList />
             </div>
-            <ModalFooter />
-          </FormProvider>
-        </form>
+          </form>
+          <ModalFooter />
+        </FormProvider>
       </div>
     </div>
   );
