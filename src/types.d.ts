@@ -159,3 +159,32 @@ interface AppContextType {
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+type Address = {
+  street: string;
+  city: string;
+  postCode: string;
+  country: string;
+};
+
+type Item = {
+  name: string;
+  quantity: number;
+  price: number;
+  total: number;
+};
+
+type Invoice = {
+  id: string;
+  createdAt: Date;
+  paymentDue: Date;
+  description: string;
+  paymentTerms: number;
+  clientName: string;
+  clientEmail: string;
+  status: { name: string; id: number };
+  senderAddress: Address;
+  clientAddress: Address;
+  items: Item[];
+  total: number;
+};
