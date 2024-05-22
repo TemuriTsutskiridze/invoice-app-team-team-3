@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import IconDown from "../../public/assets/icon-arrow-down.svg";
 import Plus from "../../public/assets/icon-plus.svg";
-import data from "../data.json";
 import { MyContext } from "../pages/Invoice";
 import "../styles/filter.css";
 import { AppContext } from "../App";
@@ -10,7 +9,7 @@ export function FilterAdd() {
   const [arrowUp, setArrowUp] = useState<boolean>(false);
   const { filterClick, setFilterClick, modalPage, setModalPage } =
     useContext(MyContext);
-  const { appData } = useContext(AppContext);
+  const { appData, setModal } = useContext(AppContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -24,6 +23,7 @@ export function FilterAdd() {
       setFilter(!filter);
     }
   };
+
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
@@ -132,7 +132,10 @@ export function FilterAdd() {
               alt=""
               className="bg-white w-8 h-8 rounded-[50%] flex justify-center items-center p-[10px]"
             />
-            <div className="text-center text-white text-[0.9375rem] font-bold">
+            <div
+              onClick={() => setModal(true)}
+              className="text-center text-white text-[0.9375rem] font-bold"
+            >
               New <span className="hidden md:inline">Invoice</span>
             </div>
           </div>

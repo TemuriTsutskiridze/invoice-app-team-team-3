@@ -1,10 +1,11 @@
 import Invoice from "./pages/Invoice";
 import ViewInvoice from "./pages/ViewInvoice";
 import { Navigate, Route, Routes } from "react-router";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import data from "./data.json";
 import Header from "./components/Header";
 import { AppContextType, InvoiceData } from "./types";
+import { Modal } from "./pages";
 
 export const AppContext = createContext<AppContextType>({
   appData: [],
@@ -17,6 +18,8 @@ export const AppContext = createContext<AppContextType>({
   deleteInvoice: () => {},
   isMoonVisible: true,
   setIsMoonVisible: () => {},
+  modal: false,
+  setModal: () => {},
 });
 
 const App = () => {
@@ -32,6 +35,7 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [isMoonVisible, setIsMoonVisible] = useState(true);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+  const [modal, setModal] = useState<boolean>(false);
 
   type StatusType = { id: number; name: string };
 
@@ -86,11 +90,12 @@ const App = () => {
         isDeleteModalVisible,
         setIsDeleteModalVisible,
         deleteInvoice,
+        modal,
+        setModal,
       }}
     >
       <Header />
-      <span className={`animatedBg ${darkMode ? "second" : "first"}`}></span>
-      {/* <Modal /> */}
+      <Modal />
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />
         <Route path="/invoices" element={<Invoice />} />

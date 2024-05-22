@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { motion } from "framer-motion";
 import { MyContext } from "../pages/Invoice";
 import ArrowRight from "../../public/assets/icon-arrow-right.svg";
@@ -20,7 +20,7 @@ const itemVariants = {
 };
 
 function InvoiceBoxes() {
-  const { filterClick, setFilterClick, isMobile } = useContext(MyContext);
+  const { filterClick, isMobile } = useContext(MyContext);
   const { darkMode, appData } = useContext(AppContext);
 
   const filterInvoice = () => {
