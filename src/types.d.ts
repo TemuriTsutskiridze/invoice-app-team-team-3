@@ -182,10 +182,9 @@ type Invoice = {
   paymentTerms: number;
   clientName: string;
   clientEmail: string;
-  status: string;
+  status: { name: string; id: number };
   senderAddress: Address;
   clientAddress: Address;
   items: Item[];
   total: number;
 };
-
