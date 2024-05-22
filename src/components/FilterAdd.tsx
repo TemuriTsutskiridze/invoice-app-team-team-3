@@ -24,7 +24,6 @@ export function FilterAdd() {
     }
   };
 
-
   return (
     <div className="flex justify-center  xl:mt-[3.88rem]">
       <div className="flex justify-between items-center px-[1.5rem] mt-9 mb-8 w-full max-w-[60rem] md:px-[3rem]">
