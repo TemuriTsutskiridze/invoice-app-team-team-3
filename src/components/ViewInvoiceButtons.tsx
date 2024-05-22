@@ -1,16 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../App";
 import { useParams } from "react-router-dom";
 import { InvoiceData } from "../types";
 
 const ViewInvoiceButtons: React.FC = () => {
-  const {
-    appData,
-    darkMode,
-    updateInvoiceStatus,
-    setIsDeleteModalVisible,
-    isDeleteModalVisible,
-  } = useContext(AppContext);
+  const { appData, darkMode, updateInvoiceStatus, setIsDeleteModalVisible } =
+    useContext(AppContext);
   const { id } = useParams<{ id: string }>();
   const invoice = appData.find((inv: InvoiceData) => inv.id === id);
 
@@ -22,8 +17,6 @@ const ViewInvoiceButtons: React.FC = () => {
 
   const handleDeleteClick = () => {
     setIsDeleteModalVisible(true);
-    document.body.style.opacity = "0.5";
-    document.body.style.backgroundColor = "#000000";
   };
 
   return (

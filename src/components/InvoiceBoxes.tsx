@@ -4,6 +4,7 @@ import data from "../data.json";
 import { MyContext } from "../pages/Invoice";
 import ArrowRight from "../../public/assets/icon-arrow-right.svg";
 import { Link } from "react-router-dom";
+import { AppContext } from "../App";
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-GB", {
@@ -19,19 +20,20 @@ const itemVariants = {
 };
 
 function InvoiceBoxes() {
-  const { filterClick, setFilterClick, isMobile } = useContext(MyContext);
+  const { filterClick, isMobile } = useContext(MyContext);
+  const { appData } = useContext(AppContext);
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return data.filter((item) => item.status === "pending");
+        return appData.filter((item) => item.status === "pending");
       case "paid":
-        return data.filter((item) => item.status === "paid");
+        return appData.filter((item) => item.status === "paid");
       case "draft":
-        return data.filter((item) => item.status === "draft");
+        return appData.filter((item) => item.status === "draft");
       case "all":
-        return data;
+        return appData;
       default:
-        return data;
+        return appData;
     }
   };
 

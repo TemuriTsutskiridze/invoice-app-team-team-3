@@ -66,4 +66,5 @@ interface AppContextType {
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
   updateInvoiceStatus: (id: string, status: string) => void;
   setIsDeleteModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteInvoice: (id: string) => void;
 }

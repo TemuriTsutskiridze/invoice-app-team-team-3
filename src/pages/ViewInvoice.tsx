@@ -26,7 +26,7 @@ const ViewInvoice: React.FC = () => {
   return (
     <>
       <div className="w-screen pt-[33px] px-6 flex flex-col items-start md:pb-[135px] md:px-[40px] md:pt-[50px] lg:px-[350px}">
-        {isDeleteModalVisible === true ? <DeleteConfirmation /> : ""}
+        {isDeleteModalVisible && <DeleteConfirmation />}
         <Link to={"/invoices"}>
           <GoBackButton />
         </Link>

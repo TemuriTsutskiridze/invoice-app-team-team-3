@@ -15,6 +15,7 @@ export const AppContext = createContext<AppContextType>({
   updateInvoiceStatus: () => {},
   isDeleteModalVisible: false,
   setIsDeleteModalVisible: () => {},
+  deleteInvoice: () => {},
 });
 
 const App = () => {
@@ -27,7 +28,7 @@ const App = () => {
     localStorage.setItem("appData", JSON.stringify(appData));
   }, [appData]);
 
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   useEffect(() => {
@@ -42,6 +43,10 @@ const App = () => {
     );
   };
 
+  const deleteInvoice = (id: string) => {
+    setAppData((prevData) => prevData.filter((invoice) => invoice.id !== id));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -52,6 +57,7 @@ const App = () => {
         updateInvoiceStatus,
         isDeleteModalVisible,
         setIsDeleteModalVisible,
+        deleteInvoice,
       }}
     >
       <Header />
