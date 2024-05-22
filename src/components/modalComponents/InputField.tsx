@@ -43,9 +43,10 @@ const InputField: React.FC<InputFieldProps> = ({
       <input
         id={id}
         type={type}
-        className={`inputStyle inputText border-solid focus:border-[#9277FF]  ${
-          darkMode &&
-          "text-white focus:border-[#7C5DFA] bg-[#1e2139] border-[#252945]"
+        className={`inputStyle inputText  ${
+          darkMode
+            ? "text-white  focus:border-[#7C5DFA] bg-[#1e2139] border-[#252945]"
+            : " border-[#DFE3FA] border-solid border-[1px] focus:border-[#9277FF] "
         } ${id === "itemListItemName" ? "mt-[15px]" : " mt-[9px]"} ${
           errorMessage ? "border-red-700" : ""
         }`}

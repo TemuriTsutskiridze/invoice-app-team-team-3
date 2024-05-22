@@ -10,6 +10,7 @@ import {
 import ArrowLeft from "/assets/icon-arrow-left.svg";
 import { AppContext } from "../App";
 import "../styles/ModalStyle.css";
+import "../styles/index.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -43,6 +44,7 @@ const Modal = () => {
   const submit = async (data: any) => {
     console.log("Form Submitted", data);
   };
+  console.log(modal);
   return (
     <div
       className={` absolute w-full z-10 ${
