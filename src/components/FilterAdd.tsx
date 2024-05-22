@@ -9,7 +9,7 @@ export function FilterAdd() {
   const [arrowUp, setArrowUp] = useState<boolean>(false);
   const { filterClick, setFilterClick, modalPage, setModalPage,filterInvoice } =
     useContext(MyContext);
-  const { appData,darkMode } = useContext(AppContext);
+  const { appData, modal, setModal,darkMode } = useContext(AppContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -24,7 +24,7 @@ export function FilterAdd() {
     }
   };
 
-console.log(filterInvoice())
+
   return (
     <div className="flex justify-center  xl:mt-[3.88rem]">
       <div className="flex justify-between items-center px-[1.5rem] mt-9 mb-8 w-full max-w-[60rem] md:px-[3rem]">
@@ -124,7 +124,10 @@ console.log(filterInvoice())
               alt=""
               className="bg-white w-8 h-8 rounded-[50%] flex justify-center items-center p-[10px]"
             />
-            <div className="text-center text-white text-[0.9375rem] font-bold">
+            <div
+              onClick={() => setModal(true)}
+              className="text-center text-white text-[0.9375rem] font-bold"
+            >
               New <span className="hidden md:inline">Invoice</span>
             </div>
           </div>

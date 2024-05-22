@@ -1,66 +1,84 @@
 import { useContext } from "react";
-import { InputField, ItemList, ModalFooter } from "../components";
+import {
+  ClientAdress,
+  InvoiceDates,
+  ItemList,
+  ModalFooter,
+  SenderAdress,
+  yupSchema,
+} from "../components";
 import ArrowLeft from "/assets/icon-arrow-left.svg";
 import { AppContext } from "../App";
 import "../styles/ModalStyle.css";
+import "../styles/index.css";
+import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+export const defaultValues = {
+  senderAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  clientName: "",
+  clientEmail: "",
+  clientAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  paymentDue: "",
+  paymentTerms: "",
+  description: "",
+  items: [],
+};
 
 const Modal = () => {
-  const { darkMode } = useContext(AppContext);
-
+  const { darkMode, modal, setModal } = useContext(AppContext);
+  const methods = useForm({
+    resolver: yupResolver(yupSchema),
+    defaultValues,
+  });
+  const submit = async (data: any) => {
+    console.log("Form Submitted", data);
+  };
+  console.log(modal);
   return (
-    <div className=" absolute w-full bg-white z-10">
-      <div className={` px-6 pt-8 pb-[180px] top-[72px] `}>
-        <div className="flex gap-6 items-center">
+    <div
+      className={` absolute w-full z-10 ${
+        darkMode ? "bg-darkBgColor" : "bg-white "
+      } ${modal ? "block" : "hidden"}`}
+    >
+      <div className={` px-6 pt-8 pb-[180px] top-[72px]  `}>
+        <div
+          onClick={() => {
+            setModal(false);
+          }}
+          className="flex gap-6 items-center cursor-pointer"
+        >
           <img src={ArrowLeft} alt="Arrow Left" />
-          <p className="inputText">Go back</p>
+          <p className={`inputText ${darkMode && "text-white"}`}>Go back</p>
         </div>
-        <h1 className="text-[24px] font-bold tracking-[-0.5px] mt-6">
+        <h1
+          className={`text-[24px] font-bold tracking-[-0.5px] mt-6 ${
+            darkMode && "text-white"
+          }`}
+        >
           New Invoice
         </h1>
-        <form className="mt-[22px]">
-          <div>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(submit)} className="mt-[22px]">
             <div>
-              <p className="inputText text-blue">Bill From</p>
-              <InputField type="text">Street Address</InputField>
-              <div>
-                <div className="flex gap-4">
-                  <div className="halfSize">
-                    <InputField type="text">City</InputField>
-                  </div>
-                  <div className="halfSize">
-                    <InputField type="text">Post Code</InputField>
-                  </div>
-                </div>
-                <InputField type="text">Country</InputField>
-              </div>
+              <SenderAdress />
+              <ClientAdress />
+              <InvoiceDates />
+              <ItemList />
             </div>
-            <div className="mt-[41px]">
-              <p className="inputText text-blue">Bill To</p>
-              <InputField type="text">Client’s Name</InputField>
-              <InputField type="email">Client’s Email</InputField>
-              <InputField type="text">Street Address</InputField>
-              <div>
-                <div className="flex gap-4">
-                  <div className="halfSize">
-                    <InputField type="text">City</InputField>
-                  </div>
-                  <div className="halfSize">
-                    <InputField type="text">Post Code</InputField>
-                  </div>
-                </div>
-                <InputField type="text">Country</InputField>
-              </div>
-            </div>
-            <div className="pt-[26px]">
-              <label className="labelStyle mt-6">Invoice Date</label>
-              <input type="date" className="inputStyle inputText" />
-              <InputField type="text">Payment Terms</InputField>
-              <InputField type="text">Project Description</InputField>
-            </div>
-            <ItemList />
-          </div>
-          <ModalFooter />
-        </form>
+            <ModalFooter />
+          </form>
+        </FormProvider>
       </div>
     </div>
   );
