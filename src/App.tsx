@@ -34,7 +34,6 @@ const App = () => {
   const [isMoonVisible, setIsMoonVisible] = useState(true);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
-
   const updateInvoiceStatus = (id: string, status: string) => {
     setAppData((prevData) =>
       prevData.map((invoice) =>
