@@ -54,11 +54,11 @@ body {
 }
 
 .animatedBg.first {
-  clip-path: circle(0% at 0% 60%);
+  clip-path: circle(0% at 0% 80%);
 }
 
 .animatedBg.second {
-  clip-path: circle(150.5% at 0% 60%);
+  clip-path: circle(150.5% at 0% 80%);
 }
 @media (max-width: 1280px) {
   .animatedBg {
@@ -116,3 +116,4 @@ body {
 .sun.hidden {
   transform: rotate(0deg) scale(0);
 }
+

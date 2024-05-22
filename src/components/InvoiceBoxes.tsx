@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MyContext } from "../pages/Invoice";
 import ArrowRight from "../../public/assets/icon-arrow-right.svg";
@@ -7,16 +7,16 @@ import { AppContext } from "../App";
 
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
+  return date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric'
   });
 }
 
 const itemVariants = {
   hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0 },
+  visible: { opacity: 1, y: 0 }
 };
 
 function InvoiceBoxes() {
@@ -42,9 +42,9 @@ function InvoiceBoxes() {
     <div className="flex justify-center pb-[6rem]">
       <div className="w-full max-w-[60rem]">
         {filterInvoice().map((invoice, index) => (
-          <Link to={`/view-invoice/${invoice.id}`} key={index}>
-            <motion.div
-              key={invoice.id}
+           <Link to={`/view-invoice/${invoice.id}`} key={index}>
+          <motion.div
+            key={invoice.id}
               className={`flex justify-between px-6 mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 border border-transparent cursor-pointer shadow-sm
                 md:mx-[3rem] md:items-center transition ease-out duration-1000 
                 ${!darkMode ? "bg-[white]" : "bg-[#1f223a]"} 

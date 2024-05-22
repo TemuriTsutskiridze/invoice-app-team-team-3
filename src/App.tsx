@@ -62,6 +62,7 @@ const App = () => {
   const deleteInvoice = (id: string) => {
     setAppData((prevData) => prevData.filter((invoice) => invoice.id !== id));
   };
+  
 
   const fetchData = async () => {
     const response = await fetch(
@@ -95,6 +96,7 @@ const App = () => {
       }}
     >
       <Header />
+      <span className={`animatedBg ${darkMode ? "second" : "first"}`}></span>
       <Modal />
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />
