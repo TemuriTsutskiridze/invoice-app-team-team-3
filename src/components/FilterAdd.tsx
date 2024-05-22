@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
 import IconDown from "../../public/assets/icon-arrow-down.svg";
 import Plus from "../../public/assets/icon-plus.svg";
-import data from "../data.json";
 import { MyContext } from "../pages/Invoice";
 import "../styles/filter.css";
 import { AppContext } from "../App";
 export function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-  const { filterClick, setFilterClick, modalPage, setModalPage } =
+  const { filterClick, setFilterClick, modalPage, setModalPage,filterInvoice } =
     useContext(MyContext);
   const { appData,darkMode } = useContext(AppContext);
 
@@ -24,21 +23,8 @@ export function FilterAdd() {
       setFilter(!filter);
     }
   };
-  const filterInvoice = () => {
-    switch (filterClick) {
-      case "pending":
-        return appData.filter((item) => item.status === "pending");
-      case "paid":
-        return appData.filter((item) => item.status === "paid");
-      case "draft":
-        return appData.filter((item) => item.status === "draft");
-      case "all":
-        return appData;
-      default:
-        return appData;
-    }
-  };
 
+console.log(filterInvoice())
   return (
     <div className="flex justify-center  xl:mt-[3.88rem]">
       <div className="flex justify-between items-center px-[1.5rem] mt-9 mb-8 w-full max-w-[60rem] md:px-[3rem]">

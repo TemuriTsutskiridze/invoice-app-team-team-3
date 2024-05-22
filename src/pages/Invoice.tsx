@@ -3,6 +3,7 @@ import FilterAdd from "../components/FilterAdd";
 import InvoiceBoxes from "../components/InvoiceBoxes";
 import EmptyInvoices from "../components/EmptyInvoices";
 import { AppContext } from "../App";
+import { InvoiceData } from "../types";
 
 type FilterType = "all" | "pending" | "paid" | "draft";
 interface ContextType {
@@ -14,6 +15,8 @@ interface ContextType {
   setIsDesktop: React.Dispatch<React.SetStateAction<boolean>>;
   modalPage: boolean;
   setModalPage: React.Dispatch<React.SetStateAction<boolean>>;
+  filterInvoice: () => InvoiceData[]
+  
 }
 
 export const MyContext = React.createContext<ContextType>({
@@ -25,6 +28,7 @@ export const MyContext = React.createContext<ContextType>({
   setIsDesktop: () => {},
   modalPage: false,
   setModalPage: () => {},
+  filterInvoice: () => []
 });
 
 
@@ -75,6 +79,7 @@ function Invoice() {
         setIsDesktop,
         modalPage,
         setModalPage,
+        filterInvoice
       }}
     >
       <FilterAdd />
