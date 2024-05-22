@@ -56,11 +56,11 @@ body {
 }
 
 .animatedBg.first {
-  clip-path: circle(0% at 0% 78%);
+  clip-path: circle(0% at 0% 60%);
 }
 
 .animatedBg.second {
-  clip-path: circle(150.5% at 0% 78%);
+  clip-path: circle(150.5% at 0% 60%);
 }
 @media (max-width: 1280px) {
   .animatedBg {
