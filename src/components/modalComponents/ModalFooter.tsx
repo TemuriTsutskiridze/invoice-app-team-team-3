@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
-import { randomUUID } from "crypto";
 import axios from "axios";
 
 const ModalFooter = () => {
@@ -47,6 +46,34 @@ const ModalFooter = () => {
       id: generateShortId(),
       createdAt: formatDate(createdAt),
       paymentDue: formatDate(paymentDue),
+      status: {
+        name: "Paid",
+      },
+    };
+
+    try {
+      const response = await axios.post(
+        "https://invoice-project-team-3.onrender.com/api/invoice/",
+        invoiceData
+      );
+      console.log("Invoice saved successfully:", response.data);
+      setInfo(response.data);
+    } catch (error) {
+      console.error("Error saving invoice:", error);
+    }
+  };
+
+  const saveDraft = async (data: any) => {
+    const createdAt = new Date();
+    const paymentDue = addDays(createdAt, data.paymentTerms);
+    const invoiceData = {
+      ...data,
+      id: generateShortId(),
+      createdAt: formatDate(createdAt),
+      paymentDue: formatDate(paymentDue),
+      status: {
+        name: "Draft",
+      },
     };
 
     try {
@@ -54,10 +81,10 @@ const ModalFooter = () => {
         "https://invoice-project-team-3.onrender.com/api/invoice/draft/",
         invoiceData
       );
-      console.log("Invoice saved successfully:", response.data);
+      console.log("Draft saved successfully:", response.data);
       setInfo(response.data);
     } catch (error) {
-      console.error("Error saving invoice:", error);
+      console.error("Error saving draft:", error);
     }
   };
 
@@ -83,6 +110,7 @@ const ModalFooter = () => {
           darkMode ? "text-[#dfe3fa]" : "text-[#7e88c3]"
         }`}
         type="button"
+        onClick={handleSubmit(saveDraft)}
       >
         Save as Draft
       </button>

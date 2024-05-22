@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   ClientAdress,
   InvoiceDates,
@@ -13,6 +13,7 @@ import "../styles/ModalStyle.css";
 import "../styles/index.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useParams } from "react-router-dom";
 
 export const defaultValues = {
   senderAddress: {
@@ -36,6 +37,17 @@ export const defaultValues = {
 };
 
 const Modal = () => {
+
+  // useEffect(()=>{
+  //   const fetchData = () =>{
+  //     const data = 
+  //   }
+  // })
+
+  // const { id } = useParams();
+
+
+
   const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),
