@@ -8,7 +8,6 @@ type InputFieldProps = {
   id: string;
   value?: any;
   name: string;
-  onChangeFunc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const getNestedValue = (obj: any, path: string) => {
@@ -24,7 +23,7 @@ const InputField: React.FC<InputFieldProps> = ({
   id,
   value,
   name,
-  onChangeFunc,
+
 }) => {
   const { darkMode } = useContext(AppContext);
   const {
@@ -34,29 +33,35 @@ const InputField: React.FC<InputFieldProps> = ({
   } = useFormContext();
 
   const errorMessage = getNestedValue(errors, name);
-  console.log(watch("items[0].quantity"));
   return (
     <div className="relative ">
-      <label className={`labelStyle mt-6 ${darkMode && "text-[#888eb0]"}`}>
+      <label
+        className={`labelStyle mt-6 ${
+          darkMode
+            ? "text-[#888eb0]"
+            : errorMessage
+            ? "text-[#EC5757]"
+            : "text-[#7E88C3]"
+        }`}
+      >
         {children}
       </label>
       <input
         id={id}
         type={type}
-        className={`inputStyle inputText  ${
+        className={`inputStyle inputText pr-[10px]  ${
           darkMode
             ? "text-white  focus:border-[#7C5DFA] bg-[#1e2139] border-[#252945]"
             : " border-[#DFE3FA] border-solid border-[1px] focus:border-[#9277FF] "
         } ${id === "itemListItemName" ? "mt-[15px]" : " mt-[9px]"} ${
           errorMessage ? "border-red-700" : ""
         }`}
-        value={value}
+        defaultValue={value}
         {...register(name)}
-        // onChange={name.includes("items") ? onChangeFunc : undefined}
       />
       {errorMessage && (
         <p
-          className={`text-red-700 absolute right-0  ${
+          className={`text-[#EC5757] absolute right-0 text-[13px] font-semibold  ${
             name.includes("price") || name.includes("quantity")
               ? "top-6"
               : "top-0"

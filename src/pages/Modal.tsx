@@ -44,14 +44,13 @@ const Modal = () => {
   const submit = async (data: any) => {
     console.log("Form Submitted", data);
   };
-  console.log(modal);
   return (
     <div
-      className={` absolute w-full z-10 ${
+      className={` absolute w-full z-10 top-[72px] ${
         darkMode ? "bg-darkBgColor" : "bg-white "
       } ${modal ? "block" : "hidden"}`}
     >
-      <div className={` px-6 pt-8 pb-[180px] top-[72px]  `}>
+      <div className={` px-6 pt-8 pb-[180px]   `}>
         <div
           onClick={() => {
             setModal(false);

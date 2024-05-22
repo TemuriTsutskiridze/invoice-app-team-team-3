@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
+import { randomUUID } from "crypto";
+import axios from "axios";
 
 const ModalFooter = () => {
   const { darkMode, setModal } = useContext(AppContext);
@@ -13,15 +15,57 @@ const ModalFooter = () => {
     setModal(false);
   };
 
+  function generateShortId(length: number = 6): string {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters[randomIndex];
+    }
+    return result;
+  }
+
+  function formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function addDays(date: Date, days: number): Date {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
   const submit = async (data: any) => {
-    console.log("Form Submitted", data); 
+    const createdAt = new Date();
+    const paymentDue = addDays(createdAt, data.paymentTerms);
+    const invoiceData = {
+      ...data,
+      id: generateShortId(),
+      createdAt: formatDate(createdAt),
+      paymentDue: formatDate(paymentDue),
+    };
+
+    try {
+      const response = await axios.post(
+        "https://invoice-project-team-3.onrender.com/api/invoice/draft/",
+        invoiceData
+      );
+      console.log("Invoice saved successfully:", response.data);
+      setInfo(response.data);
+    } catch (error) {
+      console.error("Error saving invoice:", error);
+    }
   };
 
   return (
     <footer
       className={`${
-        darkMode ? "bg-[#1e2139]" : ""
-      } px-6 flex justify-center w-full bottom-0 left-0 py-[22px] gap-[7px] shadow-footerShadow mt-[88px] fixed`}
+        darkMode ? "bg-[#1e2139]" : "bg-[#fff] shadow-footerShadow"
+      } px-6 flex justify-center w-full bottom-0 left-0 py-[22px] gap-[7px]  mt-[88px] fixed`}
     >
       <button
         type="button"
