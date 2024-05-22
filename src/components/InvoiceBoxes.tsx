@@ -21,19 +21,19 @@ const itemVariants = {
 
 function InvoiceBoxes() {
   const { filterClick, setFilterClick, isMobile } = useContext(MyContext);
-  const {darkMode} = useContext(AppContext)
+  const {darkMode,appData} = useContext(AppContext)
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return data.filter(item => item.status === "pending"); 
+        return appData.filter(item => item.status === "pending"); 
       case "paid":
-        return data.filter(item => item.status === "paid");
+        return appData.filter(item => item.status === "paid");
       case "draft":
-        return data.filter(item => item.status === "draft");
+        return appData.filter(item => item.status === "draft");
       case "all": 
-        return data;
+        return appData;
       default:
-        return data;
+        return appData;
     }
   };
 

@@ -13,7 +13,7 @@ export const AppContext = createContext<AppContextType>({
   darkMode: false,
   setDarkMode: () => {},
   isMoonVisible: true,
-  setIsMoonVisible: () => {}
+  setIsMoonVisible: () => {},
 });
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
         darkMode,
         setDarkMode,
         isMoonVisible,
-        setIsMoonVisible
+        setIsMoonVisible,
       }}
     >
       <Header />
