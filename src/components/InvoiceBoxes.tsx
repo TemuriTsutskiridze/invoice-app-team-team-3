@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import data from "../data.json";
 import { MyContext } from "../pages/Invoice";
 import ArrowRight from "../../public/assets/icon-arrow-right.svg";
 import { Link } from "react-router-dom";

@@ -28,7 +28,7 @@ const App = () => {
     localStorage.setItem("appData", JSON.stringify(appData));
   }, [appData]);
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   useEffect(() => {
