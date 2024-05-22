@@ -4,6 +4,7 @@ import data from '../data.json';
 import { MyContext } from '../pages/Invoice';
 import ArrowRight from "../../public/assets/icon-arrow-right.svg"
 import { Link } from 'react-router-dom';
+import { AppContext } from '../App';
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-GB', {
@@ -20,30 +21,35 @@ const itemVariants = {
 
 function InvoiceBoxes() {
   const { filterClick, setFilterClick, isMobile } = useContext(MyContext);
+  const {darkMode,appData} = useContext(AppContext)
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return data.filter(item => item.status === "pending"); 
+        return appData.filter(item => item.status === "pending"); 
       case "paid":
-        return data.filter(item => item.status === "paid");
+        return appData.filter(item => item.status === "paid");
       case "draft":
-        return data.filter(item => item.status === "draft");
+        return appData.filter(item => item.status === "draft");
       case "all": 
-        return data;
+        return appData;
       default:
-        return data;
+        return appData;
     }
   };
 
   return (
-    <div className="flex justify-center mb-[6.56rem]">
+    <div className="flex justify-center pb-[6rem]">
       <div className="w-full max-w-[60rem]">
         {filterInvoice().map((invoice, index) => (
            <Link to={`/view-invoice/${invoice.id}`} key={index}>
           <motion.div
             key={invoice.id}
-            className='flex justify-between px-6 bg-[#FFF] mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 hover:border border-transparent hover:border-[#7C5DFA] cursor-pointer shadow-sm
-              md:mx-[3rem] md:items-center'
+              className={`flex justify-between px-6 mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 border border-transparent cursor-pointer shadow-sm
+                md:mx-[3rem] md:items-center transition ease-out duration-1000 
+                ${!darkMode ? 'bg-[white]' : 'bg-[#1f223a]'} 
+                ${darkMode ? 'text-[white]' : 'text-[#1e2139]'} 
+                ${filterClick ? 'scale-110' : 'hover:scale-95'} hover:border-[#7C5DFA]`}
+    
             initial="hidden"
             animate="visible"
             variants={itemVariants}
@@ -53,7 +59,7 @@ function InvoiceBoxes() {
               <span className='text-[0.9375rem] font-bold md:mr-[2.75rem]'>
                 <span className='text-[#7E88C3]'>#</span>{invoice.id}
               </span>
-              <span className='-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem] md:items-center'>
+              <span className={`-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem] md:items-center  transition ease-out duration-1000  ${darkMode ? "text-[#DFE3FA]" : "text-[#888EB0]" }`}>
                 Due {formatDate(invoice.paymentDue)}
               </span>
               {!isMobile
