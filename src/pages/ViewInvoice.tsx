@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../App";
 import GoBackButton from "../components/GoBackButton";
@@ -23,6 +23,7 @@ const ViewInvoice: React.FC = () => {
   if (!invoice) {
     return <p>Invoice not found</p>;
   }
+
   return (
     <>
       <div className="w-screen pt-[33px] px-6 flex flex-col items-start md:pb-[135px] md:px-[40px] md:pt-[50px] lg:px-[350px]">
@@ -49,11 +50,11 @@ const ViewInvoice: React.FC = () => {
               className="flex items-center gap-2 px-[19px] py-[9px] rounded-lg"
               style={{
                 backgroundColor:
-                  invoice.status === "pending"
+                  invoice.status.name === "Pending"
                     ? "#fff1df"
-                    : invoice.status === "paid"
+                    : invoice.status.name === "Paid"
                     ? "#c0f6e4"
-                    : invoice.status === "draft"
+                    : invoice.status.name === "Draft"
                     ? "#eeebeb"
                     : "transparent",
               }}
@@ -62,11 +63,11 @@ const ViewInvoice: React.FC = () => {
                 className="h-[8px] w-[8px] rounded-full"
                 style={{
                   backgroundColor:
-                    invoice.status === "pending"
+                    invoice.status.name === "Pending"
                       ? "#ff8f00"
-                      : invoice.status === "paid"
+                      : invoice.status.name === "Paid"
                       ? "#22c991"
-                      : invoice.status === "draft"
+                      : invoice.status.name === "Draft"
                       ? "#979797"
                       : "transparent",
                 }}
@@ -75,16 +76,16 @@ const ViewInvoice: React.FC = () => {
                 className="font-bold text-[13px]"
                 style={{
                   color:
-                    invoice.status === "pending"
+                    invoice.status.name === "Pending"
                       ? "#ff8f00"
-                      : invoice.status === "paid"
+                      : invoice.status.name === "Paid"
                       ? "#22c991"
-                      : invoice.status === "draft"
+                      : invoice.status.name === "Draft"
                       ? "#979797"
                       : "transparent",
                 }}
               >
-                {invoice.status}
+                {invoice.status.name}
               </p>
             </div>
           </div>
@@ -435,7 +436,7 @@ const ViewInvoice: React.FC = () => {
             >
               <p className="text-[#ffffff] text-[14px]">Grand Total</p>
               <p className="text-[20px] text-[#ffffff] font-bold">
-                £ {invoice.total.toFixed(2)}
+                £ {invoice.items[0].total.toFixed(2)}
               </p>
             </div>
           </div>
