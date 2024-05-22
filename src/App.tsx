@@ -5,65 +5,39 @@ import { createContext, useEffect, useState } from "react";
 import data from "./data.json";
 import Header from "./components/Header";
 import { Modal } from "./pages";
-import { AppContextType, InvoiceData } from "./types";
+import { AppContextType } from "./types";
 
 export const AppContext = createContext<AppContextType>({
   appData: [],
   setAppData: () => {},
   darkMode: false,
   setDarkMode: () => {},
-  updateInvoiceStatus: () => {},
-  isDeleteModalVisible: false,
-  setIsDeleteModalVisible: () => {},
-  deleteInvoice: () => {},
-  isMoonVisible: true,
-  setIsMoonVisible: () => {},
+  modal: false,
+  setModal: () => {},
 });
 
 const App = () => {
-  const [appData, setAppData] = useState<InvoiceData[]>(() => {
-    const storedData = localStorage.getItem("appData");
-    return storedData ? JSON.parse(storedData) : data;
-  });
+  const [appData, setAppData] = useState(data);
+  const [darkMode, setDarkMode] = useState(true);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("appData", JSON.stringify(appData));
-  }, [appData]);
+    document.body.style.backgroundColor = darkMode ? "#141625" : "#F8F8FB";
+  }, [darkMode]);
 
-  const [darkMode, setDarkMode] = useState(false);
-  const [isMoonVisible, setIsMoonVisible] = useState(true);
-  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
-
-
-  const updateInvoiceStatus = (id: string, status: string) => {
-    setAppData((prevData) =>
-      prevData.map((invoice) =>
-        invoice.id === id ? { ...invoice, status } : invoice
-      )
-    );
-  };
-
-  const deleteInvoice = (id: string) => {
-    setAppData((prevData) => prevData.filter((invoice) => invoice.id !== id));
-  };
-return (
+  return (
     <AppContext.Provider
       value={{
         appData,
         setAppData,
         darkMode,
         setDarkMode,
-        isMoonVisible,
-        setIsMoonVisible,
-        updateInvoiceStatus,
-        isDeleteModalVisible,
-        setIsDeleteModalVisible,
-        deleteInvoice,
+        modal,
+        setModal,
       }}
     >
       <Header />
-      <span className={animatedBg ${darkMode ? "second" : "first"}}></span>
-      {/* <Modal /> */}
+      <Modal />
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />
         <Route path="/invoices" element={<Invoice />} />

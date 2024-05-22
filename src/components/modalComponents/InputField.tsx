@@ -29,11 +29,12 @@ const InputField: React.FC<InputFieldProps> = ({
   const { darkMode } = useContext(AppContext);
   const {
     register,
+    watch,
     formState: { errors },
   } = useFormContext();
 
   const errorMessage = getNestedValue(errors, name);
-
+  console.log(watch("items[0].quantity"));
   return (
     <div className="relative ">
       <label className={`labelStyle mt-6 ${darkMode && "text-[#888eb0]"}`}>
@@ -50,7 +51,7 @@ const InputField: React.FC<InputFieldProps> = ({
         }`}
         value={value}
         {...register(name)}
-        onChange={name.includes("items") ? onChangeFunc : undefined}
+        // onChange={name.includes("items") ? onChangeFunc : undefined}
       />
       {errorMessage && (
         <p

@@ -18,6 +18,7 @@ const ItemList = () => {
     formState: { errors },
     setValue,
     trigger,
+    watch,
   } = useFormContext();
 
   const [items, setItems] = useState<Item[]>([]);
@@ -108,7 +109,8 @@ const ItemList = () => {
                     Total
                   </p>
                   <p className="mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px]">
-                    {item.total}
+                    {watch(`items[${index}].price`) *
+                      watch(`items[${index}].quantity`)}
                   </p>
                 </div>
               </div>
