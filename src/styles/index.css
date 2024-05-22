@@ -4,26 +4,18 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=League+Spartan:wght@100..900&display=swap");
 
-#root {
-  min-height: 100vh;
-  font-family: "League Spartan", sans-serif;
-  position: relative;
-  z-index: 0;
-}
-
-:root {
-  --gray: #7e88c3;
-  --lightGray: #dfe3fa;
-}
-
-* {
+html,
+body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  overflow-x: hidden;
 }
-
 body {
   background-color: #f8f8fb;
+}
+
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -32,7 +24,7 @@ body {
 }
 
 .modal-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -51,4 +43,78 @@ body {
   background-color: #ffffff;
   position: relative;
   z-index: 1000;
+}
+
+.animatedBg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #141625;
+  z-index: -2;
+  clip-path: circle(0% at 0% 88%);
+  transition: clip-path 1s ease-out;
+}
+
+.animatedBg.first {
+  clip-path: circle(0% at 0% 78%);
+}
+
+.animatedBg.second {
+  clip-path: circle(150.5% at 0% 78%);
+}
+@media (max-width: 1280px) {
+  .animatedBg {
+    clip-path: circle(0.5% at 90% 0%);
+  }
+  .animatedBg.first {
+    clip-path: circle(0% at 90% 0%);
+  }
+
+  .animatedBg.second {
+    clip-path: circle(150.5% at 82% 4%);
+  }
+}
+@media (max-width: 768px) {
+  .animatedBg {
+    clip-path: circle(0.5% at 83% 0%);
+  }
+  .animatedBg.first {
+    clip-path: circle(0% at 83% 0%);
+  }
+
+  .animatedBg.second {
+    clip-path: circle(150.5% at 83% 4%);
+  }
+}
+@media (max-width: 464px) {
+  .animatedBg {
+    clip-path: circle(0.5% at 70% 0%);
+  }
+  .animatedBg.first {
+    clip-path: circle(0% at 70% 0%);
+  }
+
+  .animatedBg.second {
+    clip-path: circle(150.5% at 70% 4%);
+  }
+}
+.moon,
+.sun {
+  transition: transform 1s ease-in-out;
+}
+
+.moon {
+  transform: rotate(0deg) scale(1);
+}
+
+.sun {
+  transform: rotate(360deg) scale(1);
+}
+
+.moon.hidden {
+  transform: rotate(360deg) scale(0);
+}
+
+.sun.hidden {
+  transform: rotate(0deg) scale(0);
 }

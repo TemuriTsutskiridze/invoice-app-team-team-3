@@ -19,8 +19,8 @@ const itemVariants = {
 };
 
 function InvoiceBoxes() {
-  const { filterClick, isMobile } = useContext(MyContext);
-  const { appData } = useContext(AppContext);
+  const { filterClick, setFilterClick, isMobile } = useContext(MyContext);
+  const { darkMode, appData } = useContext(AppContext);
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
@@ -37,14 +37,19 @@ function InvoiceBoxes() {
   };
 
   return (
-    <div className="flex justify-center mb-[6.56rem]">
+    <div className="flex justify-center pb-[6rem]">
       <div className="w-full max-w-[60rem]">
         {filterInvoice().map((invoice, index) => (
           <Link to={`/view-invoice/${invoice.id}`} key={index}>
             <motion.div
               key={invoice.id}
-              className="flex justify-between px-6 bg-[#FFF] mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 hover:border border-transparent hover:border-[#7C5DFA] cursor-pointer shadow-sm
-              md:mx-[3rem] md:items-center"
+              className={`flex justify-between px-6 mx-6 rounded-lg pt-[1.56rem] pb-[1.37rem] mb-4 border border-transparent cursor-pointer shadow-sm
+                md:mx-[3rem] md:items-center transition ease-out duration-1000 
+                ${!darkMode ? "bg-[white]" : "bg-[#1f223a]"} 
+                ${darkMode ? "text-[white]" : "text-[#1e2139]"} 
+                ${
+                  filterClick ? "scale-110" : "hover:scale-95"
+                } hover:border-[#7C5DFA]`}
               initial="hidden"
               animate="visible"
               variants={itemVariants}
@@ -55,7 +60,11 @@ function InvoiceBoxes() {
                   <span className="text-[#7E88C3]">#</span>
                   {invoice.id}
                 </span>
-                <span className="-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem] md:items-center">
+                <span
+                  className={`-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem] md:items-center  transition ease-out duration-1000  ${
+                    darkMode ? "text-[#DFE3FA]" : "text-[#888EB0]"
+                  }`}
+                >
                   Due {formatDate(invoice.paymentDue)}
                 </span>
                 {!isMobile ? (
@@ -69,7 +78,7 @@ function InvoiceBoxes() {
                 )}
               </div>
 
-              <div className="flex justify-between items-end flex-col gap-[1.68rem] md:items-center md:justify-center md:flex-row">
+              <div className="flex justify-between items-end flex-col gap-[1.68rem] md:flex-row md:items-center md:justify-center md:flex-row">
                 {!isMobile ? (
                   <span className="font-[0.8125rem] text-[#858BB2] text-[0.8125rem] tracking-[-0.00625rem]">
                     {invoice.clientName}
