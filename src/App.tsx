@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import data from "./data.json";
 import Header from "./components/Header";
 import { AppContextType, InvoiceData } from "./types";
+import { Modal } from "./pages";
 
 export const AppContext = createContext<AppContextType>({
   appData: [],
@@ -95,6 +96,7 @@ const App = () => {
       }}
     >
       <Header />
+      <span className={`animatedBg ${darkMode ? "second" : "first"}`}></span>
       <Modal />
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />

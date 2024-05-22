@@ -34,7 +34,7 @@ function InvoiceBoxes() {
       case "all":
         return appData;
       default:
-        return data;
+        return appData;
     }
   };
 

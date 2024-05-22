@@ -42,11 +42,11 @@ function Invoice() {
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return appData.filter((item) => item.status === "pending");
+        return appData.filter((item) => item.status.name === "Pending");
       case "paid":
-        return appData.filter((item) => item.status === "paid");
+        return appData.filter((item) => item.status.name === "Paid");
       case "draft":
-        return appData.filter((item) => item.status === "draft");
+        return appData.filter((item) => item.status.name === "Draft");
       case "all":
         return appData;
       default:
