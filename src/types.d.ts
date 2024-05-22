@@ -66,6 +66,11 @@ interface AppContextType {
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  updateInvoiceStatus: (id: string, status: string) => void;
+  setIsDeleteModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  isMoonVisible: boolean;
+  setIsMoonVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteInvoice: (id: string) => void;
 }
 
 type SchemaType = {

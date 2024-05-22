@@ -12,8 +12,6 @@ export const AppContext = createContext<AppContextType>({
   setAppData: () => {},
   darkMode: false,
   setDarkMode: () => {},
-  modal: false,
-  setModal: () => {},
   updateInvoiceStatus: () => {},
   isDeleteModalVisible: false,
   setIsDeleteModalVisible: () => {},
@@ -36,9 +34,6 @@ const App = () => {
   const [isMoonVisible, setIsMoonVisible] = useState(true);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
-  useEffect(() => {
-    document.body.style.backgroundColor = darkMode ? "#141625" : "#F8F8FB";
-  }, [darkMode]);
 
   const updateInvoiceStatus = (id: string, status: string) => {
     setAppData((prevData) =>
@@ -51,8 +46,7 @@ const App = () => {
   const deleteInvoice = (id: string) => {
     setAppData((prevData) => prevData.filter((invoice) => invoice.id !== id));
   };
-
-  return (
+return (
     <AppContext.Provider
       value={{
         appData,
@@ -68,7 +62,7 @@ const App = () => {
       }}
     >
       <Header />
-      <span className={`animatedBg ${darkMode ? "second" : "first"}`}></span>
+      <span className={animatedBg ${darkMode ? "second" : "first"}}></span>
       {/* <Modal /> */}
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />

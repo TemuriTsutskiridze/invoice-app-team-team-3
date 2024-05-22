@@ -88,7 +88,6 @@ function FilterAdd() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
