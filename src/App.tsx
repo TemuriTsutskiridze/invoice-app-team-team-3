@@ -45,6 +45,7 @@ const App = () => {
   const deleteInvoice = (id: string) => {
     setAppData((prevData) => prevData.filter((invoice) => invoice.id !== id));
   };
+  
 
   return (
     <AppContext.Provider

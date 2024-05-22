@@ -27,12 +27,28 @@ export const MyContext = React.createContext<ContextType>({
   setModalPage: () => {},
 });
 
+
 function Invoice() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isDesktop, setIsDesktop] = useState<boolean>(false);
   const [filterClick, setFilterClick] = useState<FilterType>("all");
   const [modalPage, setModalPage] = useState<boolean>(false);
   const { appData } = useContext(AppContext);
+
+  const filterInvoice = () => {
+    switch (filterClick) {
+      case "pending":
+        return appData.filter((item) => item.status === "pending");
+      case "paid":
+        return appData.filter((item) => item.status === "paid");
+      case "draft":
+        return appData.filter((item) => item.status === "draft");
+      case "all":
+        return appData;
+      default:
+        return appData;
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -62,7 +78,7 @@ function Invoice() {
       }}
     >
       <FilterAdd />
-      {appData.length === 0 ? <EmptyInvoices /> : <InvoiceBoxes />}
+      {filterInvoice().length === 0 ? <EmptyInvoices /> : <InvoiceBoxes />}
     </MyContext.Provider>
   );
 }

@@ -31,17 +31,15 @@ const ViewInvoice: React.FC = () => {
           <GoBackButton />
         </Link>
         <div
-          className="w-full px-6 pt-6 pb-[27px] rounded-lg mt-9 flex items-center justify-between md:justify-normal"
-          style={
-            darkMode
-              ? { backgroundColor: "#1e2139" }
-              : { backgroundColor: "#ffffff" }
-          }
+          className={`w-full px-6 pt-6 pb-[27px] rounded-lg mt-9 flex items-center justify-between md:justify-normal
+               transition ease-out duration-1000 
+               ${darkMode ? "bg-[#1E2139]" : "bg-[white]"}`}
         >
           <div className="w-full flex items-center justify-between md:justify-normal md:gap-5">
             <p
-              className="text-[13px]"
-              style={darkMode ? { color: "#dfe3fa" } : { color: "#858bb2" }}
+              className={`text-[13px] 
+              transition ease-out duration-1000 
+              ${darkMode ? "text-[#dfe3fa]" : "text-[858bb2]"}`}
             >
               Status
             </p>
@@ -93,43 +91,48 @@ const ViewInvoice: React.FC = () => {
           </div>
         </div>
         <div
-          className="w-full px-6 py-6 rounded-lg mt-9 flex flex-col items-start md:pt-0"
-          style={
-            darkMode
-              ? { backgroundColor: "#1e2139" }
-              : { backgroundColor: "#ffffff" }
-          }
+          className={`w-full px-6 py-6 rounded-lg mt-9 flex flex-col items-start md:pt-0
+           transition ease-out duration-1000 
+          ${darkMode ? "bg-[#1e2139]" : "bg-[#ffffff]"}`}
         >
           <div className="w-full flex flex-col items-start md:items-baseline md:flex-row md:justify-between">
             <div>
               <p
-                className="text-[14px] font-bold"
-                style={darkMode ? { color: "#ffffff" } : { color: "#0c0e16" }}
+                className={`text-[14px] font-bold
+                transition ease-out duration-1000 
+                ${darkMode ? "text-[white]" : "text-[#0c0e16]"}`}
+      
               >
                 <span
-                  className="font-bold"
-                  style={darkMode ? { color: "#626291" } : { color: "#7e88c3" }}
+                  className={`font-bold
+                  transition ease-out duration-1000 
+                  ${darkMode ? "text-[#626291]" : "text-[#7e88c3]"}`}
                 >
                   #
                 </span>
                 {invoice.id}
               </p>
               <p
-                className="text-[13px] font-semibold"
-                style={darkMode ? { color: "#dfe3fa" } : { color: "#7e88c3" }}
+                className={`text-[13px] font-semibold
+                 transition ease-out duration-1000 
+                ${darkMode ? "text-[#dfe3fa]" : "text-[#7e88c3]"}`}
               >
                 {invoice.description}
               </p>
             </div>
             <div className="md:flex md:flex-col md:items-end">
               <p
-                className="text-[13px] font-semibold mt-[30px]"
+                className={`text-[13px] font-semibold mt-[30px]
+                 transition ease-out duration-1000 
+                ${darkMode ? "bg-[#1E2139]" : "bg-[white]"}`}
                 style={darkMode ? { color: "#dfe3fa" } : { color: "#7e88c3" }}
               >
                 {invoice.senderAddress.street}
               </p>
               <p
-                className="text-[13px] font-semibold"
+                className={`text-[13px] font-semibold
+                 transition ease-out duration-1000 
+                ${darkMode ? "bg-[#1E2139]" : "bg-[white]"}`}
                 style={darkMode ? { color: "#dfe3fa" } : { color: "#7e88c3" }}
               >
                 {invoice.senderAddress.city}
@@ -243,12 +246,9 @@ const ViewInvoice: React.FC = () => {
             </p>
           </div>
           <div
-            className="w-full mt-[38px] rounded-lg"
-            style={
-              darkMode
-                ? { backgroundColor: "#252945" }
-                : { backgroundColor: "#f9fafe" }
-            }
+            className={`w-full mt-[38px] rounded-lg
+             transition ease-out duration-1000 
+            ${darkMode ? "bg-[#252945]" : "bg-[#f9fafe]"}`}
           >
             <div className="px-6 pt-6 pb-0 md:px-8 md:pt-8">
               <div className="flex items-center justify-between md:hidden">
@@ -426,7 +426,9 @@ const ViewInvoice: React.FC = () => {
               </div>
             </div>
             <div
-              className="rounded-b-lg px-6 py-6 flex items-center justify-between mt-6"
+              className={`rounded-b-lg px-6 py-6 flex items-center justify-between mt-6
+               transition ease-out duration-1000 
+              ${darkMode ? "bg-[#0c0e16]" : "bg-[#373b53]"}`}
               style={
                 darkMode
                   ? { backgroundColor: "#0c0e16" }
