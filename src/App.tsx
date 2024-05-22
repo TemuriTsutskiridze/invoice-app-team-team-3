@@ -34,9 +34,6 @@ const App = () => {
   const [isMoonVisible, setIsMoonVisible] = useState(true);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
-  useEffect(() => {
-    document.body.style.backgroundColor = darkMode ? "#141625" : "#F8F8FB";
-  }, [darkMode]);
 
   const updateInvoiceStatus = (id: string, status: string) => {
     setAppData((prevData) =>
