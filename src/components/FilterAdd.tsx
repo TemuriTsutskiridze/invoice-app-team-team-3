@@ -59,7 +59,7 @@ export function FilterAdd() {
             <div
               className={`filter-box ${
                 filter ? "filter-box-visible" : "filter-box-hidden"
-              } absolute top-full mt-5 -mr-[6rem] md:-mr-[1rem] bg-white p-4 shadow-lg rounded-lg z-10 transition ease-out duration-1000 
+              } absolute top-full mt-5 -mr-[6rem] md:-mr-[1rem] p-4 shadow-lg rounded-lg z-10 transition ease-out duration-1000 
               ${darkMode ? "bg-[#252945]" : "bg-[white]"}
               ${darkMode ? "text-[white]" : "text-[#1e2139]"}`}
             >
