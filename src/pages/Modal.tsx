@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   ClientAdress,
   InvoiceDates,
@@ -13,6 +13,7 @@ import "../styles/ModalStyle.css";
 import "../styles/index.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useParams } from "react-router-dom";
 
 export const defaultValues = {
   senderAddress: {
@@ -36,6 +37,17 @@ export const defaultValues = {
 };
 
 const Modal = () => {
+
+  // useEffect(()=>{
+  //   const fetchData = () =>{
+  //     const data = 
+  //   }
+  // })
+
+  // const { id } = useParams();
+
+
+
   const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),
@@ -44,14 +56,13 @@ const Modal = () => {
   const submit = async (data: any) => {
     console.log("Form Submitted", data);
   };
-  console.log(modal);
   return (
     <div
-      className={` absolute w-full z-10 ${
+      className={` absolute w-full z-10 top-[72px] ${
         darkMode ? "bg-darkBgColor" : "bg-white "
       } ${modal ? "block" : "hidden"}`}
     >
-      <div className={` px-6 pt-8 pb-[180px] top-[72px]  `}>
+      <div className={` px-6 pt-8 pb-[180px]   `}>
         <div
           onClick={() => {
             setModal(false);

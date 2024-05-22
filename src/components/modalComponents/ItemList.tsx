@@ -19,39 +19,22 @@ const ItemList = () => {
     setValue,
     trigger,
     watch,
+    register,
   } = useFormContext();
 
   const [items, setItems] = useState<Item[]>([]);
   const [totalSum, setTotalSum] = useState<number>();
   const handleAddItems = () => {
-    const newItems = [
-      ...items,
-      { name: "", quantity: 0, price: 0, total: 0.0 },
-    ];
+    const newItems = [...items, { name: "", quantity: 0, price: 0, total: 0 }];
     setItems(newItems);
-    setValue("items", newItems);
   };
 
   const handleDeleteItems = (index: number) => {
     const newItems = [...items];
     newItems.splice(index, 1);
     setItems(newItems);
-    setValue("items", newItems);
   };
-  const handleQuantityOrPriceChange = (
-    index: number,
-    field: string,
-    value: string
-  ) => {
-    const newItems = [...items];
-    newItems[index][field] = value;
 
-    newItems[index].total = newItems[index].quantity * newItems[index].price;
-
-    setItems(newItems);
-    setValue(`items[${index}].${field}`, Number(value));
-    trigger(`items[${index}].${field}`);
-  };
 
   useEffect(() => {
     const sum = items.reduce((acc, item) => acc + item.total, 0);
@@ -80,13 +63,6 @@ const ItemList = () => {
                   id={`item-Quantity-${index}`}
                   type="number"
                   name={`items[${index}].quantity`}
-                  onChangeFunc={(e) =>
-                    handleQuantityOrPriceChange(
-                      index,
-                      "quantity",
-                      e.target.value
-                    )
-                  }
                 >
                   Qty.
                 </InputField>
@@ -94,9 +70,6 @@ const ItemList = () => {
                   id={`item-Price-${index}`}
                   type="number"
                   name={`items[${index}].price`}
-                  onChangeFunc={(e) =>
-                    handleQuantityOrPriceChange(index, "price", e.target.value)
-                  }
                 >
                   Price
                 </InputField>
@@ -108,10 +81,15 @@ const ItemList = () => {
                   >
                     Total
                   </p>
-                  <p className="mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px]">
-                    {watch(`items[${index}].price`) *
-                      watch(`items[${index}].quantity`)}
-                  </p>
+                  <input
+                    readOnly
+                    value={
+                      watch(`items[${index}].price`) *
+                      watch(`items[${index}].quantity`)
+                    }
+                    {...register(`items[${index}].total`)}
+                    className={`outline-none  mt-[27px]  font-bold text-[#888EB0] text-[15px] tracking-[-0.25px]`}
+                  />
                 </div>
               </div>
               <div className="pt-[70px] justify-self-end">

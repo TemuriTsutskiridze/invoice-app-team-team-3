@@ -5,6 +5,12 @@ import { ChangeEvent } from "react";
 const InvoiceDates = () => {
   const { control, setValue, trigger } = useFormContext();
 
+  function addDays(date: Date, days: number): Date {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValue(name, value);
@@ -12,12 +18,7 @@ const InvoiceDates = () => {
   };
   return (
     <div className="pt-[26px]">
-      <InputField
-        id="paymentDue"
-        type="date"
-        name="paymentDue"
-        onChangeFunc={handleChange}
-      >
+      <InputField id="paymentDue" type="date" name="paymentDue">
         Invoice Date
       </InputField>
       <Controller
@@ -29,7 +30,7 @@ const InvoiceDates = () => {
               Payment Terms
             </label>
             <select
-              className="inputStyle p-0 h-12 inputText styled-select "
+              className="outline-none w-full rounded-[5px] border-[#DFE3FA] pl-5 border-solid border-[1px] p-0 h-12 inputText styled-select "
               id="paymentTerms inputStyle"
               {...field}
             >
@@ -43,12 +44,7 @@ const InvoiceDates = () => {
           </div>
         )}
       />
-      <InputField
-        id="InvoiceDatesProjectDesc"
-        type="text"
-        name="description"
-        onChangeFunc={handleChange}
-      >
+      <InputField id="InvoiceDatesProjectDesc" type="text" name="description">
         Project Description
       </InputField>
     </div>

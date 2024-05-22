@@ -7,7 +7,7 @@ import { AppContext } from "../App";
 export function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-  const { filterClick, setFilterClick, modalPage, setModalPage,filterInvoice } =
+  const { filterClick, setFilterClick, modalPage, setModalPage, filterInvoice } =
     useContext(MyContext);
   const { appData, modal, setModal,darkMode } = useContext(AppContext);
 
@@ -23,6 +23,7 @@ export function FilterAdd() {
       setFilter(!filter);
     }
   };
+
 
   return (
     <div className="flex justify-center  xl:mt-[3.88rem]">
