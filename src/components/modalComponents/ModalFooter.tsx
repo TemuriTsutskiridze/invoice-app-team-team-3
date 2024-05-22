@@ -1,20 +1,22 @@
 import { useContext } from "react";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
-import { defaultValues } from "../../pages/Modal";
 
 const ModalFooter = () => {
   const { darkMode, setModal } = useContext(AppContext);
-  const { reset, clearErrors, handleSubmit } = useFormContext();
+  const { reset, clearErrors, handleSubmit, trigger, watch } = useFormContext();
 
   const handleDiscard = () => {
-    reset(defaultValues);
+    reset();
     clearErrors();
     setModal(false);
   };
 
   const submit = async (data: any) => {
-    console.log(data);
+    await trigger();
+    if (Object.keys(data).length > 0) {
+      console.log(data);
+    }
   };
   return (
     <footer
@@ -23,6 +25,7 @@ const ModalFooter = () => {
       } px-6 flex justify-center w-full bottom-0 left-0 py-[22px] gap-[7px] shadow-footerShadow mt-[88px] fixed`}
     >
       <button
+        type="button"
         className={`text-[15px] font-bold h-12 rounded-[24px] px-[18px] flex items-center justify-center ${
           darkMode
             ? "bg-[#252945] text-[#dfe3fa]"
@@ -41,7 +44,7 @@ const ModalFooter = () => {
       </button>
       <button
         onClick={handleSubmit(submit)}
-        type="submit"
+        type="button"
         className="text-[#fff] text-[15px] font-bold h-12 bg-[#7c5dfa] rounded-[24px] px-[15px] flex items-center justify-center"
       >
         Save & Send

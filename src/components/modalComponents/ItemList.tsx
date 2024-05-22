@@ -1,47 +1,57 @@
 import { useContext, useState } from "react";
-import InputField from "./InputField";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
-import { object } from "yup";
+import { InputField } from "..";
 
 interface Item {
   name: string;
   quantity: number;
   price: number;
   total: number;
+  [key: string]: string | number;
 }
 
 const ItemList = () => {
-  //using context
   const { darkMode } = useContext(AppContext);
   const {
     formState: { errors },
     setValue,
     trigger,
   } = useFormContext();
-  //declare states
+
   const [items, setItems] = useState<Item[]>([]);
 
-  //item add and delete function
   const handleAddItems = () => {
-    setItems((prevItems) => [
-      ...prevItems,
-      { name: "", quantity: 0, price: 0, total: 0 },
-    ]);
+    const newItems = [
+      ...items,
+      { name: "", quantity: 0, price: 0, total: 0.0 },
+    ];
+    setItems(newItems);
+    setValue("items", newItems);
   };
 
   const handleDeleteItems = (index: number) => {
     const newItems = [...items];
     newItems.splice(index, 1);
     setItems(newItems);
-
     setValue("items", newItems);
-    trigger("items");
+  };
+  const handleQuantityOrPriceChange = (
+    index: number,
+    field: string,
+    value: string
+  ) => {
+    const newItems = [...items];
+    newItems[index][field] = value;
+
+    newItems[index].total = newItems[index].quantity * newItems[index].price;
+
+    setItems(newItems);
+    setValue(`items[${index}].${field}`, Number(value));
+    trigger(`items[${index}].${field}`);
   };
 
-  console.log(items);
-  console.log(errors);
   return (
     <div className="mt-[69px]">
       <h3 className="font-bold text-[18px] tracking-[-0.38px] text-[#777f98]">
@@ -49,60 +59,65 @@ const ItemList = () => {
       </h3>
 
       <div className="mt-[22px] flex flex-col gap-[48px]">
-        {items.length > 0
-          ? items.map((item, index) => (
-              <div key={index}>
+        {items.map((item, index) => (
+          <div key={index}>
+            <InputField
+              id={`item-Name-${index}`}
+              type="text"
+              name={`items[${index}].name`}
+            >
+              Item Name
+            </InputField>
+            <div className="grid grid-cols-2 gap-[65px]">
+              <div className="grid grid-cols-inputsGrid gap-4 flex-grow-[2]">
                 <InputField
-                  id={`item-Name-${index}`}
-                  type="text"
-                  // value={item?.name}
-                  name={`items[${index}].name`}
+                  id={`item-Quantity-${index}`}
+                  type="number"
+                  name={`items[${index}].quantity`}
+                  onChangeFunc={(e) =>
+                    handleQuantityOrPriceChange(
+                      index,
+                      "quantity",
+                      e.target.value
+                    )
+                  }
                 >
-                  Item Name
+                  Qty.
                 </InputField>
-                <div className="grid grid-cols-2 gap-[65px]">
-                  <div className="grid grid-cols-inputsGrid gap-4 flex-grow-[2]">
-                    <InputField
-                      id={`item-Quantity-${index}`}
-                      type="number"
-                      // value={item.quantity}
-                      name={`items[${index}].quantity`}
-                    >
-                      Qty.
-                    </InputField>
-                    <InputField
-                      id={`item-Price-${index}`}
-                      type="number"
-                      // value={item.price}
-                      name={`items[${index}].price`}
-                    >
-                      Price
-                    </InputField>
-                    <div>
-                      <p
-                        className={`labelStyle mt-6 ${
-                          darkMode && "text-[#888eb0]"
-                        }`}
-                      >
-                        Total
-                      </p>
-                      <p className="mt-[25px] text-[15px] font-bold tracking-[-0.25px] text-[#888eb0]">
-                        {/* {item.total} */}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-[70px] justify-self-end">
-                    <img
-                      onClick={() => handleDeleteItems(index)}
-                      src={DeleteIcon}
-                      className="max-w-max cursor-pointer"
-                      alt="Delete"
-                    />
-                  </div>
+                <InputField
+                  id={`item-Price-${index}`}
+                  type="number"
+                  name={`items[${index}].price`}
+                  onChangeFunc={(e) =>
+                    handleQuantityOrPriceChange(index, "price", e.target.value)
+                  }
+                >
+                  Price
+                </InputField>
+                <div>
+                  <p
+                    className={`labelStyle mt-6 ${
+                      darkMode && "text-[#888eb0]"
+                    }`}
+                  >
+                    Total
+                  </p>
+                  <p className="mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px]">
+                    {item.total}
+                  </p>
                 </div>
               </div>
-            ))
-          : ""}
+              <div className="pt-[70px] justify-self-end">
+                <img
+                  onClick={() => handleDeleteItems(index)}
+                  src={DeleteIcon}
+                  className="max-w-max cursor-pointer"
+                  alt="Delete"
+                />
+              </div>
+            </div>
+          </div>
+        ))}
         <div
           onClick={handleAddItems}
           className={`${
@@ -113,12 +128,16 @@ const ItemList = () => {
         </div>
       </div>
       {Object.keys(errors).length > 1 && (
-        <p className="text-[#ec5757] text-[10px] font-semibold mt-[30px] ">
+        <p className="text-[#ec5757] text-[10px] font-semibold mt-[30px]">
           - All fields must be Added
         </p>
       )}
-      {errors.items && typeof errors.items.message === "string" && (
-        <p className="text-[#ec5757] mt-5px text-[10px] font-semibold">
+      {errors?.items?.message && typeof errors.items.message === "string" && (
+        <p
+          className={`text-[#ec5757] text-[10px] font-semibold ${
+            Object.keys(errors).length < 1 ? "mt-[30px]" : "mt-5px"
+          }`}
+        >
           {errors.items.message}
         </p>
       )}

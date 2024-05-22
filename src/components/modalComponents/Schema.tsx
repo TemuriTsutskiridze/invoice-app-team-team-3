@@ -62,6 +62,16 @@ const Schema = yup.object().shape({
           .number()
           .positive("Invalid price")
           .required("Price is required"),
+        total: yup
+          .number()
+          .test(
+            "total",
+            "Total must be the product of quantity and price",
+            function (total) {
+              const { quantity, price } = this.parent;
+              return total === quantity * price;
+            }
+          ),
       })
     )
     .min(1, "- AN Item must be added"),

@@ -8,6 +8,7 @@ type InputFieldProps = {
   id: string;
   value?: any;
   name: string;
+  onChangeFunc?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const getNestedValue = (obj: any, path: string) => {
@@ -23,6 +24,7 @@ const InputField: React.FC<InputFieldProps> = ({
   id,
   value,
   name,
+  onChangeFunc,
 }) => {
   const { darkMode } = useContext(AppContext);
   const {
@@ -40,18 +42,22 @@ const InputField: React.FC<InputFieldProps> = ({
       <input
         id={id}
         type={type}
-        className={`inputStyle inputText ${
-          darkMode && "text-white bg-[#1e2139] border-[#252945]"
+        className={`inputStyle inputText border-solid focus:border-[#9277FF]  ${
+          darkMode &&
+          "text-white focus:border-[#7C5DFA] bg-[#1e2139] border-[#252945]"
         } ${id === "itemListItemName" ? "mt-[15px]" : " mt-[9px]"} ${
           errorMessage ? "border-red-700" : ""
         }`}
         value={value}
         {...register(name)}
+        onChange={onChangeFunc && onChangeFunc}
       />
       {errorMessage && (
         <p
-          className={`text-red-700 absolute right-0 top-0 ${
-            name.includes("items") && "hidden"
+          className={`text-red-700 absolute right-0  ${
+            name.includes("price") || name.includes("quantity")
+              ? "top-6"
+              : "top-0"
           }`}
         >
           {(errorMessage as FieldError)?.message}
