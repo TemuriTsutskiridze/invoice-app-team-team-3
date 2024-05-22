@@ -50,7 +50,7 @@ const InputField: React.FC<InputFieldProps> = ({
         }`}
         value={value}
         {...register(name)}
-        onChange={onChangeFunc && onChangeFunc}
+        onChange={name.includes("items") ? onChangeFunc : undefined}
       />
       {errorMessage && (
         <p

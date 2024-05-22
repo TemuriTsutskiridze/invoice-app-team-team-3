@@ -8,7 +8,7 @@ const SenderAddress = () => {
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValue(name, value);
-    await trigger(name);
+     trigger(name);
   };
   return (
     <div>

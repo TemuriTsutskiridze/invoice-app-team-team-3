@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
@@ -21,7 +21,7 @@ const ItemList = () => {
   } = useFormContext();
 
   const [items, setItems] = useState<Item[]>([]);
-
+  const [totalSum, setTotalSum] = useState<number>();
   const handleAddItems = () => {
     const newItems = [
       ...items,
@@ -51,6 +51,11 @@ const ItemList = () => {
     setValue(`items[${index}].${field}`, Number(value));
     trigger(`items[${index}].${field}`);
   };
+
+  useEffect(() => {
+    const sum = items.reduce((acc, item) => acc + item.total, 0);
+    setTotalSum(sum);
+  }, [items]);
 
   return (
     <div className="mt-[69px]">
@@ -119,7 +124,9 @@ const ItemList = () => {
           </div>
         ))}
         <div
-          onClick={handleAddItems}
+          onClick={() => {
+            handleAddItems();
+          }}
           className={`${
             darkMode ? "bg-[#252945]" : "bg-[#eaeced]"
           } h-[48px] rounded-3xl flex items-center justify-center cursor-pointer`}

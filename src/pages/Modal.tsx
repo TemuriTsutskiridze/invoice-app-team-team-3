@@ -40,7 +40,9 @@ const Modal = () => {
     resolver: yupResolver(yupSchema),
     defaultValues,
   });
-
+  const submit = async (data: any) => {
+    console.log("Form Submitted", data);
+  };
   return (
     <div
       className={` absolute w-full z-10 ${
@@ -65,15 +67,15 @@ const Modal = () => {
           New Invoice
         </h1>
         <FormProvider {...methods}>
-          <form className="mt-[22px]">
+          <form onSubmit={methods.handleSubmit(submit)} className="mt-[22px]">
             <div>
               <SenderAdress />
               <ClientAdress />
               <InvoiceDates />
               <ItemList />
             </div>
+            <ModalFooter />
           </form>
-          <ModalFooter />
         </FormProvider>
       </div>
     </div>

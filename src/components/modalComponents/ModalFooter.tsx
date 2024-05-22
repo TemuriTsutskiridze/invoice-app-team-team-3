@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
 
 const ModalFooter = () => {
   const { darkMode, setModal } = useContext(AppContext);
-  const { reset, clearErrors, handleSubmit, trigger, watch } = useFormContext();
+  const { reset, clearErrors, handleSubmit } = useFormContext();
+  const [info, setInfo] = useState<object>();
 
   const handleDiscard = () => {
     reset();
@@ -13,11 +14,9 @@ const ModalFooter = () => {
   };
 
   const submit = async (data: any) => {
-    await trigger();
-    if (Object.keys(data).length > 0) {
-      console.log(data);
-    }
+    console.log("Form Submitted", data); 
   };
+
   return (
     <footer
       className={`${
@@ -39,6 +38,7 @@ const ModalFooter = () => {
         className={`text-[15px] font-bold h-12 bg-[#373b53] rounded-[24px] px-[15px] flex items-center justify-center ${
           darkMode ? "text-[#dfe3fa]" : "text-[#7e88c3]"
         }`}
+        type="button"
       >
         Save as Draft
       </button>

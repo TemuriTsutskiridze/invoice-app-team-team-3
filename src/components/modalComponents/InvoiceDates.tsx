@@ -5,14 +5,19 @@ import { ChangeEvent } from "react";
 const InvoiceDates = () => {
   const { control, setValue, trigger } = useFormContext();
 
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValue(name, value);
-    await trigger(name); 
+    trigger(name);
   };
   return (
     <div className="pt-[26px]">
-      <InputField id="paymentDue" type="date" name="paymentDue">
+      <InputField
+        id="paymentDue"
+        type="date"
+        name="paymentDue"
+        onChangeFunc={handleChange}
+      >
         Invoice Date
       </InputField>
       <Controller
