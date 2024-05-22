@@ -1,11 +1,11 @@
-import "./App.css";
 import Invoice from "./pages/Invoice";
 import ViewInvoice from "./pages/ViewInvoice";
 import { Navigate, Route, Routes } from "react-router";
 import { createContext, useEffect, useState } from "react";
 import data from "./data.json";
-import { AppContextType } from "./types";
 import Header from "./components/Header";
+import { Modal } from "./pages";
+import { AppContextType, InvoiceData } from "./types";
 
 export const AppContext = createContext<AppContextType>({
   appData: [],
@@ -13,6 +13,8 @@ export const AppContext = createContext<AppContextType>({
   darkMode: false,
   setDarkMode: () => {},
   updateInvoiceStatus: () => {},
+  isDeleteModalVisible: false,
+  setIsDeleteModalVisible: () => {},
 });
 
 const App = () => {
@@ -26,6 +28,7 @@ const App = () => {
   }, [appData]);
 
   const [darkMode, setDarkMode] = useState(true);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = darkMode ? "#141625" : "#F8F8FB";
@@ -47,9 +50,12 @@ const App = () => {
         darkMode,
         setDarkMode,
         updateInvoiceStatus,
+        isDeleteModalVisible,
+        setIsDeleteModalVisible,
       }}
     >
       <Header />
+      {/* <Modal /> */}
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />
         <Route path="/invoices" element={<Invoice />} />

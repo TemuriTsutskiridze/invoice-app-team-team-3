@@ -1,17 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../App";
 import { useParams } from "react-router-dom";
+import { InvoiceData } from "../types";
 
 const ViewInvoiceButtons: React.FC = () => {
-  const { appData, darkMode, updateInvoiceStatus } = useContext(AppContext);
+  const {
+    appData,
+    darkMode,
+    updateInvoiceStatus,
+    setIsDeleteModalVisible,
+    isDeleteModalVisible,
+  } = useContext(AppContext);
   const { id } = useParams<{ id: string }>();
-  const invoice = appData.find((inv) => inv.id === id);
+  const invoice = appData.find((inv: InvoiceData) => inv.id === id);
 
   const handleMarkAsPaid = () => {
     if (invoice) {
       updateInvoiceStatus(invoice.id, "paid");
     }
   };
+
+  const handleDeleteClick = () => {
+    setIsDeleteModalVisible(true);
+    document.body.style.opacity = "0.5";
+    document.body.style.backgroundColor = "#000000";
+  };
+
   return (
     <>
       <button
@@ -24,7 +38,10 @@ const ViewInvoiceButtons: React.FC = () => {
       >
         Edit
       </button>
-      <button className="w-[90px] py-3 rounded-[24px] text-[#ffffff] bg-[#ec5757] lg:hover:bg-[#ff9797] lg:transition lg:duration-200">
+      <button
+        onClick={handleDeleteClick}
+        className="w-[90px] py-3 rounded-[24px] text-[#ffffff] bg-[#ec5757] lg:hover:bg-[#ff9797] lg:transition lg:duration-200"
+      >
         Delete
       </button>
       <button

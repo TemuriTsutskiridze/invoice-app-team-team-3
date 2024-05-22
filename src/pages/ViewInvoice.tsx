@@ -3,11 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../App";
 import GoBackButton from "../components/GoBackButton";
 import ViewInvoiceButtons from "../components/ViewInvoiceButtons";
+import { InvoiceData } from "../types";
+import DeleteConfirmation from "../components/modalComponents/DeleteConfirmation";
 
 const ViewInvoice: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { appData, darkMode } = useContext(AppContext);
-  const invoice = appData.find((inv) => inv.id === id);
+  const { appData, darkMode, isDeleteModalVisible } = useContext(AppContext);
+  const invoice = appData.find((inv: InvoiceData) => inv.id === id);
 
   const formatDate = (dateString: string): string => {
     const options: Intl.DateTimeFormatOptions = {
@@ -23,7 +25,8 @@ const ViewInvoice: React.FC = () => {
   }
   return (
     <>
-      <div className="w-screen pt-[33px] px-6 flex flex-col items-start md:pb-[135px] md:px-[40px] md:pt-[50px] lg:px-[350px]">
+      <div className="w-screen pt-[33px] px-6 flex flex-col items-start md:pb-[135px] md:px-[40px] md:pt-[50px] lg:px-[350px}">
+        {isDeleteModalVisible === true ? <DeleteConfirmation /> : ""}
         <Link to={"/invoices"}>
           <GoBackButton />
         </Link>
@@ -210,7 +213,7 @@ const ViewInvoice: React.FC = () => {
                 {invoice.clientAddress.country}
               </p>
             </div>
-            <div className="">
+            <div className="hidden md:block">
               <p
                 className="text-[13px] font-semibold mb-[13px] mt-[35px] md:mb-2"
                 style={darkMode ? { color: "#dfe3fa" } : { color: "#7e88c3" }}
