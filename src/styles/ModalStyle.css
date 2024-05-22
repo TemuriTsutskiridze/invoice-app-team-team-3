@@ -1,3 +1,7 @@
+:root {
+  --gray: "#7E88C3";
+}
+
 .halfSize {
   width: calc(50% - 8px);
 }
@@ -11,7 +15,6 @@
   font-weight: 500;
   font-size: 13px;
   letter-spacing: -0.1px;
-  color: var(--gray);
   display: block;
 }
 

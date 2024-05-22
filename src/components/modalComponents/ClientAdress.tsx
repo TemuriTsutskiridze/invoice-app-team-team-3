@@ -1,15 +1,7 @@
-import { ChangeEvent } from "react";
 import InputField from "./InputField";
-import { useFormContext } from "react-hook-form";
 
 const ClientAddress = () => {
-  const { setValue, trigger } = useFormContext();
 
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setValue(name, value);
-    await trigger(name);
-  };
   return (
     <div className="mt-[41px]">
       <p className="inputText text-blue">Bill To</p>
@@ -17,7 +9,6 @@ const ClientAddress = () => {
         id="ClientsName"
         type="text"
         name="clientName"
-        onChangeFunc={handleChange}
       >
         Client’s Name
       </InputField>
@@ -25,7 +16,6 @@ const ClientAddress = () => {
         id="ClientsEmail"
         type="email"
         name="clientEmail"
-        onChangeFunc={handleChange}
       >
         Client’s Email
       </InputField>
@@ -33,7 +23,6 @@ const ClientAddress = () => {
         id="ClientAdress"
         type="text"
         name="clientAddress.street"
-        onChangeFunc={handleChange}
       >
         Street Address
       </InputField>
@@ -44,7 +33,6 @@ const ClientAddress = () => {
               id="Client-City"
               type="text"
               name="clientAddress.city"
-              onChangeFunc={handleChange}
             >
               City
             </InputField>
@@ -54,7 +42,6 @@ const ClientAddress = () => {
               id="Client-PostCode"
               type="text"
               name="clientAddress.postCode"
-              onChangeFunc={handleChange}
             >
               Post Code
             </InputField>
@@ -64,7 +51,6 @@ const ClientAddress = () => {
           id="ClientCountry"
           type="text"
           name="clientAddress.country"
-          onChangeFunc={handleChange}
         >
           Country
         </InputField>

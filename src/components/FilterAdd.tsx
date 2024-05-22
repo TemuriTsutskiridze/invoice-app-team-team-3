@@ -24,6 +24,21 @@ export function FilterAdd() {
     }
   };
 
+  const filterInvoice = () => {
+    switch (filterClick) {
+      case "pending":
+        return appData.filter((item) => item.status.name === "pending");
+      case "paid":
+        return appData.filter((item) => item.status.name === "paid");
+      case "draft":
+        return appData.filter((item) => item.status.name === "draft");
+      case "all":
+        return appData;
+      default:
+        return appData;
+    }
+  };
+
   return (
     <div className="flex justify-center  xl:mt-[3.88rem]">
       <div className="flex justify-between items-center px-[1.5rem] mt-9 mb-8 w-full max-w-[60rem] md:px-[3rem]">
