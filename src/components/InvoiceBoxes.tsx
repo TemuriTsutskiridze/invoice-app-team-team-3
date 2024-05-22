@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { MyContext } from "../pages/Invoice";
 import ArrowRight from "../../public/assets/icon-arrow-right.svg";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
+
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-GB", {
@@ -21,14 +22,15 @@ const itemVariants = {
 function InvoiceBoxes() {
   const { filterClick, setFilterClick, isMobile } = useContext(MyContext);
   const { darkMode, appData } = useContext(AppContext);
+
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return appData.filter((item) => item.status === "pending");
+        return appData.filter((item) => item.status.name === "Pending");
       case "paid":
-        return appData.filter((item) => item.status === "paid");
+        return appData.filter((item) => item.status.name === "Paid");
       case "draft":
-        return appData.filter((item) => item.status === "draft");
+        return appData.filter((item) => item.status.name === "Draft");
       case "all":
         return appData;
       default:
@@ -61,7 +63,7 @@ function InvoiceBoxes() {
                   {invoice.id}
                 </span>
                 <span
-                  className={`-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem] md:items-center  transition ease-out duration-1000  ${
+                  className={`-mb-[0.9rem] text-[#7E88C3] text-[0.9375rem] md:mr-[3.19rem] md:items-center transition ease-out duration-1000 ${
                     darkMode ? "text-[#DFE3FA]" : "text-[#888EB0]"
                   }`}
                 >
@@ -69,7 +71,7 @@ function InvoiceBoxes() {
                 </span>
                 {!isMobile ? (
                   <span className="font-bold mt-4 md:mr-[3.56rem]">
-                    £ {invoice.total.toFixed(2)}
+                    £ {invoice.items[0]?.total.toFixed(2)}
                   </span>
                 ) : (
                   <span className="font-[0.8125rem] text-[#858BB2] text-[0.8125rem] tracking-[-0.00625rem]">
@@ -78,45 +80,44 @@ function InvoiceBoxes() {
                 )}
               </div>
 
-              <div className="flex justify-between items-end flex-col gap-[1.68rem] md:flex-row md:items-center md:justify-center md:flex-row">
+              <div className="flex justify-between items-end flex-col gap-[1.68rem] md:items-center md:justify-center md:flex-row">
                 {!isMobile ? (
                   <span className="font-[0.8125rem] text-[#858BB2] text-[0.8125rem] tracking-[-0.00625rem]">
                     {invoice.clientName}
                   </span>
                 ) : (
                   <span className="font-bold">
-                    £ {invoice.total.toFixed(2)}
+                    £ {invoice.items[0].total.toFixed(2)}
                   </span>
                 )}
                 <div
                   className={`${
-                    invoice.status === "paid"
+                    invoice.status.name === "Paid"
                       ? "bg-[#33D69F]"
-                      : invoice.status === "pending"
+                      : invoice.status.name === "Pending"
                       ? "bg-[#FF8F00]"
                       : "bg-[#373B53]"
                   } bg-opacity-10 flex justify-center items-center gap-2 min-w-[6.5rem] max-w-[7.5rem] rounded-[0.375rem] pt-[0.88rem] pb-[0.69rem]`}
                 >
                   <div
                     className={`${
-                      invoice.status === "paid"
+                      invoice.status.name === "Paid"
                         ? "bg-[#33D69F]"
-                        : invoice.status === "pending"
+                        : invoice.status.name === "Pending"
                         ? "bg-[#FF8F00]"
                         : "bg-[black]"
                     } w-[0.5rem] h-[0.5rem] rounded-lg`}
                   ></div>
                   <span
                     className={`${
-                      invoice.status === "paid"
+                      invoice.status.name === "Paid"
                         ? "text-[#33D69F]"
-                        : invoice.status === "pending"
+                        : invoice.status.name === "Pending"
                         ? "text-[#FF8F00]"
                         : "text-[#373B53]"
                     } font-bold`}
                   >
-                    {invoice.status.split("")[0].toUpperCase() +
-                      invoice.status.slice(1)}
+                    {invoice.status.name}
                   </span>
                 </div>
                 {isMobile && <img src={ArrowRight} alt="" />}

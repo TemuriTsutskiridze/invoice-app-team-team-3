@@ -9,15 +9,19 @@ const ViewInvoiceButtons: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const invoice = appData.find((inv: InvoiceData) => inv.id === id);
 
-  const handleMarkAsPaid = () => {
+  const handleMarkAsPaid = (id: string, status: string) => {
     if (invoice) {
-      updateInvoiceStatus(invoice.id, "paid");
+      updateInvoiceStatus(id, status);
     }
   };
 
   const handleDeleteClick = () => {
     setIsDeleteModalVisible(true);
   };
+
+  console.log(invoice);
+
+  console.log(invoice?.status.name === "Pending");
 
   return (
     <>
@@ -37,17 +41,14 @@ const ViewInvoiceButtons: React.FC = () => {
       >
         Delete
       </button>
-      <button
-        className="w-[131px] py-3 rounded-[24px] text-[#ffffff] bg-[#7c5dfa] lg:hover:bg-[#9277ff] lg:transition lg:duration-200"
-        onClick={handleMarkAsPaid}
-        style={
-          invoice && invoice.status === "pending"
-            ? { display: "block" }
-            : { display: "none" }
-        }
-      >
-        Mark as Paid
-      </button>
+      {invoice && invoice.status.name === "Pending" ? (
+        <button
+          className="w-[131px] py-3 rounded-[24px] text-[#ffffff] bg-[#7c5dfa] lg:hover:bg-[#9277ff] lg:transition lg:duration-200"
+          onClick={() => handleMarkAsPaid(invoice.id, "paid")}
+        >
+          Mark as Paid
+        </button>
+      ) : null}
     </>
   );
 };

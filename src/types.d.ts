@@ -36,7 +36,7 @@ interface InvoiceData {
   paymentTerms: number;
   clientName: string;
   clientEmail: string;
-  status: string;
+  status: { id: number; name: string };
   senderAddress: Address;
   clientAddress: Address;
   items: Item[];
