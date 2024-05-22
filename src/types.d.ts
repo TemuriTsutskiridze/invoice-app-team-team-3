@@ -67,4 +67,6 @@ interface AppContextType {
   updateInvoiceStatus: (id: string, status: string) => void;
   setIsDeleteModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   deleteInvoice: (id: string) => void;
+  isMoonVisible: boolean
+  setIsMoonVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
