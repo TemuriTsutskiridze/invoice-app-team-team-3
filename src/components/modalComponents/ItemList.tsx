@@ -39,7 +39,7 @@ const ItemList = () => {
       </h3>
 
       <div className="mt-[22px] flex flex-col gap-[48px]">
-        {items.map((item, index) => (
+        {items.map((_, index) => (
           <div key={index}>
             <InputField
               id={`item-Name-${index}`}
