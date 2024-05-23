@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
@@ -21,7 +21,6 @@ const ItemList = () => {
   } = useFormContext();
 
   const [items, setItems] = useState<Item[]>([]);
-  const [totalSum, setTotalSum] = useState<number>();
   const handleAddItems = () => {
     const newItems = [...items, { name: "", quantity: 0, price: 0, total: 0 }];
     setItems(newItems);
@@ -32,11 +31,6 @@ const ItemList = () => {
     newItems.splice(index, 1);
     setItems(newItems);
   };
-
-  useEffect(() => {
-    const sum = items.reduce((acc, item) => acc + item.total, 0);
-    setTotalSum(sum);
-  }, [items]);
 
   return (
     <div className="mt-[69px]">
