@@ -16,8 +16,6 @@ const ItemList = () => {
   const { darkMode } = useContext(AppContext);
   const {
     formState: { errors },
-    setValue,
-    trigger,
     watch,
     register,
   } = useFormContext();
@@ -34,7 +32,6 @@ const ItemList = () => {
     newItems.splice(index, 1);
     setItems(newItems);
   };
-
 
   useEffect(() => {
     const sum = items.reduce((acc, item) => acc + item.total, 0);

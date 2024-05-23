@@ -1,7 +1,7 @@
 import Invoice from "./pages/Invoice";
 import ViewInvoice from "./pages/ViewInvoice";
 import { Navigate, Route, Routes } from "react-router";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import data from "./data.json";
 import Header from "./components/Header";
 import { AppContextType, InvoiceData } from "./types";
@@ -62,7 +62,6 @@ const App = () => {
   const deleteInvoice = (id: string) => {
     setAppData((prevData) => prevData.filter((invoice) => invoice.id !== id));
   };
-  
 
   const fetchData = async () => {
     const response = await fetch(

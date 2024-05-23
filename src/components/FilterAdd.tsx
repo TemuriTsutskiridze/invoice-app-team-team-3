@@ -7,9 +7,14 @@ import { AppContext } from "../App";
 export function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-  const { filterClick, setFilterClick, modalPage, setModalPage, filterInvoice } =
-    useContext(MyContext);
-  const { appData, modal, setModal,darkMode } = useContext(AppContext);
+  const {
+    filterClick,
+    setFilterClick,
+    modalPage,
+    setModalPage,
+    filterInvoice,
+  } = useContext(MyContext);
+  const { setModal, darkMode } = useContext(AppContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -28,9 +33,11 @@ export function FilterAdd() {
     <div className="flex justify-center  xl:mt-[3.88rem]">
       <div className="flex justify-between items-center px-[1.5rem] mt-9 mb-8 w-full max-w-[60rem] md:px-[3rem]">
         <div className="inline-flex justify-start items-start flex-col">
-          <h1 className={`text-[1.5rem] font-bold -mb-[4px] md:text-[2.25rem] 
+          <h1
+            className={`text-[1.5rem] font-bold -mb-[4px] md:text-[2.25rem] 
           transition ease-out duration-1000 
-          ${!darkMode ? "text-[#0C0E16]" : "text-[white]"} `}>
+          ${!darkMode ? "text-[#0C0E16]" : "text-[white]"} `}
+          >
             Invoices
           </h1>
           <p className="text-[#888EB0]">{filterInvoice().length} invoices</p>
@@ -41,9 +48,11 @@ export function FilterAdd() {
               className="flex justify-between items-center gap-[0.75rem] md:mr-[2.75rem] cursor-pointer"
               onClick={filterBox}
             >
-              <span className={`font-bold text-[0.9375rem]
+              <span
+                className={`font-bold text-[0.9375rem]
                transition ease-out duration-1000 
-               ${!darkMode ? "text-[#0C0E16]" : "text-[white]"}`}>
+               ${!darkMode ? "text-[#0C0E16]" : "text-[white]"}`}
+              >
                 Filter{" "}
                 <span className=" hidden md:inline-block">by status</span>
               </span>
@@ -71,9 +80,7 @@ export function FilterAdd() {
                   onChange={handleCheckboxChange}
                   checked={filterClick === "draft"}
                 />
-                <span className=" text-[0.9375rem] font-bold">
-                  Draft
-                </span>
+                <span className=" text-[0.9375rem] font-bold">Draft</span>
               </div>
               <div className="flex gap-[0.81rem]">
                 <input
@@ -83,9 +90,7 @@ export function FilterAdd() {
                   onChange={handleCheckboxChange}
                   checked={filterClick === "pending"}
                 />
-                <span className=" text-[0.9375rem] font-bold">
-                  Pending
-                </span>
+                <span className=" text-[0.9375rem] font-bold">Pending</span>
               </div>
               <div className="flex gap-[0.81rem]">
                 <input
@@ -95,9 +100,7 @@ export function FilterAdd() {
                   onChange={handleCheckboxChange}
                   checked={filterClick === "paid"}
                 />
-                <span className=" text-[0.9375rem] font-bold">
-                  Paid
-                </span>
+                <span className=" text-[0.9375rem] font-bold">Paid</span>
               </div>
               <div className="flex gap-[0.81rem]">
                 <input
@@ -107,9 +110,7 @@ export function FilterAdd() {
                   onChange={handleCheckboxChange}
                   checked={filterClick === "all"}
                 />
-                <span className="text-[0.9375rem] font-bold">
-                  All
-                </span>
+                <span className="text-[0.9375rem] font-bold">All</span>
               </div>
             </div>
           </div>
