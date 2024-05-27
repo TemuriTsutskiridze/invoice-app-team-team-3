@@ -3,6 +3,7 @@ import FilterAdd from "../components/FilterAdd";
 import InvoiceBoxes from "../components/InvoiceBoxes";
 import EmptyInvoices from "../components/EmptyInvoices";
 import { AppContext } from "../App";
+import { InvoiceData } from "../types";
 
 type FilterType = "all" | "pending" | "paid" | "draft";
 interface ContextType {
@@ -14,6 +15,8 @@ interface ContextType {
   setIsDesktop: React.Dispatch<React.SetStateAction<boolean>>;
   modalPage: boolean;
   setModalPage: React.Dispatch<React.SetStateAction<boolean>>;
+  filterInvoice: () => InvoiceData[]
+  
 }
 
 export const MyContext = React.createContext<ContextType>({
@@ -25,7 +28,9 @@ export const MyContext = React.createContext<ContextType>({
   setIsDesktop: () => {},
   modalPage: false,
   setModalPage: () => {},
+  filterInvoice: () => []
 });
+
 
 function Invoice() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -33,6 +38,21 @@ function Invoice() {
   const [filterClick, setFilterClick] = useState<FilterType>("all");
   const [modalPage, setModalPage] = useState<boolean>(false);
   const { appData } = useContext(AppContext);
+
+  const filterInvoice = () => {
+    switch (filterClick) {
+      case "pending":
+        return appData.filter((item) => item.status.name === "Pending");
+      case "paid":
+        return appData.filter((item) => item.status.name === "Paid");
+      case "draft":
+        return appData.filter((item) => item.status.name === "Draft");
+      case "all":
+        return appData;
+      default:
+        return appData;
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,10 +79,11 @@ function Invoice() {
         setIsDesktop,
         modalPage,
         setModalPage,
+        filterInvoice
       }}
     >
       <FilterAdd />
-      {appData.length === 0 ? <EmptyInvoices /> : <InvoiceBoxes />}
+      {filterInvoice().length === 0 ? <EmptyInvoices /> : <InvoiceBoxes />}
     </MyContext.Provider>
   );
 }
