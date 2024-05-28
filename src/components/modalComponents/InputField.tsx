@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { useFormContext, FieldError } from "react-hook-form";
 import { AppContext } from "../../App";
+import { error } from "console";
 
 type InputFieldProps = {
   children: React.ReactNode;
   type: string;
   id: string;
-  value?: any;
   name: string;
 };
 
@@ -21,16 +21,14 @@ const InputField: React.FC<InputFieldProps> = ({
   children,
   type,
   id,
-  value,
   name,
-
 }) => {
   const { darkMode } = useContext(AppContext);
   const {
     register,
-    watch,
     formState: { errors },
   } = useFormContext();
+  console.log(errors);
 
   const errorMessage = getNestedValue(errors, name);
   return (
@@ -56,9 +54,9 @@ const InputField: React.FC<InputFieldProps> = ({
         } ${id === "itemListItemName" ? "mt-[15px]" : " mt-[9px]"} ${
           errorMessage ? "border-red-700" : ""
         }`}
-        defaultValue={value}
         {...register(name)}
       />
+
       {errorMessage && (
         <p
           className={`text-[#EC5757] absolute right-0 text-[13px] font-semibold  ${

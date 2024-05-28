@@ -188,3 +188,28 @@ type Invoice = {
   items: Item[];
   total: number;
 };
+type FormData = {
+  senderAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  clientAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  items: {
+    name: string;
+    quantity: number;
+    price: number;
+    total: number;
+  }[];
+  clientEmail: string;
+  clientName: string;
+  description: string;
+  paymentTerms: string;
+  paymentDue: string;
+};

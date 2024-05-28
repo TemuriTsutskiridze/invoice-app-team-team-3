@@ -62,7 +62,7 @@ const Schema = yup.object().shape({
           .number()
           .positive("Invalid price")
           .required("Price is required"),
-        total: yup.number(),
+        total: yup.number().positive("Invalid total"),
       })
     )
     .min(1, "- AN Item must be added"),

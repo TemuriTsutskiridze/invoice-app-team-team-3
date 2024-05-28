@@ -75,7 +75,6 @@ const App = () => {
     fetchData();
   }, []);
 
-  console.log(appData);
 
   return (
     <AppContext.Provider

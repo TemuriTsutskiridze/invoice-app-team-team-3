@@ -4,7 +4,7 @@ import { AppContext } from "../App";
 import GoBackButton from "../components/GoBackButton";
 import ViewInvoiceButtons from "../components/ViewInvoiceButtons";
 import { InvoiceData } from "../types";
-import DeleteConfirmation from "../components/modalComponents/DeleteConfirmation";
+import DeleteConfirmation from "../components/DeleteConfirmation";
 
 const ViewInvoice: React.FC = () => {
   const { id } = useParams<{ id: string }>();
