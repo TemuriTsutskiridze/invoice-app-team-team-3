@@ -11,8 +11,6 @@ const ModalFooter = () => {
   } = useFormContext();
 
   
-  console.log(errors);
-
 
   const addInvoice = (data: any) => {
     console.log(data);

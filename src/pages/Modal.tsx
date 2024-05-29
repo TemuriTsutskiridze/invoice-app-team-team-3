@@ -14,26 +14,6 @@ import "../styles/index.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-export const defaultValues = {
-  senderAddress: {
-    street: "",
-    city: "",
-    postCode: "",
-    country: "",
-  },
-  clientName: "",
-  clientEmail: "",
-  clientAddress: {
-    street: "",
-    city: "",
-    postCode: "",
-    country: "",
-  },
-  paymentDue: "",
-  paymentTerms: "",
-  description: "",
-  items: [],
-};
 
 const Modal = () => {
   // useEffect(()=>{
@@ -47,7 +27,6 @@ const Modal = () => {
   const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),
-    defaultValues,
   });
 
   return (

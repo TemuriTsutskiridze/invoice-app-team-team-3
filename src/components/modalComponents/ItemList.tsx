@@ -15,12 +15,17 @@ const ItemList = () => {
     clearErrors,
   } = useFormContext();
 
-  const { fields, append, remove } = useFieldArray({ control, name: "items" });
-  console.log(fields);
+  const { fields, append, remove } = useFieldArray({
+    rules: { minLength: 1 },
+    control,
+    name: "items",
+  });
+
+  console.log(errors)
+
 
   const handleAddItems = () => {
     append({ name: "", quantity: 0, price: 0, total: 0 });
-    clearErrors(`items[${fields.length}]`);
   };
 
   const handleDeleteItems = (index: number) => {
