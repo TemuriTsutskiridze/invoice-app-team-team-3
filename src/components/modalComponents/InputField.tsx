@@ -23,12 +23,10 @@ const InputField: React.FC<InputFieldProps> = ({
   id,
   value,
   name,
-
 }) => {
   const { darkMode } = useContext(AppContext);
   const {
     register,
-    watch,
     formState: { errors },
   } = useFormContext();
 

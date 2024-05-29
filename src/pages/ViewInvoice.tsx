@@ -1,4 +1,4 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../App";
 import GoBackButton from "../components/GoBackButton";
@@ -102,7 +102,6 @@ const ViewInvoice: React.FC = () => {
                 className={`text-[14px] font-bold
                 transition ease-out duration-1000 
                 ${darkMode ? "text-[white]" : "text-[#0c0e16]"}`}
-      
               >
                 <span
                   className={`font-bold

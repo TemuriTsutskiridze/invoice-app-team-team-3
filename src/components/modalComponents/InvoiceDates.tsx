@@ -1,21 +1,9 @@
 import { Controller, useFormContext } from "react-hook-form";
 import InputField from "./InputField";
-import { ChangeEvent } from "react";
 
 const InvoiceDates = () => {
-  const { control, setValue, trigger } = useFormContext();
+  const { control } = useFormContext();
 
-  function addDays(date: Date, days: number): Date {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setValue(name, value);
-    trigger(name);
-  };
   return (
     <div className="pt-[26px]">
       <InputField id="paymentDue" type="date" name="paymentDue">
