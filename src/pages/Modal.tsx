@@ -3,7 +3,7 @@ import {
   ClientAdress,
   InvoiceDates,
   ItemList,
-  ModalFooter,
+  // ModalFooter,
   SenderAdress,
   yupSchema,
 } from "../components";
@@ -13,6 +13,7 @@ import "../styles/ModalStyle.css";
 import "../styles/index.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import ModalFooter from "../components/modalComponents/ModalFooter";
 
 const Modal = () => {
   // useEffect(()=>{
@@ -22,12 +23,17 @@ const Modal = () => {
   // })
 
   // const { id } = useParams();
+  const addInvoice = (data: any) => {
+    console.log(data);
+    console.log("consoled data");
+  };
 
   const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),
   });
 
+  const { handleSubmit } = methods;
   const [clickSubmit, setClickSubmit] = useState<boolean>(false);
 
   return (
@@ -54,15 +60,15 @@ const Modal = () => {
           New Invoice
         </h1>
         <FormProvider {...methods}>
-          <form className="mt-[22px]">
+          <form className="mt-[22px]" >
             <div>
               <SenderAdress />
               <ClientAdress />
               <InvoiceDates />
               <ItemList clickSubmit={clickSubmit} />
             </div>
+            <ModalFooter setClickSubmit={setClickSubmit} />
           </form>
-          <ModalFooter setClickSubmit={setClickSubmit} />
         </FormProvider>
       </div>
     </div>

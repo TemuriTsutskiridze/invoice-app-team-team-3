@@ -12,10 +12,16 @@ const ModalFooter: React.FC<{
     formState: { errors },
   } = useFormContext();
 
-  const addInvoice =  (data: any) => {
+  const addInvoice = (data: any) => {
     console.log(data);
-    console.log("consoled data")
+    console.log("console data");
   };
+
+  const handleButtonClick = () => {
+    handleSubmit(addInvoice)();
+    setClickSubmit(true);
+  };
+  console.log(errors);
 
   return (
     <footer
@@ -24,7 +30,7 @@ const ModalFooter: React.FC<{
       } px-6 flex justify-center w-full bottom-0 left-0 py-[22px] gap-[7px]  mt-[88px] fixed`}
     >
       <button
-        type="button"
+        type="submit"
         className={`text-[15px] font-bold h-12 rounded-[24px] px-[18px] flex items-center justify-center ${
           darkMode
             ? "bg-[#252945] text-[#dfe3fa]"
@@ -37,15 +43,15 @@ const ModalFooter: React.FC<{
         className={`text-[15px] font-bold h-12 bg-[#373b53] rounded-[24px] px-[15px] flex items-center justify-center ${
           darkMode ? "text-[#dfe3fa]" : "text-[#7e88c3]"
         }`}
-        type="button"
+        type="submit"
       >
         Save as Draft
       </button>
       <button
-        type="button"
-        onClick={async () => {
-          await handleSubmit(addInvoice)();
-          setClickSubmit(true); 
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+          handleButtonClick();
         }}
         className="text-[#fff] text-[15px] font-bold h-12 bg-[#7c5dfa] rounded-[24px] px-[15px] flex items-center justify-center"
       >

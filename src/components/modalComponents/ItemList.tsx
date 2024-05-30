@@ -21,6 +21,7 @@ const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
     name: "items",
   });
 
+  console.log(errors);
 
 
 
