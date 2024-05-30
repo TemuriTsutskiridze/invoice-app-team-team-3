@@ -4,7 +4,7 @@ import { AppContext } from "../../App";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { InputField } from "..";
 
-const ItemList = () => {
+const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
   const { darkMode } = useContext(AppContext);
   const {
     formState: { errors },
@@ -21,12 +21,16 @@ const ItemList = () => {
     name: "items",
   });
 
-  console.log(errors)
 
 
-  const handleAddItems = () => {
-    append({ name: "", quantity: 0, price: 0, total: 0 });
-  };
+
+const handleAddItems = async () => {
+  append({ name: "", quantity: 0, price: 0, total: 0 });
+  if (clickSubmit) {
+    await trigger("items");
+  }
+};
+
 
   const handleDeleteItems = (index: number) => {
     remove(index);

@@ -28,11 +28,11 @@ export function FilterAdd() {
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return appData.filter((item) => item.status.name === "pending");
+        return appData.filter((item: any) => item.status.name === "pending");
       case "paid":
-        return appData.filter((item) => item.status.name === "paid");
+        return appData.filter((item: any) => item.status.name === "paid");
       case "draft":
-        return appData.filter((item) => item.status.name === "draft");
+        return appData.filter((item: any) => item.status.name === "draft");
       case "all":
         return appData;
       default:

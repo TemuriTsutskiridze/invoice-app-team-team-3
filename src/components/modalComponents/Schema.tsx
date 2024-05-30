@@ -57,10 +57,12 @@ const Schema = yup.object().shape({
         quantity: yup
           .number()
           .positive("Invalid quantity")
+          .typeError("Invalid price: Must be a number")
           .required("Quantity is required"),
         price: yup
           .number()
           .positive("Invalid price")
+          .typeError("Invalid price: Must be a number")
           .required("Price is required"),
         total: yup.number().positive("Invalid total"),
       })

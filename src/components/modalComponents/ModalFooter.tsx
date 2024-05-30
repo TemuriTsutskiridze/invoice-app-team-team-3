@@ -1,19 +1,20 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
 import axios from "axios";
 
-const ModalFooter = () => {
+const ModalFooter: React.FC<{
+  setClickSubmit: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ setClickSubmit }) => {
   const { darkMode, setModal } = useContext(AppContext);
   const {
     handleSubmit,
     formState: { errors },
   } = useFormContext();
 
-  
-
-  const addInvoice = (data: any) => {
+  const addInvoice =  (data: any) => {
     console.log(data);
+    console.log("consoled data")
   };
 
   return (
@@ -42,7 +43,10 @@ const ModalFooter = () => {
       </button>
       <button
         type="button"
-        onClick={handleSubmit(addInvoice)}
+        onClick={async () => {
+          await handleSubmit(addInvoice)();
+          setClickSubmit(true); 
+        }}
         className="text-[#fff] text-[15px] font-bold h-12 bg-[#7c5dfa] rounded-[24px] px-[15px] flex items-center justify-center"
       >
         Save & Send

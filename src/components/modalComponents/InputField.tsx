@@ -1,18 +1,33 @@
 import React, { useContext } from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, FieldError } from "react-hook-form";
 import { AppContext } from "../../App";
 
 type InputFieldProps = {
   children: React.ReactNode;
   type: string;
   id: string;
+  value?: any;
   name: string;
+};
+
+interface ErrorObject {
+  [key: string]: {
+    message: string;
+  };
+}
+
+const getNestedValue = (obj: any, path: string) => {
+  return path
+    .split(/[\.\[\]]+/)
+    .filter(Boolean)
+    .reduce((acc, part) => acc && acc[part], obj);
 };
 
 const InputField: React.FC<InputFieldProps> = ({
   children,
   type,
   id,
+  value,
   name,
 }) => {
   const { darkMode } = useContext(AppContext);
@@ -21,16 +36,14 @@ const InputField: React.FC<InputFieldProps> = ({
     formState: { errors },
   } = useFormContext();
 
-  const errorMessage = errors[name]?.message;
-  const errorText = typeof errorMessage === "string" ? errorMessage : undefined;
-
+  const errorMessage = getNestedValue(errors, name);
   return (
-    <div className="relative">
+    <div className="relative ">
       <label
         className={`labelStyle mt-6 ${
           darkMode
             ? "text-[#888eb0]"
-            : errorText
+            : errorMessage
             ? "text-[#EC5757]"
             : "text-[#7E88C3]"
         }`}
@@ -40,25 +53,25 @@ const InputField: React.FC<InputFieldProps> = ({
       <input
         id={id}
         type={type}
-        min={type === "number" ? 0 : undefined}
         className={`inputStyle inputText pr-[10px]  ${
           darkMode
-            ? "text-white focus:border-[#7C5DFA] bg-[#1e2139] border-[#252945]"
-            : "border-[#DFE3FA] border-solid border-[1px] focus:border-[#9277FF]"
-        } ${id === "itemListItemName" ? "mt-[15px]" : "mt-[9px]"} ${
-          errorText ? "border-red-700" : ""
+            ? "text-white  focus:border-[#7C5DFA] bg-[#1e2139] border-[#252945]"
+            : " border-[#DFE3FA] border-solid border-[1px] focus:border-[#9277FF] "
+        } ${id === "itemListItemName" ? "mt-[15px]" : " mt-[9px]"} ${
+          errorMessage ? "border-red-700" : ""
         }`}
+        defaultValue={value}
         {...register(name)}
       />
-      {errorText && (
+      {errorMessage && (
         <p
-          className={`text-[#EC5757] absolute right-0 text-[13px] font-semibold ${
+          className={`text-[#EC5757] absolute right-0 text-[13px] font-semibold  ${
             name.includes("price") || name.includes("quantity")
-              ? "top-6"
+              ? "top-6 hidden"
               : "top-0"
           }`}
         >
-          {errorText}
+          {(errorMessage as FieldError)?.message}
         </p>
       )}
     </div>

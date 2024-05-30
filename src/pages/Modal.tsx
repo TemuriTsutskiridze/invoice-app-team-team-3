@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   ClientAdress,
   InvoiceDates,
@@ -14,7 +14,6 @@ import "../styles/index.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-
 const Modal = () => {
   // useEffect(()=>{
   //   const fetchData = () =>{
@@ -28,6 +27,8 @@ const Modal = () => {
   const methods = useForm({
     resolver: yupResolver(yupSchema),
   });
+
+  const [clickSubmit, setClickSubmit] = useState<boolean>(false);
 
   return (
     <div
@@ -58,10 +59,10 @@ const Modal = () => {
               <SenderAdress />
               <ClientAdress />
               <InvoiceDates />
-              <ItemList />
+              <ItemList clickSubmit={clickSubmit} />
             </div>
-            <ModalFooter />
           </form>
+          <ModalFooter setClickSubmit={setClickSubmit} />
         </FormProvider>
       </div>
     </div>
