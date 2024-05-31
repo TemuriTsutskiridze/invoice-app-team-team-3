@@ -21,17 +21,10 @@ const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
     name: "items",
   });
 
-  console.log(errors);
 
-
-
-const handleAddItems = async () => {
-  append({ name: "", quantity: 0, price: 0, total: 0 });
-  if (clickSubmit) {
-    await trigger("items");
-  }
-};
-
+  const handleAddItems = async () => {
+    append({ name: "", quantity: 0, price: 0, total: 0 });
+  };
 
   const handleDeleteItems = (index: number) => {
     remove(index);

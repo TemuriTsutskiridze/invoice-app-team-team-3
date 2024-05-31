@@ -71,7 +71,7 @@ const Schema = yup.object().shape({
   clientEmail: yup.string().email().required("Client email is required"),
   clientName: yup.string().required("Client name is required"),
   description: yup.string().required("Description is required"),
-  paymentTerms: yup.string().required("Payment terms are required"),
+  paymentTerms: yup.string(),
   paymentDue: yup.string().required("Payment due date is required"),
 });
 
