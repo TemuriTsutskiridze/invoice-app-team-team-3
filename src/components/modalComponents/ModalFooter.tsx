@@ -4,12 +4,14 @@ import { useFormContext } from "react-hook-form";
 import axios from "axios";
 
 const ModalFooter: React.FC<{
-  setClickSubmit: React.Dispatch<React.SetStateAction<boolean>>;
+  setClickSubmit: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ setClickSubmit }) => {
   const { darkMode, setModal } = useContext(AppContext);
   const {
     handleSubmit,
     formState: { errors },
+    reset,
+    clearErrors,
   } = useFormContext();
 
   const addInvoice = (data: any) => {
@@ -19,9 +21,15 @@ const ModalFooter: React.FC<{
 
   const handleButtonClick = () => {
     handleSubmit(addInvoice)();
-    setClickSubmit(true);
+    setClickSubmit(1);
   };
-  console.log(errors);
+
+  const handleDiscard = () => {
+    setModal(false)();
+    reset();
+    clearErrors();
+  };
+
 
   return (
     <footer
@@ -30,6 +38,7 @@ const ModalFooter: React.FC<{
       } px-6 flex justify-center w-full bottom-0 left-0 py-[22px] gap-[7px]  mt-[88px] fixed`}
     >
       <button
+        onClick={handleDiscard}
         type="submit"
         className={`text-[15px] font-bold h-12 rounded-[24px] px-[18px] flex items-center justify-center ${
           darkMode

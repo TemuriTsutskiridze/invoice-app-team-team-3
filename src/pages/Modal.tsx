@@ -29,7 +29,7 @@ const Modal = () => {
     resolver: yupResolver(yupSchema),
   });
 
-  const [clickSubmit, setClickSubmit] = useState<boolean>(false);
+  const [clickSubmit, setClickSubmit] = useState<number>(0);
 
   return (
     <div
@@ -60,7 +60,7 @@ const Modal = () => {
               <SenderAdress />
               <ClientAdress />
               <InvoiceDates />
-              <ItemList clickSubmit={clickSubmit} />
+              <ItemList clickSubmit={clickSubmit} setClickSubmit={setClickSubmit} />
             </div>
           </form>
           <ModalFooter setClickSubmit={setClickSubmit} />

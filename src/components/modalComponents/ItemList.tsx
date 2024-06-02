@@ -1,10 +1,13 @@
-import { useContext, useEffect } from "react";
+import { SetStateAction, useContext, useEffect } from "react";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { InputField } from "..";
 
-const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
+const ItemList: React.FC<{
+  clickSubmit: number;
+  setClickSubmit: React.Dispatch<SetStateAction<number>>;
+}> = ({ clickSubmit, setClickSubmit }) => {
   const { darkMode } = useContext(AppContext);
   const {
     formState: { errors },
@@ -19,21 +22,25 @@ const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
     control,
     name: "items",
   });
-
-  const handleAddItems = async () => {
-    append({ name: "", quantity: 0, price: 0, total: 0 });
-    if (clickSubmit) {
-    }
-  };
-
-  const handleDeleteItems = (index: number) => {
-    remove(index);
-  };
-
   const items = useWatch({
     name: "items",
     control,
   });
+
+  const handleAddItems = async () => {
+    append({ name: "", quantity: 0, price: 0, total: 0 });
+  };
+
+  console.log(clickSubmit);
+
+  const handleDeleteItems = (index: number) => {
+    remove(index);
+  };
+  if (items && items.length > 1) {
+    setClickSubmit(0);
+  } else if (items && items.length === 0) {
+    setClickSubmit(1);
+  }
 
   useEffect(() => {
     if (items && items.length > 0) {
@@ -43,7 +50,9 @@ const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
           setValue(`items[${index}].total`, total);
         }
       });
-      clearErrors("items[0]");
+      if (clickSubmit === 1) {
+        clearErrors("items[0]");
+      }
     }
   }, [items, setValue]);
 
