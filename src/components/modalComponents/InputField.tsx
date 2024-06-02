@@ -10,11 +10,7 @@ type InputFieldProps = {
   name: string;
 };
 
-interface ErrorObject {
-  [key: string]: {
-    message: string;
-  };
-}
+
 
 const getNestedValue = (obj: any, path: string) => {
   return path
@@ -22,7 +18,6 @@ const getNestedValue = (obj: any, path: string) => {
     .filter(Boolean)
     .reduce((acc, part) => acc && acc[part], obj);
 };
-
 
 const InputField: React.FC<InputFieldProps> = ({
   children,
@@ -68,7 +63,7 @@ const InputField: React.FC<InputFieldProps> = ({
         <p
           className={`text-[#EC5757] absolute right-0 text-[13px] font-semibold  ${
             name.includes("price") || name.includes("quantity")
-              ? "top-6 hidden"
+              ? "top-6 hidden md:block"
               : "top-0"
           }`}
         >

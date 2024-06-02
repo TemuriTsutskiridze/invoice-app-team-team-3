@@ -2,11 +2,11 @@ import { Controller, useFormContext } from "react-hook-form";
 import InputField from "./InputField";
 
 const InvoiceDates = () => {
-  const { control, } = useFormContext();
+  const { control } = useFormContext();
 
   return (
     <div className="pt-[26px]">
-      <InputField id="paymentDue" type="date" name="paymentDue">
+      <InputField id="paymentDue" type="date" name="createdAt">
         Invoice Date
       </InputField>
       <Controller

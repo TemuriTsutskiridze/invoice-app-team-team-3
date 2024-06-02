@@ -72,7 +72,7 @@ const Schema = yup.object().shape({
   clientName: yup.string().required("Client name is required"),
   description: yup.string().required("Description is required"),
   paymentTerms: yup.string(),
-  paymentDue: yup.string().required("Payment due date is required"),
+  createdAt: yup.string().required("Payment date is required"),
 });
 
 export default Schema;

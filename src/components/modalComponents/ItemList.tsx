@@ -1,17 +1,16 @@
 import { useContext, useEffect } from "react";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { InputField } from "..";
 
 const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
   const { darkMode } = useContext(AppContext);
   const {
     formState: { errors },
-    watch,
     register,
     control,
-    trigger,
+    setValue,
     clearErrors,
   } = useFormContext();
 
@@ -21,14 +20,32 @@ const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
     name: "items",
   });
 
-
   const handleAddItems = async () => {
     append({ name: "", quantity: 0, price: 0, total: 0 });
+    if (clickSubmit) {
+    }
   };
 
   const handleDeleteItems = (index: number) => {
     remove(index);
   };
+
+  const items = useWatch({
+    name: "items",
+    control,
+  });
+
+  useEffect(() => {
+    if (items && items.length > 0) {
+      items.forEach((item: any, index: number) => {
+        const total = item.quantity * item.price;
+        if (total !== item.total) {
+          setValue(`items[${index}].total`, total);
+        }
+      });
+      clearErrors("items[0]");
+    }
+  }, [items, setValue]);
 
   return (
     <div className="mt-[69px]">
@@ -72,10 +89,7 @@ const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
                   </p>
                   <input
                     readOnly
-                    value={
-                      watch(`items[${index}].price`) *
-                      watch(`items[${index}].quantity`)
-                    }
+                    value={items && items[index] ? items[index].total : 0}
                     {...register(`items[${index}].total`)}
                     className={`outline-none mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px]`}
                   />
@@ -103,7 +117,7 @@ const ItemList: React.FC<{ clickSubmit: boolean }> = ({ clickSubmit }) => {
       </div>
       {Object.keys(errors).length > 1 && (
         <p className="text-[#ec5757] text-[10px] font-semibold mt-[30px]">
-          - All fields must be Added
+          - All fields must be filled
         </p>
       )}
       {errors?.items && typeof errors.items.message === "string" && (
