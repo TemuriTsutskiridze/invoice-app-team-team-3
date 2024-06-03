@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
 import axios from "axios";
@@ -6,7 +6,6 @@ import axios from "axios";
 const ModalFooter = () => {
   const { darkMode, setModal } = useContext(AppContext);
   const { reset, clearErrors, handleSubmit } = useFormContext();
-  const [info, setInfo] = useState<object>();
 
   const handleDiscard = () => {
     reset();
@@ -57,7 +56,6 @@ const ModalFooter = () => {
         invoiceData
       );
       console.log("Invoice saved successfully:", response.data);
-      setInfo(response.data);
     } catch (error) {
       console.error("Error saving invoice:", error);
     }
@@ -82,7 +80,6 @@ const ModalFooter = () => {
         invoiceData
       );
       console.log("Draft saved successfully:", response.data);
-      setInfo(response.data);
     } catch (error) {
       console.error("Error saving draft:", error);
     }

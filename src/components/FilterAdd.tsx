@@ -7,9 +7,12 @@ import { AppContext } from "../App";
 export function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-  const { filterClick, setFilterClick, modalPage, setModalPage } =
-    useContext(MyContext);
-  const { appData, setModal, darkMode } = useContext(AppContext);
+  const {
+    filterClick,
+    setFilterClick,
+    filterInvoice,
+  } = useContext(MyContext);
+  const { setModal, darkMode, appData } = useContext(AppContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -21,21 +24,6 @@ export function FilterAdd() {
     if (checked) {
       setFilterClick(value as any);
       setFilter(!filter);
-    }
-  };
-
-  const filterInvoice = () => {
-    switch (filterClick) {
-      case "pending":
-        return appData.filter((item) => item.status.name === "pending");
-      case "paid":
-        return appData.filter((item) => item.status.name === "paid");
-      case "draft":
-        return appData.filter((item) => item.status.name === "draft");
-      case "all":
-        return appData;
-      default:
-        return appData;
     }
   };
 
@@ -78,7 +66,7 @@ export function FilterAdd() {
             <div
               className={`filter-box ${
                 filter ? "filter-box-visible" : "filter-box-hidden"
-              } absolute top-full mt-5 -mr-[6rem] md:-mr-[1rem] bg-white p-4 shadow-lg rounded-lg z-10 transition ease-out duration-1000 
+              } absolute top-full mt-5 -mr-[6rem] md:-mr-[1rem] p-4 shadow-lg rounded-lg z-10 transition ease-out duration-1000 
               ${darkMode ? "bg-[#252945]" : "bg-[white]"}
               ${darkMode ? "text-[white]" : "text-[#1e2139]"}`}
             >

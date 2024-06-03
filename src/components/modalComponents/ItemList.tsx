@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
@@ -16,14 +16,11 @@ const ItemList = () => {
   const { darkMode } = useContext(AppContext);
   const {
     formState: { errors },
-    setValue,
-    trigger,
     watch,
     register,
   } = useFormContext();
 
   const [items, setItems] = useState<Item[]>([]);
-  const [totalSum, setTotalSum] = useState<number>();
   const handleAddItems = () => {
     const newItems = [...items, { name: "", quantity: 0, price: 0, total: 0 }];
     setItems(newItems);
@@ -35,12 +32,6 @@ const ItemList = () => {
     setItems(newItems);
   };
 
-
-  useEffect(() => {
-    const sum = items.reduce((acc, item) => acc + item.total, 0);
-    setTotalSum(sum);
-  }, [items]);
-
   return (
     <div className="mt-[69px]">
       <h3 className="font-bold text-[18px] tracking-[-0.38px] text-[#777f98]">
@@ -48,7 +39,7 @@ const ItemList = () => {
       </h3>
 
       <div className="mt-[22px] flex flex-col gap-[48px]">
-        {items.map((item, index) => (
+        {items.map((_, index) => (
           <div key={index}>
             <InputField
               id={`item-Name-${index}`}
