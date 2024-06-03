@@ -31,7 +31,6 @@ const ItemList: React.FC<{
     append({ name: "", quantity: 0, price: 0, total: 0 });
   };
 
-  console.log(clickSubmit);
 
   const handleDeleteItems = (index: number) => {
     remove(index);

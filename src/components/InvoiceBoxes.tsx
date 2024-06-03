@@ -26,11 +26,11 @@ function InvoiceBoxes() {
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return appData.filter((item) => item.status.name === "Pending");
+        return appData.filter((item: any) => item.status.name === "Pending");
       case "paid":
-        return appData.filter((item) => item.status.name === "Paid");
+        return appData.filter((item: any) => item.status.name === "Paid");
       case "draft":
-        return appData.filter((item) => item.status.name === "Draft");
+        return appData.filter((item: any) => item.status.name === "Draft");
       case "all":
         return appData;
       default:
@@ -41,7 +41,7 @@ function InvoiceBoxes() {
   return (
     <div className="flex justify-center pb-[6rem]">
       <div className="w-full max-w-[60rem]">
-        {filterInvoice().map((invoice, index) => (
+        {filterInvoice().map((invoice: any, index: number) => (
           <Link to={`/view-invoice/${invoice.id}`} key={index}>
             <motion.div
               key={invoice.id}
@@ -71,7 +71,7 @@ function InvoiceBoxes() {
                 </span>
                 {!isMobile ? (
                   <span className="font-bold mt-4 md:mr-[3.56rem]">
-                    £ {invoice.items[0]?.total.toFixed(2)}
+                    {/* £ {invoice.items[0]?.total.toFixed(2)} */}
                   </span>
                 ) : (
                   <span className="font-[0.8125rem] text-[#858BB2] text-[0.8125rem] tracking-[-0.00625rem]">
@@ -87,7 +87,7 @@ function InvoiceBoxes() {
                   </span>
                 ) : (
                   <span className="font-bold">
-                    £ {invoice.items[0].total.toFixed(2)}
+                    {/* £ {invoice.items[0].total.toFixed(2)} */}
                   </span>
                 )}
                 <div

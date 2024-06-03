@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
-import axios from "axios";
+import axios, { all } from "axios";
 
 const ModalFooter: React.FC<{
   setClickSubmit: React.Dispatch<React.SetStateAction<number>>;
@@ -30,19 +30,35 @@ const ModalFooter: React.FC<{
     return id;
   };
 
-  const addInvoice = (data: any) => {
-    const { createdAt, paymentTerms } = data;
-
-    if (createdAt && paymentTerms) {
-      const dueDate = new Date(createdAt);
-      dueDate.setDate(dueDate.getDate() + parseInt(paymentTerms));
-      const paymentDue = dueDate.toISOString().split("T")[0];
-      const allInfo = { ...data, paymentDue, id: generateId() };
-      console.log(allInfo);
+  const addInvoice = async (data: any) => {
+    const { createdAt, paymentTerms, items } = data;
+    const dueDate = new Date(createdAt);
+    dueDate.setDate(dueDate.getDate() + parseInt(paymentTerms));
+    const paymentDue = dueDate.toISOString().split("T")[0];
+    let total = 0;
+    items.forEach((items: any, _: number) => {
+      total += items.total;
+    });
+    console.log("total:" + total);
+    const allInfo = {
+      ...data,
+      paymentDue,
+      id: generateId(),
+      status: { name: "saved" },
+      total,
+    };
+    try {
+      const result = await axios.post(
+        "https://invoice-project-team-3.onrender.com/api/invoice/",
+        allInfo
+      );
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const handleButtonClick = () => {
+  const handleSaveandSendClick = () => {
     handleSubmit(addInvoice)();
     setClickSubmit(1);
   };
@@ -82,7 +98,7 @@ const ModalFooter: React.FC<{
         type="submit"
         onClick={(e) => {
           e.preventDefault();
-          handleButtonClick();
+          handleSaveandSendClick();
         }}
         className="text-[#fff] text-[15px] font-bold h-12 bg-[#7c5dfa] rounded-[24px] px-[15px] flex items-center justify-center"
       >
