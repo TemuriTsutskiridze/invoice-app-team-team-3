@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AppContext } from "../../App";
-import { InvoiceData } from "../../types";
-import "../../styles/index.css";
+import { AppContext } from "../App";
+import { InvoiceData } from "../types";
+import "../styles/index.css";
 
 const DeleteConfirmation: React.FC = () => {
   const { appData, darkMode, setIsDeleteModalVisible, deleteInvoice } =

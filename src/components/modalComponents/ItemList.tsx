@@ -1,36 +1,59 @@
-import { useContext, useState } from "react";
+import { SetStateAction, useContext, useEffect } from "react";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
-import { useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { InputField } from "..";
 
-interface Item {
-  name: string;
-  quantity: number;
-  price: number;
-  total: number;
-  [key: string]: string | number;
-}
-
-const ItemList = () => {
+const ItemList: React.FC<{
+  clickSubmit: number;
+  setClickSubmit: React.Dispatch<SetStateAction<number>>;
+}> = ({ clickSubmit, setClickSubmit }) => {
   const { darkMode } = useContext(AppContext);
   const {
     formState: { errors },
-    watch,
     register,
+    control,
+    setValue,
+    clearErrors,
   } = useFormContext();
 
-  const [items, setItems] = useState<Item[]>([]);
-  const handleAddItems = () => {
-    const newItems = [...items, { name: "", quantity: 0, price: 0, total: 0 }];
-    setItems(newItems);
+  const { fields, append, remove } = useFieldArray({
+    rules: { minLength: 1 },
+    control,
+    name: "items",
+  });
+  const items = useWatch({
+    name: "items",
+    control,
+  });
+
+  const handleAddItems = async () => {
+    append({ name: "", quantity: 0, price: 0, total: 0 });
   };
 
+
   const handleDeleteItems = (index: number) => {
-    const newItems = [...items];
-    newItems.splice(index, 1);
-    setItems(newItems);
+    remove(index);
   };
+  if (items && items.length > 1) {
+    setClickSubmit(0);
+  } else if (items && items.length === 0) {
+    setClickSubmit(1);
+  }
+
+  useEffect(() => {
+    if (items && items.length > 0) {
+      items.forEach((item: any, index: number) => {
+        const total = item.quantity * item.price;
+        if (total !== item.total) {
+          setValue(`items[${index}].total`, total);
+        }
+      });
+      if (clickSubmit === 1) {
+        clearErrors("items[0]");
+      }
+    }
+  }, [items, setValue]);
 
   return (
     <div className="mt-[69px]">
@@ -39,8 +62,8 @@ const ItemList = () => {
       </h3>
 
       <div className="mt-[22px] flex flex-col gap-[48px]">
-        {items.map((_, index) => (
-          <div key={index}>
+        {fields.map((field, index) => (
+          <div key={field.id}>
             <InputField
               id={`item-Name-${index}`}
               type="text"
@@ -74,12 +97,9 @@ const ItemList = () => {
                   </p>
                   <input
                     readOnly
-                    value={
-                      watch(`items[${index}].price`) *
-                      watch(`items[${index}].quantity`)
-                    }
+                    value={items && items[index] ? items[index].total : 0}
                     {...register(`items[${index}].total`)}
-                    className={`outline-none  mt-[27px]  font-bold text-[#888EB0] text-[15px] tracking-[-0.25px]`}
+                    className={`outline-none mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px]`}
                   />
                 </div>
               </div>
@@ -95,9 +115,7 @@ const ItemList = () => {
           </div>
         ))}
         <div
-          onClick={() => {
-            handleAddItems();
-          }}
+          onClick={handleAddItems}
           className={`${
             darkMode ? "bg-[#252945]" : "bg-[#eaeced]"
           } h-[48px] rounded-3xl flex items-center justify-center cursor-pointer`}
@@ -107,13 +125,13 @@ const ItemList = () => {
       </div>
       {Object.keys(errors).length > 1 && (
         <p className="text-[#ec5757] text-[10px] font-semibold mt-[30px]">
-          - All fields must be Added
+          - All fields must be filled
         </p>
       )}
-      {errors?.items?.message && typeof errors.items.message === "string" && (
+      {errors?.items && typeof errors.items.message === "string" && (
         <p
           className={`text-[#ec5757] text-[10px] font-semibold ${
-            Object.keys(errors).length < 1 ? "mt-[30px]" : "mt-5px"
+            Object.keys(errors).length === 1 ? "mt-[30px]" : "mt-5px"
           }`}
         >
           {errors.items.message}

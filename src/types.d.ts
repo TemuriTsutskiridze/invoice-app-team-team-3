@@ -7,13 +7,6 @@ interface Address {
   country: string;
 }
 
-type Item = {
-  name: string;
-  quantity: number;
-  price: number;
-  total: number;
-};
-
 interface Address {
   street: string;
   city: string;
@@ -21,14 +14,7 @@ interface Address {
   country: string;
 }
 
-interface Item {
-  name: string;
-  quantity: number;
-  price: number;
-  total: number;
-}
-
-interface InvoiceData {
+export interface InvoiceData {
   id: string;
   createdAt: string;
   paymentDue: string;
@@ -130,22 +116,7 @@ type SchemaType = {
   }[];
 };
 
-interface InvoiceData {
-  id: string;
-  createdAt: string;
-  paymentDue: string;
-  description: string;
-  paymentTerms: number;
-  clientName: string;
-  clientEmail: string;
-  status: string;
-  senderAddress: Address;
-  clientAddress: Address;
-  items: Item[];
-  total: number;
-}
-
-interface AppContextType {
+export interface AppContextType {
   appData: InvoiceData[];
   setAppData: React.Dispatch<React.SetStateAction<InvoiceData[]>>;
   darkMode: boolean;
@@ -160,31 +131,29 @@ interface AppContextType {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-type Address = {
+
+interface Address {
   street: string;
   city: string;
   postCode: string;
   country: string;
-};
+}
 
-type Item = {
+interface Item {
   name: string;
   quantity: number;
   price: number;
   total: number;
-};
+}
 
-type Invoice = {
-  id: string;
-  createdAt: Date;
-  paymentDue: Date;
+interface InvoiceFormValues {
+  paymentDue: string;
   description: string;
   paymentTerms: number;
   clientName: string;
   clientEmail: string;
-  status: { name: string; id: number };
   senderAddress: Address;
   clientAddress: Address;
   items: Item[];
-  total: number;
-};
+}
+

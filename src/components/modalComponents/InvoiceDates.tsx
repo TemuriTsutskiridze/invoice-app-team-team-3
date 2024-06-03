@@ -6,7 +6,7 @@ const InvoiceDates = () => {
 
   return (
     <div className="pt-[26px]">
-      <InputField id="paymentDue" type="date" name="paymentDue">
+      <InputField id="paymentDue" type="date" name="createdAt">
         Invoice Date
       </InputField>
       <Controller

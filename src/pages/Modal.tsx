@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   ClientAdress,
   InvoiceDates,
   ItemList,
-  ModalFooter,
+  // ModalFooter,
   SenderAdress,
   yupSchema,
 } from "../components";
@@ -13,27 +13,7 @@ import "../styles/ModalStyle.css";
 import "../styles/index.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-export const defaultValues = {
-  senderAddress: {
-    street: "",
-    city: "",
-    postCode: "",
-    country: "",
-  },
-  clientName: "",
-  clientEmail: "",
-  clientAddress: {
-    street: "",
-    city: "",
-    postCode: "",
-    country: "",
-  },
-  paymentDue: "",
-  paymentTerms: "",
-  description: "",
-  items: [],
-};
+import ModalFooter from "../components/modalComponents/ModalFooter";
 
 const Modal = () => {
   // useEffect(()=>{
@@ -47,11 +27,13 @@ const Modal = () => {
   const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),
-    defaultValues,
+    defaultValues: {
+      items: [],
+    },
   });
-  const submit = async (data: any) => {
-    console.log("Form Submitted", data);
-  };
+
+  const [clickSubmit, setClickSubmit] = useState<number>(0);
+
   return (
     <div
       className={` absolute w-full z-10 top-[72px] ${
@@ -76,15 +58,18 @@ const Modal = () => {
           New Invoice
         </h1>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(submit)} className="mt-[22px]">
+          <form className="mt-[22px]">
             <div>
               <SenderAdress />
               <ClientAdress />
               <InvoiceDates />
-              <ItemList />
+              <ItemList
+                clickSubmit={clickSubmit}
+                setClickSubmit={setClickSubmit}
+              />
             </div>
-            <ModalFooter />
           </form>
+          <ModalFooter setClickSubmit={setClickSubmit} />
         </FormProvider>
       </div>
     </div>

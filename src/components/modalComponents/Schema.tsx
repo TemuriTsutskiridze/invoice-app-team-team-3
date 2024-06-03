@@ -57,10 +57,12 @@ const Schema = yup.object().shape({
         quantity: yup
           .number()
           .positive("Invalid quantity")
+          .typeError("Invalid price: Must be a number")
           .required("Quantity is required"),
         price: yup
           .number()
           .positive("Invalid price")
+          .typeError("Invalid price: Must be a number")
           .required("Price is required"),
         total: yup.number(),
       })
@@ -69,8 +71,8 @@ const Schema = yup.object().shape({
   clientEmail: yup.string().email().required("Client email is required"),
   clientName: yup.string().required("Client name is required"),
   description: yup.string().required("Description is required"),
-  paymentTerms: yup.string().required("Payment terms are required"),
-  paymentDue: yup.string().required("Payment due date is required"),
+  paymentTerms: yup.string(),
+  createdAt: yup.string().required("Payment date is required"),
 });
 
 export default Schema;

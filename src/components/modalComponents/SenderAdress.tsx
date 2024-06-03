@@ -15,11 +15,7 @@ const SenderAddress = () => {
       </InputField>
       <div className="flex gap-4">
         <div className="halfSize">
-          <InputField
-            id="Sender-City"
-            type="text"
-            name="senderAddress.city"
-          >
+          <InputField id="Sender-City" type="text" name="senderAddress.city">
             City
           </InputField>
         </div>
@@ -33,11 +29,7 @@ const SenderAddress = () => {
           </InputField>
         </div>
       </div>
-      <InputField
-        id="Sender-Country"
-        type="text"
-        name="senderAddress.country"
-      >
+      <InputField id="Sender-Country" type="text" name="senderAddress.country">
         Country
       </InputField>
     </div>

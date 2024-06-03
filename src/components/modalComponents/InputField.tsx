@@ -10,6 +10,8 @@ type InputFieldProps = {
   name: string;
 };
 
+
+
 const getNestedValue = (obj: any, path: string) => {
   return path
     .split(/[\.\[\]]+/)
@@ -61,7 +63,7 @@ const InputField: React.FC<InputFieldProps> = ({
         <p
           className={`text-[#EC5757] absolute right-0 text-[13px] font-semibold  ${
             name.includes("price") || name.includes("quantity")
-              ? "top-6"
+              ? "top-6 hidden md:block"
               : "top-0"
           }`}
         >
