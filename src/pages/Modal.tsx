@@ -36,11 +36,11 @@ const Modal = () => {
 
   return (
     <div
-      className={` absolute w-full z-10 top-[72px] ${
+      className={`md:bg-[rgba(0,0,0,0.5)] absolute w-full z-10 top-[72px] ${
         darkMode ? "bg-darkBgColor" : "bg-white "
       } ${modal ? "block" : "hidden"}`}
     >
-      <div className={` px-6 pt-8 pb-[180px]   `}>
+      <div className={` md:rounded-e-lg md:h-[100vh] md:overflow-scroll md:rounded-r-lg px-6 pt-8 pb-[180px]  md:w-[80.209%] md:bg-white`}>
         <div
           onClick={() => {
             setModal(false);
