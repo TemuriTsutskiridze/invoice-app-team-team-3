@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { useFormContext } from "react-hook-form";
-import axios, { all } from "axios";
+import axios from "axios";
+import { generateId } from "./functions";
 
 const ModalFooter: React.FC<{
   setClickSubmit: React.Dispatch<React.SetStateAction<number>>;
@@ -9,26 +10,9 @@ const ModalFooter: React.FC<{
   const { darkMode, setModal } = useContext(AppContext);
   const {
     handleSubmit,
-    formState: { errors },
     reset,
     clearErrors,
   } = useFormContext();
-
-  const generateId = () => {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numbers = "0123456789";
-    let id = "";
-
-    for (let i = 0; i < 2; i++) {
-      id += letters.charAt(Math.floor(Math.random() * letters.length));
-    }
-
-    for (let i = 0; i < 4; i++) {
-      id += numbers.charAt(Math.floor(Math.random() * numbers.length));
-    }
-
-    return id;
-  };
 
   const addInvoice = async (data: any) => {
     const { createdAt, paymentTerms, items } = data;
@@ -39,7 +23,6 @@ const ModalFooter: React.FC<{
     items.forEach((items: any, _: number) => {
       total += items.total;
     });
-    console.log("total:" + total);
     const allInfo = {
       ...data,
       paymentDue,
