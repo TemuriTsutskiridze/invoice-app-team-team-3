@@ -27,6 +27,9 @@ const Modal = () => {
   const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),
+    defaultValues: {
+      items: [],
+    },
   });
 
   const [clickSubmit, setClickSubmit] = useState<number>(0);
@@ -60,7 +63,10 @@ const Modal = () => {
               <SenderAdress />
               <ClientAdress />
               <InvoiceDates />
-              <ItemList clickSubmit={clickSubmit} setClickSubmit={setClickSubmit} />
+              <ItemList
+                clickSubmit={clickSubmit}
+                setClickSubmit={setClickSubmit}
+              />
             </div>
           </form>
           <ModalFooter setClickSubmit={setClickSubmit} />

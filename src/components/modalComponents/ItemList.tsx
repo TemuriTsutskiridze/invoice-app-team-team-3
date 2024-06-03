@@ -132,7 +132,7 @@ const ItemList: React.FC<{
       {errors?.items && typeof errors.items.message === "string" && (
         <p
           className={`text-[#ec5757] text-[10px] font-semibold ${
-            Object.keys(errors).length < 1 ? "mt-[30px]" : "mt-5px"
+            Object.keys(errors).length === 1 ? "mt-[30px]" : "mt-5px"
           }`}
         >
           {errors.items.message}

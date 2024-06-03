@@ -14,9 +14,32 @@ const ModalFooter: React.FC<{
     clearErrors,
   } = useFormContext();
 
+  const generateId = () => {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+    let id = "";
+
+    for (let i = 0; i < 2; i++) {
+      id += letters.charAt(Math.floor(Math.random() * letters.length));
+    }
+
+    for (let i = 0; i < 4; i++) {
+      id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    }
+
+    return id;
+  };
+
   const addInvoice = (data: any) => {
-    console.log(data);
-    console.log("console data");
+    const { createdAt, paymentTerms } = data;
+
+    if (createdAt && paymentTerms) {
+      const dueDate = new Date(createdAt);
+      dueDate.setDate(dueDate.getDate() + parseInt(paymentTerms));
+      const paymentDue = dueDate.toISOString().split("T")[0];
+      const allInfo = { ...data, paymentDue, id: generateId() };
+      console.log(allInfo);
+    }
   };
 
   const handleButtonClick = () => {
@@ -25,11 +48,10 @@ const ModalFooter: React.FC<{
   };
 
   const handleDiscard = () => {
-    setModal(false)();
+    setModal(false);
     reset();
     clearErrors();
   };
-
 
   return (
     <footer
