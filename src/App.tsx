@@ -1,10 +1,10 @@
 import Invoice from "./pages/Invoice";
 import ViewInvoice from "./pages/ViewInvoice";
 import { Navigate, Route, Routes } from "react-router";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import data from "./data.json";
 import Header from "./components/Header";
-import { AppContextType, InvoiceData } from "./types";
+import {AppContextType, InvoiceData } from "./types"
 import { Modal } from "./pages";
 
 export const AppContext = createContext<AppContextType>({
@@ -75,7 +75,6 @@ const App = () => {
     fetchData();
   }, []);
 
-
   return (
     <AppContext.Provider
       value={{
@@ -94,6 +93,7 @@ const App = () => {
       }}
     >
       <Header />
+      <span className={`animatedBg ${darkMode ? "second" : "first"}`}></span>
       <Modal />
       <Routes>
         <Route path="/" element={<Navigate to="/invoices" />} />

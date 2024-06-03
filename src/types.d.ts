@@ -14,7 +14,7 @@ interface Address {
   country: string;
 }
 
-interface InvoiceData {
+export interface InvoiceData {
   id: string;
   createdAt: string;
   paymentDue: string;
@@ -116,7 +116,7 @@ type SchemaType = {
   }[];
 };
 
-interface AppContextType {
+export interface AppContextType {
   appData: InvoiceData[];
   setAppData: React.Dispatch<React.SetStateAction<InvoiceData[]>>;
   darkMode: boolean;
@@ -156,3 +156,4 @@ interface InvoiceFormValues {
   clientAddress: Address;
   items: Item[];
 }
+
