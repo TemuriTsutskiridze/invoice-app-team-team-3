@@ -15,11 +15,11 @@ const DeleteConfirmation: React.FC = () => {
     setIsDeleteModalVisible(false);
   };
 
-  const handleDeleteClick = () => {
-    if (invoice) {
-      deleteInvoice(invoice.id);
+  const handleDeleteClick = async () => {
+    if (id) {
+      await deleteInvoice(id);
       setIsDeleteModalVisible(false);
-      navigate("/");
+      navigate("/invoices"); // Navigate back to the invoices list after deletion
     }
   };
 

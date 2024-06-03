@@ -36,14 +36,6 @@ export const defaultValues = {
 };
 
 const Modal = () => {
-  // useEffect(()=>{
-  //   const fetchData = () =>{
-  //     const data =
-  //   }
-  // })
-
-  // const { id } = useParams();
-
   const { darkMode, modal, setModal } = useContext(AppContext);
   const methods = useForm({
     resolver: yupResolver(yupSchema),

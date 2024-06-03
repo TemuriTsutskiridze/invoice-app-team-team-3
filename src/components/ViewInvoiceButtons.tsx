@@ -15,13 +15,9 @@ const ViewInvoiceButtons: React.FC = () => {
     }
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     setIsDeleteModalVisible(true);
   };
-
-  console.log(invoice);
-
-  console.log(invoice?.status.name === "Pending");
 
   return (
     <>

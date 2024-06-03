@@ -10,11 +10,9 @@ export function FilterAdd() {
   const {
     filterClick,
     setFilterClick,
-    modalPage,
-    setModalPage,
     filterInvoice,
   } = useContext(MyContext);
-  const { setModal, darkMode } = useContext(AppContext);
+  const { setModal, darkMode, appData } = useContext(AppContext);
 
   const filterBox = () => {
     setFilter(!filter);

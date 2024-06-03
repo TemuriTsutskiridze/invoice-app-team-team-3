@@ -2,7 +2,6 @@ import Invoice from "./pages/Invoice";
 import ViewInvoice from "./pages/ViewInvoice";
 import { Navigate, Route, Routes } from "react-router";
 import { createContext, useEffect, useState } from "react";
-import data from "./data.json";
 import Header from "./components/Header";
 import { AppContextType, InvoiceData } from "./types";
 import { Modal } from "./pages";
@@ -23,15 +22,8 @@ export const AppContext = createContext<AppContextType>({
 });
 
 const App = () => {
-  const [appData, setAppData] = useState<InvoiceData[]>(() => {
-    const storedData = localStorage.getItem("appData");
-    return storedData ? JSON.parse(storedData) : data;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("appData", JSON.stringify(appData));
-  }, [appData]);
-
+  const [appData, setAppData] = useState<InvoiceData[]>([]);
+  const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [isMoonVisible, setIsMoonVisible] = useState(true);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
@@ -59,23 +51,47 @@ const App = () => {
     );
   };
 
-  const deleteInvoice = (id: string) => {
-    setAppData((prevData) => prevData.filter((invoice) => invoice.id !== id));
+  const deleteInvoice = async (id: string) => {
+    try {
+      const response = await fetch(
+        `https://invoice-project-team-3.onrender.com/api/invoice/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to delete invoice");
+      }
+      setAppData((prevData) => prevData.filter((invoice) => invoice.id !== id));
+    } catch (error) {
+      console.error("Failed to delete invoice:", error);
+    }
   };
 
   const fetchData = async () => {
-    const response = await fetch(
-      "https://invoice-project-team-3.onrender.com/api/invoice/"
-    );
-    const data = await response.json();
-    setAppData(data);
+    try {
+      const response = await fetch(
+        "https://invoice-project-team-3.onrender.com/api/invoice/"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      setAppData(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  console.log(appData);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AppContext.Provider
