@@ -14,6 +14,9 @@ export default {
       gridTemplateColumns: {
         inputsGrid: "48% 76.28% 43px",
       },
+      screens:{
+        xl: "1440px"
+      }
     },
   },
   plugins: [],

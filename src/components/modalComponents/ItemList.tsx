@@ -99,7 +99,7 @@ const ItemList: React.FC<{
                     readOnly
                     value={items && items[index] ? items[index].total : 0}
                     {...register(`items[${index}].total`)}
-                    className={`outline-none mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px]`}
+                    className={`outline-none mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px] ${darkMode && "bg-[#141625]"}`}
                   />
                 </div>
               </div>

@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from "react-router";
 import { createContext, useEffect, useState } from "react";
 import data from "./data.json";
 import Header from "./components/Header";
-import {AppContextType, InvoiceData } from "./types"
+import { AppContextType, InvoiceData } from "./types";
 import { Modal } from "./pages";
 
 export const AppContext = createContext<AppContextType>({
@@ -70,6 +70,12 @@ const App = () => {
     const data = await response.json();
     setAppData(data);
   };
+
+  if (modal) {
+    document.body.style.overflowY = "hidden";
+  }else {
+    document.body.style.overflowY = "auto";
+  }
 
   useEffect(() => {
     fetchData();

@@ -55,8 +55,8 @@ const ModalFooter: React.FC<{
   return (
     <footer
       className={`${
-        darkMode ? "bg-[#1e2139]" : "bg-[#fff] shadow-footerShadow"
-      } px-6 flex justify-center w-full bottom-0 left-0 py-[22px] gap-[7px]  mt-[88px] fixed`}
+        darkMode ? "bg-[#1e2139]" : "bg-[#fff]  submitGroup"
+      } xl:left-[100px]  md:w-[616px] px-6 flex justify-center w-full bottom-0 left-0 py-[22px] gap-[7px]  mt-[88px] fixed md:rounded-e-lg md:rounded-r-lg `}
     >
       <button
         onClick={handleDiscard}

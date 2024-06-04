@@ -1,8 +1,11 @@
 import { Controller, useFormContext } from "react-hook-form";
 import InputField from "./InputField";
+import { useContext } from "react";
+import { AppContext } from "../../App";
 
 const InvoiceDates = () => {
   const { control } = useFormContext();
+  const { darkMode } = useContext(AppContext);
 
   return (
     <div className="pt-[26px]">
@@ -14,11 +17,22 @@ const InvoiceDates = () => {
         control={control}
         render={({ field }) => (
           <div>
-            <label className="labelStyle mt-4" htmlFor="paymentTerms ">
+            <label
+              className={`labelStyle mt-4 ${
+                darkMode
+                  ? "text-[#888eb0]"
+                  : "text-[#7E88C3]"
+              }`}
+              htmlFor="paymentTerms "
+            >
               Payment Terms
             </label>
             <select
-              className="outline-none w-full rounded-[5px] border-[#DFE3FA] pl-5 border-solid border-[1px] p-0 h-12 inputText styled-select "
+              className={` ${
+                darkMode
+                  ? "text-white  focus:border-[#7C5DFA] bg-[#1e2139] border-none"
+                  : " border-[#DFE3FA] border-solid border-[1px] focus:border-[#9277FF] "
+              } outline-none w-full rounded-[5px] border-[#DFE3FA] pl-5 border-solid border-[1px] p-0 h-12 inputText styled-select`}
               id="paymentTerms inputStyle"
               {...field}
             >
