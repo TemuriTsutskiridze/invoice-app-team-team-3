@@ -7,13 +7,7 @@ import { AppContext } from "../App";
 export function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
-  const {
-    filterClick,
-    setFilterClick,
-    modalPage,
-    setModalPage,
-    filterInvoice,
-  } = useContext(MyContext);
+  const { filterClick, setFilterClick, filterInvoice } = useContext(MyContext);
   const { setModal, darkMode } = useContext(AppContext);
 
   const filterBox = () => {
