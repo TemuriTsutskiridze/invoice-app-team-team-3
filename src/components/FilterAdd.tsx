@@ -8,7 +8,7 @@ export function FilterAdd() {
   const [filter, setFilter] = useState<boolean>(false);
   const [arrowUp, setArrowUp] = useState<boolean>(false);
   const { filterClick, setFilterClick, filterInvoice } = useContext(MyContext);
-  const { setModal, darkMode } = useContext(AppContext);
+  const { setModal, darkMode, modal } = useContext(AppContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -109,7 +109,7 @@ export function FilterAdd() {
             </div>
           </div>
           <div
-            onClick={() => setModalPage(!modalPage)}
+            onClick={() => setModal(!modal)}
             className="flex justify-center items-center w-[5.625rem] h-[2.75rem] bg-[#7C5DFA] rounded-[1.5rem] gap-[0.5rem] cursor-pointer
             md:w-[9.375rem]"
           >
