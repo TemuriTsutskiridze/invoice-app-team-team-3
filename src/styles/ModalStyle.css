@@ -13,7 +13,7 @@
 }
 .labelStyle {
   font-weight: 500;
-  font-size: 13px;
+  font-size: 10px;
   letter-spacing: -0.1px;
   display: block;
 }
@@ -37,4 +37,14 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+.submitGroup {
+  box-shadow: rgba(72, 84, 159, 0.25) 0px 10px 20px 0px;
+}
+
+@media (min-width: 768px) {
+  .halfSize {
+    width: 152px;
+  }
 }

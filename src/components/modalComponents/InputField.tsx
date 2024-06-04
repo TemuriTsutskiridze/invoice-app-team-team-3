@@ -10,8 +10,6 @@ type InputFieldProps = {
   name: string;
 };
 
-
-
 const getNestedValue = (obj: any, path: string) => {
   return path
     .split(/[\.\[\]]+/)
@@ -51,7 +49,7 @@ const InputField: React.FC<InputFieldProps> = ({
         type={type}
         className={`inputStyle inputText pr-[10px]  ${
           darkMode
-            ? "text-white  focus:border-[#7C5DFA] bg-[#1e2139] border-[#252945]"
+            ? "text-white  focus:border-[#7C5DFA] border-[1px] bg-[#1e2139] border-solid border-[#252945]"
             : " border-[#DFE3FA] border-solid border-[1px] focus:border-[#9277FF] "
         } ${id === "itemListItemName" ? "mt-[15px]" : " mt-[9px]"} ${
           errorMessage ? "border-red-700" : ""
@@ -64,6 +62,12 @@ const InputField: React.FC<InputFieldProps> = ({
           className={`text-[#EC5757] absolute right-0 text-[13px] font-semibold  ${
             name.includes("price") || name.includes("quantity")
               ? "top-6 hidden md:block"
+              : "top-0"
+          } ${
+            name.includes("city") ||
+            name.includes("postCode") ||
+            name.includes("country")
+              ? "md:hidden"
               : "top-0"
           }`}
         >

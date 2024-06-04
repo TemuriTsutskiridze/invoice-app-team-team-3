@@ -33,14 +33,19 @@ const Modal = () => {
   });
 
   const [clickSubmit, setClickSubmit] = useState<number>(0);
+  console.log(modal);
 
   return (
     <div
-      className={`md:bg-[rgba(0,0,0,0.5)] absolute w-full z-10 top-[72px] ${
-        darkMode ? "bg-darkBgColor" : "bg-white "
+      className={`md:bg-[rgba(0,0,0,0.5)] absolute w-full xl:left-[100px] xl:top-0 z-10 top-[72px] ${
+        darkMode ? "bg-[#141625]" : "bg-white"
       } ${modal ? "block" : "hidden"}`}
     >
-      <div className={` md:rounded-e-lg md:h-[100vh] md:overflow-scroll md:rounded-r-lg px-6 pt-8 pb-[180px]  md:w-[80.209%] md:bg-white`}>
+      <div
+        className={`${
+          darkMode ? "bg-[#141625]" : "bg-white"
+        }  h-[100vh] md:min-h-[100%] relative overflow-scroll md:rounded-e-lg md:rounded-r-lg md:px-[56px] px-6 pt-8 pb-[180px]  md:w-[636px] `}
+      >
         <div
           onClick={() => {
             setModal(false);

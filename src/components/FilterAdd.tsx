@@ -10,11 +10,9 @@ export function FilterAdd() {
   const {
     filterClick,
     setFilterClick,
-    modalPage,
-    setModalPage,
     filterInvoice,
   } = useContext(MyContext);
-  const { setModal, darkMode } = useContext(AppContext);
+  const { setModal, darkMode, modal } = useContext(AppContext);
 
   const filterBox = () => {
     setFilter(!filter);
@@ -116,7 +114,7 @@ export function FilterAdd() {
               </div>
             </div>
             <div
-              onClick={() => setModalPage(!modalPage)}
+              onClick={() => setModal(!modal)}
               className="flex justify-center items-center w-[5.625rem] h-[2.75rem] bg-[#7C5DFA] rounded-[1.5rem] gap-[0.5rem] cursor-pointer
             md:w-[9.375rem]"
             >
@@ -126,7 +124,6 @@ export function FilterAdd() {
                 className="bg-white w-8 h-8 rounded-[50%] flex justify-center items-center p-[10px]"
               />
               <div
-                onClick={() => setModal(true)}
                 className="text-center text-white text-[0.9375rem] font-bold"
               >
                 New <span className="hidden md:inline">Invoice</span>
