@@ -4,9 +4,15 @@ import { useParams } from "react-router-dom";
 import { InvoiceData } from "../types";
 
 const ViewInvoiceButtons: React.FC = () => {
-  const { appData, darkMode, updateInvoiceStatus, setIsDeleteModalVisible } =
-    useContext(AppContext);
+  const {
+    appData,
+    darkMode,
+    setModal,
+    updateInvoiceStatus,
+    setIsDeleteModalVisible,
+  } = useContext(AppContext);
   const { id } = useParams<{ id: string }>();
+  
   const invoice = appData.find((inv: InvoiceData) => inv.id === id);
 
   const handleMarkAsPaid = (id: string, status: string) => {
@@ -19,13 +25,10 @@ const ViewInvoiceButtons: React.FC = () => {
     setIsDeleteModalVisible(true);
   };
 
-  console.log(invoice);
-
-  console.log(invoice?.status.name === "Pending");
-
   return (
     <>
       <button
+        onClick={() => setModal(true)}
         className="w-[73px] py-3 rounded-[24px] lg:hover:bg-[#dfe3fa] lg:transition lg:duration-200"
         style={
           darkMode

@@ -31,15 +31,16 @@ const ItemList: React.FC<{
     append({ name: "", quantity: 0, price: 0, total: 0 });
   };
 
-
   const handleDeleteItems = (index: number) => {
     remove(index);
   };
-  if (items && items.length > 1) {
-    setClickSubmit(0);
-  } else if (items && items.length === 0) {
-    setClickSubmit(1);
-  }
+  useEffect(() => {
+    if (items && items.length > 1) {
+      setClickSubmit(0);
+    } else if (items && items.length === 0) {
+      setClickSubmit(1);
+    }
+  }, [items, setClickSubmit]);
 
   useEffect(() => {
     if (items && items.length > 0) {
@@ -99,7 +100,9 @@ const ItemList: React.FC<{
                     readOnly
                     value={items && items[index] ? items[index].total : 0}
                     {...register(`items[${index}].total`)}
-                    className={`outline-none mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px] ${darkMode && "bg-[#141625]"}`}
+                    className={`outline-none mt-[27px] font-bold text-[#888EB0] text-[15px] tracking-[-0.25px] ${
+                      darkMode && "bg-[#141625]"
+                    }`}
                   />
                 </div>
               </div>
