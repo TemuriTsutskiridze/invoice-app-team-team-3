@@ -22,18 +22,6 @@ const Modal = () => {
   const [data, setData] = useState(null);
   const location = useLocation();
 
-  useEffect(() => {
-    if (location.pathname.includes("view-invoice")) {
-      setId(invoiceId);
-    } else {
-      setId("");
-      setData(null);
-      methods.reset(defaultValues);
-    }
-  }, [location.pathname, invoiceId, data]);
-
-  console.log(data);
-
   const fetchData = async () => {
     if (id) {
       try {
@@ -47,11 +35,7 @@ const Modal = () => {
     }
   };
 
-  useEffect(() => {
-    if (id) {
-      fetchData();
-    }
-  }, [id, location.pathname]);
+  console.log(data);
 
   const defaultValues = {
     senderAddress: {
@@ -76,16 +60,32 @@ const Modal = () => {
 
   const methods = useForm({
     resolver: yupResolver(yupSchema),
-    defaultValues: data || defaultValues,
+    defaultValues: data ? data : defaultValues,
   });
 
   const [clickSubmit, setClickSubmit] = useState<number>(0);
 
   useEffect(() => {
+    if (location.pathname.includes("view-invoice")) {
+      setId(invoiceId);
+    } else {
+      setId("");
+      setData(null);
+      methods.reset(defaultValues);
+    }
+  }, [location.pathname, invoiceId, data]);
+
+  useEffect(() => {
+    if (id) {
+      fetchData();
+    }
+  }, [id, location.pathname]);
+
+  useEffect(() => {
     if (data) {
       methods.reset(data);
     }
-  }, [data, methods]);
+  }, [data, id, invoiceId]);
 
   return (
     <div
