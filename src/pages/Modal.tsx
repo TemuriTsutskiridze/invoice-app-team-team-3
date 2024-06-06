@@ -32,6 +32,8 @@ const Modal = () => {
     }
   }, [location.pathname, invoiceId, data]);
 
+  console.log(data);
+
   const fetchData = async () => {
     if (id) {
       try {
@@ -49,7 +51,7 @@ const Modal = () => {
     if (id) {
       fetchData();
     }
-  }, [id]);
+  }, [id, location.pathname]);
 
   const defaultValues = {
     senderAddress: {
