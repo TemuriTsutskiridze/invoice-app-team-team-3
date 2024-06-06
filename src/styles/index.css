@@ -120,8 +120,6 @@ body {
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
-  position: absolute;
-  left: 10px;
 }
 
 /* Track */

@@ -41,7 +41,6 @@ const ItemList: React.FC<{
       setClickSubmit(1);
     }
   }, [items, setClickSubmit, handleAddItems]);
-  console.log(items);
 
   useEffect(() => {
     if (items && items.length > 0) {

@@ -17,10 +17,10 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const Modal = () => {
-  const { darkMode, modal, setModal, invoiceId } = useContext(AppContext);
+  const { darkMode, modal, setModal, invoiceId, id, setId } =
+    useContext(AppContext);
   const [data, setData] = useState(null);
   const location = useLocation();
-  const [id, setId] = useState("");
 
   useEffect(() => {
     if (location.pathname.includes("view-invoice")) {
@@ -31,7 +31,6 @@ const Modal = () => {
       methods.reset(defaultValues);
     }
   }, [location.pathname, invoiceId, data]);
-  console.log(invoiceId);
 
   const fetchData = async () => {
     if (id) {
@@ -46,7 +45,6 @@ const Modal = () => {
     }
   };
 
-  console.log(data);
   useEffect(() => {
     if (id) {
       fetchData();

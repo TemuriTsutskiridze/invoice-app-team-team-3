@@ -22,6 +22,8 @@ export const AppContext = createContext<AppContextType>({
   setModal: () => {},
   invoiceId: "",
   setInvoiceId: () => {},
+  id: "",
+  setId: () => {},
 });
 
 const App = () => {
@@ -38,6 +40,7 @@ const App = () => {
   const [isMoonVisible, setIsMoonVisible] = useState(true);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [modal, setModal] = useState<boolean>(false);
+  const [id, setId] = useState("");
   const [invoiceId, setInvoiceId] = useState<string>("");
   type StatusType = { id: number; name: string };
 
@@ -100,6 +103,8 @@ const App = () => {
         setModal,
         invoiceId,
         setInvoiceId,
+        id,
+        setId,
       }}
     >
       <Header />
