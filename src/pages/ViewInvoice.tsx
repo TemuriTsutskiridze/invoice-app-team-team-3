@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../App";
 import GoBackButton from "../components/GoBackButton";
@@ -7,8 +7,15 @@ import { InvoiceData } from "../types";
 import DeleteConfirmation from "../components/DeleteConfirmation";
 
 const ViewInvoice: React.FC = () => {
+  const { appData, darkMode, isDeleteModalVisible, setInvoiceId } =
+    useContext(AppContext);
   const { id } = useParams<{ id: string }>();
-  const { appData, darkMode, isDeleteModalVisible } = useContext(AppContext);
+
+  useEffect(() => {
+    if (id) {
+      setInvoiceId(id);
+    }
+  },[id]);
   const invoice = appData.find((inv: InvoiceData) => inv.id === id);
 
   const formatDate = (dateString: string): string => {

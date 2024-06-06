@@ -1,9 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ClientAdress,
   InvoiceDates,
   ItemList,
-  // ModalFooter,
   SenderAdress,
   yupSchema,
 } from "../components";
@@ -14,26 +13,77 @@ import "../styles/index.css";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ModalFooter from "../components/modalComponents/ModalFooter";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Modal = () => {
-  // useEffect(()=>{
-  //   const fetchData = () =>{
-  //     const data =
-  //   }
-  // })
+  const { darkMode, modal, setModal, invoiceId, id, setId } =
+    useContext(AppContext);
+  const [data, setData] = useState(null);
+  const location = useLocation();
 
-  // const { id } = useParams();
+  useEffect(() => {
+    if (location.pathname.includes("view-invoice")) {
+      setId(invoiceId);
+    } else {
+      setId("");
+      setData(null);
+      methods.reset(defaultValues);
+    }
+  }, [location.pathname, invoiceId, data]);
 
-  const { darkMode, modal, setModal } = useContext(AppContext);
+  const fetchData = async () => {
+    if (id) {
+      try {
+        const result = await axios.get(
+          `https://invoice-project-team-3.onrender.com/api/invoice/${id}`
+        );
+        setData(result.data);
+      } catch (error) {
+        console.error("Error fetching invoice data:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+
+  const defaultValues = {
+    senderAddress: {
+      street: "",
+      city: "",
+      postCode: "",
+      country: "",
+    },
+    clientAddress: {
+      street: "",
+      city: "",
+      postCode: "",
+      country: "",
+    },
+    items: [],
+    clientEmail: "",
+    clientName: "",
+    description: "",
+    paymentTerms: "",
+    createdAt: "",
+  };
+
   const methods = useForm({
     resolver: yupResolver(yupSchema),
-    defaultValues: {
-      items: [],
-    },
+    defaultValues: data || defaultValues,
   });
 
   const [clickSubmit, setClickSubmit] = useState<number>(0);
-  console.log(modal);
+
+  useEffect(() => {
+    if (data) {
+      methods.reset(data);
+    }
+  }, [data, methods]);
 
   return (
     <div

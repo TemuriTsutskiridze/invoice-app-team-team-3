@@ -129,8 +129,11 @@ export interface AppContextType {
   setIsMoonVisible: React.Dispatch<React.SetStateAction<boolean>>;
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  invoiceId: string;
+  setInvoiceId: React.Dispatch<React.SetStateAction<string>>;
+  id: string;
+  setId: React.Dispatch<React.SetStateAction<string>>;
 }
-
 
 interface Address {
   street: string;
@@ -156,4 +159,3 @@ interface InvoiceFormValues {
   clientAddress: Address;
   items: Item[];
 }
-

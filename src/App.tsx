@@ -20,6 +20,10 @@ export const AppContext = createContext<AppContextType>({
   setIsMoonVisible: () => {},
   modal: false,
   setModal: () => {},
+  invoiceId: "",
+  setInvoiceId: () => {},
+  id: "",
+  setId: () => {},
 });
 
 const App = () => {
@@ -36,7 +40,8 @@ const App = () => {
   const [isMoonVisible, setIsMoonVisible] = useState(true);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [modal, setModal] = useState<boolean>(false);
-
+  const [id, setId] = useState("");
+  const [invoiceId, setInvoiceId] = useState<string>("");
   type StatusType = { id: number; name: string };
 
   const statusMapping: { [key: string]: StatusType } = {
@@ -73,7 +78,7 @@ const App = () => {
 
   if (modal) {
     document.body.style.overflowY = "hidden";
-  }else {
+  } else {
     document.body.style.overflowY = "auto";
   }
 
@@ -96,6 +101,10 @@ const App = () => {
         deleteInvoice,
         modal,
         setModal,
+        invoiceId,
+        setInvoiceId,
+        id,
+        setId,
       }}
     >
       <Header />
