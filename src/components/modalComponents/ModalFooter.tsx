@@ -43,7 +43,7 @@ const ModalFooter: React.FC<{
 
   const handleSaveandSendClick = () => {
     handleSubmit(addInvoice)();
-    setClickSubmit(1);
+    setClickSubmit(0);
   };
 
   const handleDiscard = () => {

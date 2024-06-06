@@ -40,7 +40,8 @@ const ItemList: React.FC<{
     } else if (items && items.length === 0) {
       setClickSubmit(1);
     }
-  }, [items, setClickSubmit]);
+  }, [items, setClickSubmit, handleAddItems]);
+  console.log(items);
 
   useEffect(() => {
     if (items && items.length > 0) {
@@ -54,7 +55,7 @@ const ItemList: React.FC<{
         clearErrors("items[0]");
       }
     }
-  }, [items, setValue]);
+  }, [items, setValue, setClickSubmit]);
 
   return (
     <div className="mt-[69px]">

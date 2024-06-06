@@ -27,9 +27,11 @@ const Modal = () => {
       setId(invoiceId);
     } else {
       setId("");
-      setData(null); 
+      setData(null);
+      methods.reset(defaultValues);
     }
-  }, [location.pathname, invoiceId]);
+  }, [location.pathname, invoiceId, data]);
+  console.log(invoiceId);
 
   const fetchData = async () => {
     if (id) {
