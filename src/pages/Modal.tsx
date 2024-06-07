@@ -17,7 +17,8 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const Modal = () => {
-  const { darkMode, modal, setModal, invoiceId } = useContext(AppContext);
+  const { darkMode, modal, setModal, invoiceId,  } =
+    useContext(AppContext);
   const [data, setData] = useState(null);
   const location = useLocation();
 
@@ -58,16 +59,16 @@ const Modal = () => {
       methods.reset(defaultValues);
     }
   }, [location.pathname, invoiceId]);
-  console.log(data);
 
   useEffect(() => {
     if (data) {
       methods.reset(data);
     }
-  }, [data, invoiceId]);
+  }, [data]);
+  
 
   const fetchData = async () => {
-    if (invoiceId) {
+    if (invoiceId !== "") {
       try {
         const result = await axios.get(
           `https://invoice-project-team-3.onrender.com/api/invoice/${invoiceId}`
