@@ -17,26 +17,11 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const Modal = () => {
-  const { darkMode, modal, setModal, invoiceId, id, setId } =
-    useContext(AppContext);
+  const { darkMode, modal, setModal, invoiceId } = useContext(AppContext);
   const [data, setData] = useState(null);
   const location = useLocation();
 
-  const fetchData = async () => {
-    if (id) {
-      try {
-        const result = await axios.get(
-          `https://invoice-project-team-3.onrender.com/api/invoice/${id}`
-        );
-        setData(result.data);
-      } catch (error) {
-        console.error("Error fetching invoice data:", error);
-      }
-    }
-  };
-
-  console.log(data);
-
+  console.log(invoiceId);
   const defaultValues = {
     senderAddress: {
       street: "",
@@ -67,25 +52,33 @@ const Modal = () => {
 
   useEffect(() => {
     if (location.pathname.includes("view-invoice")) {
-      setId(invoiceId);
+      fetchData();
     } else {
-      setId("");
       setData(null);
       methods.reset(defaultValues);
     }
-  }, [location.pathname, invoiceId, data]);
-
-  useEffect(() => {
-    if (id) {
-      fetchData();
-    }
-  }, [id, location.pathname]);
+  }, [location.pathname, invoiceId]);
+  console.log(data);
 
   useEffect(() => {
     if (data) {
       methods.reset(data);
     }
-  }, [data, id, invoiceId]);
+  }, [data]);
+
+  const fetchData = async () => {
+    if (invoiceId) {
+      try {
+        const result = await axios.get(
+          `https://invoice-project-team-3.onrender.com/api/invoice/${invoiceId}`
+        );
+        setData(result.data);
+        console.log(result.data);
+      } catch (error) {
+        console.error("Error fetching invoice data:", error);
+      }
+    }
+  };
 
   return (
     <div
