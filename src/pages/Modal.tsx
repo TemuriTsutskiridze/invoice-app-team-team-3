@@ -64,7 +64,7 @@ const Modal = () => {
     if (data) {
       methods.reset(data);
     }
-  }, [data]);
+  }, [data, invoiceId]);
 
   const fetchData = async () => {
     if (invoiceId) {
