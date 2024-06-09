@@ -7,7 +7,7 @@ import { generateId } from "./functions";
 const ModalFooter: React.FC<{
   setClickSubmit: React.Dispatch<React.SetStateAction<number>>;
 }> = ({ setClickSubmit }) => {
-  const { darkMode, setModal, id } = useContext(AppContext);
+  const { darkMode, setModal, invoiceId } = useContext(AppContext);
   const { handleSubmit, reset, clearErrors } = useFormContext();
 
   const addInvoice = async (data: any) => {
@@ -26,7 +26,7 @@ const ModalFooter: React.FC<{
       status: { name: "saved" },
       total,
     };
-    if (id == "") {
+    if (invoiceId == "") {
       try {
         const result = await axios.post(
           "https://invoice-project-team-3.onrender.com/api/invoice/",
@@ -39,7 +39,7 @@ const ModalFooter: React.FC<{
     } else {
       try {
         const result = await axios.put(
-          `https://invoice-project-team-3.onrender.com/api/invoice/${id}`,
+          `https://invoice-project-team-3.onrender.com/api/invoice/${invoiceId}`,
           allInfo
         );
         console.log(result.data);
@@ -66,7 +66,7 @@ const ModalFooter: React.FC<{
         darkMode ? "bg-[#1e2139]" : "bg-[#fff]  submitGroup"
       } xl:left-[100px]  md:w-[616px] px-6 flex justify-center w-full bottom-0 left-0 py-[22px] gap-[7px]  mt-[88px] fixed md:rounded-e-lg md:rounded-r-lg `}
     >
-      {id === "" ? (
+      {invoiceId === "" ? (
         <>
           <button
             onClick={handleDiscard}
