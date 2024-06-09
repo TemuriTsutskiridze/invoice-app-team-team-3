@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext,  } from "react";
 import { AppContext } from "../App";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { InvoiceData } from "../types";
 
 const ViewInvoiceButtons: React.FC = () => {
@@ -10,9 +10,10 @@ const ViewInvoiceButtons: React.FC = () => {
     setModal,
     updateInvoiceStatus,
     setIsDeleteModalVisible,
+  
   } = useContext(AppContext);
   const { id } = useParams<{ id: string }>();
-  
+
   const invoice = appData.find((inv: InvoiceData) => inv.id === id);
 
   const handleMarkAsPaid = (id: string, status: string) => {
@@ -20,6 +21,7 @@ const ViewInvoiceButtons: React.FC = () => {
       updateInvoiceStatus(id, status);
     }
   };
+
 
   const handleDeleteClick = () => {
     setIsDeleteModalVisible(true);

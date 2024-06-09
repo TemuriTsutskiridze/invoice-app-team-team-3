@@ -131,8 +131,7 @@ export interface AppContextType {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   invoiceId: string;
   setInvoiceId: React.Dispatch<React.SetStateAction<string>>;
-  id: string;
-  setId: React.Dispatch<React.SetStateAction<string>>;
+
 }
 
 interface Address {

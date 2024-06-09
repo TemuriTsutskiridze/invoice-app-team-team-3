@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { AppContext } from "../App";
 import GoBackButton from "../components/GoBackButton";
 import ViewInvoiceButtons from "../components/ViewInvoiceButtons";
@@ -10,12 +10,18 @@ const ViewInvoice: React.FC = () => {
   const { appData, darkMode, isDeleteModalVisible, setInvoiceId } =
     useContext(AppContext);
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
 
   useEffect(() => {
-    if (id) {
+    if (location.pathname.includes("view-invoice") && id) {
       setInvoiceId(id);
+    } else {
+      setInvoiceId("");
     }
-  },[id]);
+    return () => {
+      setInvoiceId("");
+    };
+  }, [location.pathname]);
   const invoice = appData.find((inv: InvoiceData) => inv.id === id);
 
   const formatDate = (dateString: string): string => {
