@@ -1,20 +1,16 @@
-import { SetStateAction, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { InputField } from "..";
 
-const ItemList: React.FC<{
-  clickSubmit: number;
-  setClickSubmit: React.Dispatch<SetStateAction<number>>;
-}> = ({ clickSubmit, setClickSubmit }) => {
+const ItemList: React.FC<{}> = () => {
   const { darkMode } = useContext(AppContext);
   const {
-    formState: { errors },
+    formState: { errors, submitCount },
     register,
     control,
     setValue,
-    clearErrors,
   } = useFormContext();
 
   const { fields, append, remove } = useFieldArray({
@@ -31,16 +27,10 @@ const ItemList: React.FC<{
     append({ name: "", quantity: 0, price: 0, total: 0 });
   };
 
+  console.log(submitCount);
   const handleDeleteItems = (index: number) => {
     remove(index);
   };
-  useEffect(() => {
-    if (items && items.length > 1) {
-      setClickSubmit(0);
-    } else if (items && items.length === 0) {
-      setClickSubmit(1);
-    }
-  }, [items, setClickSubmit, handleAddItems]);
 
   useEffect(() => {
     if (items && items.length > 0) {
@@ -50,11 +40,9 @@ const ItemList: React.FC<{
           setValue(`items[${index}].total`, total);
         }
       });
-      if (clickSubmit === 1) {
-        clearErrors("items[0]");
-      }
     }
-  }, [items, setValue, setClickSubmit]);
+  }, [items, setValue]);
+
 
   return (
     <div className="mt-[69px]">
@@ -131,13 +119,14 @@ const ItemList: React.FC<{
           - All fields must be filled
         </p>
       )}
-      {errors?.items && typeof errors.items.message === "string" && (
+
+      {submitCount !== 0 && fields.length === 0 && (
         <p
           className={`text-[#ec5757] text-[10px] font-semibold ${
             Object.keys(errors).length === 1 ? "mt-[30px]" : "mt-5px"
           }`}
         >
-          {errors.items.message}
+          - At least one item is required
         </p>
       )}
     </div>

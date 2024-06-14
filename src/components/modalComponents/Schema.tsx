@@ -66,8 +66,7 @@ const Schema = yup.object().shape({
           .required("Price is required"),
         total: yup.number(),
       })
-    )
-    .min(1, "- AN Item must be added"),
+    ),
   clientEmail: yup.string().email().required("Client email is required"),
   clientName: yup.string().required("Client name is required"),
   description: yup.string().required("Description is required"),

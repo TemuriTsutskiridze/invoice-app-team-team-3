@@ -4,54 +4,67 @@ import { useFormContext } from "react-hook-form";
 import axios from "axios";
 import { generateId } from "./functions";
 
-const ModalFooter: React.FC<{
-  setClickSubmit: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ setClickSubmit }) => {
+const ModalFooter: React.FC = () => {
   const { darkMode, setModal, invoiceId } = useContext(AppContext);
-  const { handleSubmit, reset, clearErrors } = useFormContext();
+  const {
+    handleSubmit,
+    reset,
+    clearErrors,
+    setError,
+    formState: { errors },
+  } = useFormContext();
 
   const addInvoice = async (data: any) => {
-    const { createdAt, paymentTerms, items } = data;
-    const dueDate = new Date(createdAt);
-    dueDate.setDate(dueDate.getDate() + parseInt(paymentTerms));
-    const paymentDue = dueDate.toISOString().split("T")[0];
-    let total = 0;
-    items.forEach((items: any, _: number) => {
-      total += items.total;
-    });
-    const allInfo = {
-      ...data,
-      paymentDue,
-      id: generateId(),
-      status: { name: "saved" },
-      total,
-    };
-    if (invoiceId == "") {
-      try {
-        const result = await axios.post(
-          "https://invoice-project-team-3.onrender.com/api/invoice/",
-          allInfo
-        );
-        console.log(result.data);
-      } catch (error) {
-        console.log(error);
+    if (data.items.length > 0) {
+      clearErrors(data.items);
+      const { createdAt, paymentTerms, items } = data;
+      const dueDate = new Date(createdAt);
+      dueDate.setDate(dueDate.getDate() + parseInt(paymentTerms));
+      const paymentDue = dueDate.toISOString().split("T")[0];
+      let total = 0;
+      items.forEach((item: any) => {
+        total += item.total;
+      });
+      const allInfo = {
+        ...data,
+        paymentDue,
+        id: generateId(),
+        status: { name: "saved" },
+        total,
+      };
+      if (invoiceId === "") {
+        try {
+          const result = await axios.post(
+            "https://invoice-project-team-3.onrender.com/api/invoice/",
+            allInfo
+          );
+          console.log(result.data);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          const result = await axios.put(
+            `https://invoice-project-team-3.onrender.com/api/invoice/${invoiceId}`,
+            allInfo
+          );
+          console.log(result.data);
+        } catch (error) {
+          console.log(error);
+        }
       }
     } else {
-      try {
-        const result = await axios.put(
-          `https://invoice-project-team-3.onrender.com/api/invoice/${invoiceId}`,
-          allInfo
-        );
-        console.log(result.data);
-      } catch (error) {
-        console.log(error);
-      }
+      setError("items", {
+        type: "auto",
+        message: "At least one item is required",
+      });
     }
   };
 
+  console.log(errors);
+
   const handleSaveandSendClick = () => {
     handleSubmit(addInvoice)();
-    setClickSubmit(0);
   };
 
   const handleDiscard = () => {

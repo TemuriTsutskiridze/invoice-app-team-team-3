@@ -17,12 +17,10 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const Modal = () => {
-  const { darkMode, modal, setModal, invoiceId,  } =
-    useContext(AppContext);
+  const { darkMode, modal, setModal, invoiceId } = useContext(AppContext);
   const [data, setData] = useState(null);
   const location = useLocation();
 
-  console.log(invoiceId);
   const defaultValues = {
     senderAddress: {
       street: "",
@@ -49,7 +47,6 @@ const Modal = () => {
     defaultValues: data ? data : defaultValues,
   });
 
-  const [clickSubmit, setClickSubmit] = useState<number>(0);
 
   useEffect(() => {
     if (location.pathname.includes("view-invoice")) {
@@ -65,7 +62,6 @@ const Modal = () => {
       methods.reset(data);
     }
   }, [data]);
-  
 
   const fetchData = async () => {
     if (invoiceId !== "") {
@@ -114,13 +110,10 @@ const Modal = () => {
               <SenderAdress />
               <ClientAdress />
               <InvoiceDates />
-              <ItemList
-                clickSubmit={clickSubmit}
-                setClickSubmit={setClickSubmit}
-              />
+              <ItemList />
             </div>
           </form>
-          <ModalFooter setClickSubmit={setClickSubmit} />
+          <ModalFooter />
         </FormProvider>
       </div>
     </div>

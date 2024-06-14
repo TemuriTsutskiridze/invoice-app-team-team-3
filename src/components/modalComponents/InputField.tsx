@@ -28,6 +28,7 @@ const InputField: React.FC<InputFieldProps> = ({
   const {
     register,
     formState: { errors },
+    control,
   } = useFormContext();
 
   const errorMessage = getNestedValue(errors, name);
@@ -55,7 +56,7 @@ const InputField: React.FC<InputFieldProps> = ({
           errorMessage ? "border-red-700" : ""
         }`}
         defaultValue={value}
-        {...register(name)}
+        {...control.register(name)}
       />
       {errorMessage && (
         <p
