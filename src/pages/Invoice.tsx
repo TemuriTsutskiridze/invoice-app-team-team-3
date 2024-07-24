@@ -5,7 +5,7 @@ import EmptyInvoices from "../components/EmptyInvoices";
 import { AppContext } from "../App";
 import { InvoiceData } from "../types";
 
-type FilterType = "all" | "pending" | "paid" | "draft";
+export type FilterType = "all" | "pending" | "paid" | "draft";
 interface ContextType {
   filterClick: FilterType;
   setFilterClick: React.Dispatch<React.SetStateAction<FilterType>>;

@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../App";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, SubmitHandler, useFormContext } from "react-hook-form";
 import axios from "axios";
 import { generateId } from "./functions";
+import { Item } from "../../types";
 
 const ModalFooter: React.FC<{
   setClickSubmit: React.Dispatch<React.SetStateAction<number>>;
@@ -10,13 +11,13 @@ const ModalFooter: React.FC<{
   const { darkMode, setModal, invoiceId } = useContext(AppContext);
   const { handleSubmit, reset, clearErrors } = useFormContext();
 
-  const addInvoice = async (data: any) => {
+  const addInvoice : SubmitHandler<FieldValues> = async (data) => {
     const { createdAt, paymentTerms, items } = data;
     const dueDate = new Date(createdAt);
-    dueDate.setDate(dueDate.getDate() + parseInt(paymentTerms));
+    dueDate.setDate(dueDate.getDate() + paymentTerms);
     const paymentDue = dueDate.toISOString().split("T")[0];
     let total = 0;
-    items.forEach((items: any, _: number) => {
+    items.forEach((items: Item) => {
       total += items.total;
     });
     const allInfo = {

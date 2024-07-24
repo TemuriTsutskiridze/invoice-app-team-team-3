@@ -3,6 +3,7 @@ import DeleteIcon from "/assets/icon-delete.svg";
 import { AppContext } from "../../App";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { InputField } from "..";
+import { InvoiceData } from "../../types";
 
 const ItemList: React.FC<{
   clickSubmit: number;
@@ -44,7 +45,7 @@ const ItemList: React.FC<{
 
   useEffect(() => {
     if (items && items.length > 0) {
-      items.forEach((item: any, index: number) => {
+      items.forEach((item: InvoiceData, index: number) => {
         const total = item.quantity * item.price;
         if (total !== item.total) {
           setValue(`items[${index}].total`, total);

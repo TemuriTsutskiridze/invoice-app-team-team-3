@@ -1,21 +1,27 @@
 import React, { useContext } from "react";
-import { useFormContext, FieldError } from "react-hook-form";
+import { useFormContext, FieldError, FieldErrors, FieldValues } from "react-hook-form";
 import { AppContext } from "../../App";
 
 type InputFieldProps = {
   children: React.ReactNode;
   type: string;
   id: string;
-  value?: any;
+  value?: string;
   name: string;
 };
 
-const getNestedValue = (obj: any, path: string) => {
+const getNestedValue = (obj: FieldErrors<FieldValues>, path: string): FieldError | undefined => {
   return path
-    .split(/[\.\[\]]+/)
+    .split(/[.\\[\]]+/)
     .filter(Boolean)
-    .reduce((acc, part) => acc && acc[part], obj);
+    .reduce((acc: FieldErrors<FieldValues> | FieldError | undefined, part) => {
+      if (acc && typeof acc === 'object') {
+        return (acc as FieldErrors<FieldValues>)[part];
+      }
+      return undefined;
+    }, obj) as FieldError | undefined;
 };
+
 
 const InputField: React.FC<InputFieldProps> = ({
   children,
@@ -71,7 +77,7 @@ const InputField: React.FC<InputFieldProps> = ({
               : "top-0"
           }`}
         >
-          {(errorMessage as FieldError)?.message}
+          {(errorMessage as unknown as FieldError)?.message}
         </p>
       )}
     </div>

@@ -4,6 +4,7 @@ import { MyContext } from "../pages/Invoice";
 import ArrowRight from "../../public/assets/icon-arrow-right.svg";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
+import { InvoiceData } from "../types";
 
 function formatDate(dateString: string | number | Date) {
   const date = new Date(dateString);
@@ -26,11 +27,11 @@ function InvoiceBoxes() {
   const filterInvoice = () => {
     switch (filterClick) {
       case "pending":
-        return appData.filter((item: any) => item.status.name === "Pending");
+        return appData.filter((item: InvoiceData) => item.status.name === "Pending");
       case "paid":
-        return appData.filter((item: any) => item.status.name === "Paid");
+        return appData.filter((item: InvoiceData) => item.status.name === "Paid");
       case "draft":
-        return appData.filter((item: any) => item.status.name === "Draft");
+        return appData.filter((item: InvoiceData) => item.status.name === "Draft");
       case "all":
         return appData;
       default:
@@ -41,7 +42,7 @@ function InvoiceBoxes() {
   return (
     <div className="flex justify-center pb-[6rem]">
       <div className="w-full max-w-[60rem]">
-        {filterInvoice().map((invoice: any, index: number) => (
+        {filterInvoice().map((invoice: InvoiceData, index: number) => (
           <Link to={`/view-invoice/${invoice.id}`} key={index}>
             <motion.div
               key={invoice.id}

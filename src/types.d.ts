@@ -15,6 +15,8 @@ interface Address {
 }
 
 export interface InvoiceData {
+  price: any;
+  quantity: any;
   id: string;
   createdAt: string;
   paymentDue: string;

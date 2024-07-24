@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { SetStateAction, useContext, useState } from "react";
 import IconDown from "../../public/assets/icon-arrow-down.svg";
 import Plus from "../../public/assets/icon-plus.svg";
-import { MyContext } from "../pages/Invoice";
+import { FilterType, MyContext } from "../pages/Invoice";
 import "../styles/filter.css";
 import { AppContext } from "../App";
 export function FilterAdd() {
@@ -22,7 +22,7 @@ export function FilterAdd() {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
     if (checked) {
-      setFilterClick(value as any);
+      setFilterClick(value as SetStateAction<FilterType>);
       setFilter(!filter);
     }
   };
@@ -115,8 +115,8 @@ export function FilterAdd() {
             </div>
             <div
               onClick={() => setModal(!modal)}
-              className="flex justify-center items-center w-[5.625rem] h-[2.75rem] bg-[#7C5DFA] rounded-[1.5rem] gap-[0.5rem] cursor-pointer
-            md:w-[9.375rem]"
+              className="flex justify-center items-center w-[5.625rem] h-[2.75rem] bg-[#7C5DFA] rounded-[1.5rem] gap-4 cursor-pointer
+            md:w-[9.375rem] "
             >
               <img
                 src={Plus}

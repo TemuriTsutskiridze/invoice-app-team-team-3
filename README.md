@@ -1,30 +1,58 @@
-# React + TypeScript + Vite
+# Invoice App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a web application for managing and generating invoices. The app is built using React, TypeScript, and Vite, ensuring a fast and efficient development experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Invoice Management:** Create, read, update, filter and delete invoices.
+- **Responsive Design:** Works on both desktop and mobile devices.
+- **Data Persistence:** Uses local storage to save data.
+- **Modern UI:** Styled with Tailwind CSS for a sleek and modern look.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Vite**: A build tool that aims to provide a faster and leaner development experience for modern web projects.
+- **Tailwind CSS**: A utility-first CSS framework for rapidly building custom user interfaces.
+- **Yup**: A JavaScript schema builder for value parsing and validation.
+- **Local Storage**: Web storage that allows JavaScript sites and apps to store and access data right in the browser.
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+To get a local copy up and running, follow these simple steps.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js
+- npm (Node package manager)
+
+### Installation
+
+1. Clone the repository:
+
+    ```sh
+    git clone https://github.com/LevaniMesxia23/invoice-app.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```sh
+    cd invoice-app
+    ```
+
+3. Install the dependencies:
+
+    ```sh
+    npm install
+    ```
+
+### Usage
+
+To start the development server:
+
+```sh
+npm run dev
+
